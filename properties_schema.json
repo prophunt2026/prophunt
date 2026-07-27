@@ -1,0 +1,4401 @@
+[
+  {
+    "listing": {
+      "id_source": "87219007",
+      "id_universel": "HIT_87219007",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007",
+      "date_scraping": "2026-07-27T15:48:46.820504+00:00",
+      "date_publication": "2026-07-21",
+      "date_maj": "2026-07-21",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 140400,
+      "devise": "EUR",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-21"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": null,
+      "superficie_habitable": null,
+      "superficie_terrain": null,
+      "nombre_pieces": null,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": null,
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": null,
+      "standing": null,
+      "meuble": null,
+      "orientation": null,
+      "vue": null
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Megève",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Route de Rochebrune",
+      "code_postal": "74120",
+      "proximites": [],
+      "coordonnees": {
+        "latitude": 45.85775,
+        "longitude": 6.61763
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": null,
+      "chauffage": null,
+      "ascenseur": null,
+      "garage": null,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": null,
+      "terrasse": null,
+      "balcon": null,
+      "jardin": null,
+      "superficie_jardin": null,
+      "piscine": null,
+      "cuisine_equipee": null,
+      "cuisine_americaine": null,
+      "double_vitrage": null,
+      "volets_roulants": null,
+      "porte_blindee": null,
+      "interphone": null,
+      "videophone": null,
+      "alarme": null,
+      "concierge": null,
+      "gardiennage": null,
+      "eau_chaude": null,
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": null,
+      "dressing": null,
+      "salle_de_sport": null,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Studio 17m² Megève Rochebrune — Investissement locatif",
+      "texte": "À 300 m des remontées de Rochebrune et 800 m du centre de Megève, studio de 17 m² en résidence Le Floréal (3★). Kitchenette équipée, coin nuit double, salle de bains. Prix d'accès rare à Megève avec fort potentiel locatif : un 33 m² comparable se loue 6 370 €/semaine en haute saison.",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/886dc95486efef97598511b8ba357b8f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/885ed571baa339fefce68c9336a29c29.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/01ae2f02f233550fe3be246ff0b0da4f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3ebad5a2b63c707de31d00df5d8c76e8.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/02e4241f4b1ce9a15934a67ab744f646.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4fe01c2a0ec227597395d446dc6f3118.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 6
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Ouissem HAMILA International Property & Tourism Consultant",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 73 210 426",
+        "+216 25 801 000"
+      ],
+      "whatsapp": null,
+      "email": "wis@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007"
+            },
+            "name": " Studio 17m² Megève Rochebrune — Investissement locatif",
+            "identifier": "87219007",
+            "sku": "87219007",
+            "description": "À 300 m des remontées de Rochebrune et 800 m du centre de Megève, studio de 17 m² en résidence Le Floréal (3★). Kitchenette équipée, coin nuit double, salle de bains. Prix d'accès rare à Megève avec fort potentiel locatif : un 33 m² comparable se loue 6 370 €/semaine en haute saison.",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/886dc95486efef97598511b8ba357b8f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/885ed571baa339fefce68c9336a29c29.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/01ae2f02f233550fe3be246ff0b0da4f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3ebad5a2b63c707de31d00df5d8c76e8.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/02e4241f4b1ce9a15934a67ab744f646.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4fe01c2a0ec227597395d446dc6f3118.jpg"
+            ],
+            "datePosted": "2026-07-21",
+            "dateModified": "2026-07-21",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Route de Rochebrune",
+              "addressLocality": "Megève",
+              "postalCode": "74120",
+              "addressCountry": "FR"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 45.85775,
+              "longitude": 6.61763
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007",
+              "price": "140400.00",
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-21",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87219007#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87218812",
+      "id_universel": "HIT_87218812",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812",
+      "date_scraping": "2026-07-27T15:48:49.704702+00:00",
+      "date_publication": "2026-07-21",
+      "date_maj": "2026-07-21",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 160000,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-21"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 57,
+      "superficie_habitable": null,
+      "superficie_terrain": null,
+      "nombre_pieces": 2,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "1er",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "bon",
+      "standing": null,
+      "meuble": null,
+      "orientation": null,
+      "vue": "Dégagée"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Sousse",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Trocadero",
+      "code_postal": "4000",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Bus",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Cinéma",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Commerces",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École primaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École secondaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Gare",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Gare routière",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Médecin",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Mer",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Métro",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Palais des congrès",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parc",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parking public",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Port",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Route principale",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Supermarché",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Taxi",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Tram",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Université",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 35.82975,
+        "longitude": 10.62864
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": null,
+      "chauffage": null,
+      "ascenseur": null,
+      "garage": null,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": null,
+      "terrasse": null,
+      "balcon": null,
+      "jardin": null,
+      "superficie_jardin": null,
+      "piscine": null,
+      "cuisine_equipee": null,
+      "cuisine_americaine": null,
+      "double_vitrage": null,
+      "volets_roulants": null,
+      "porte_blindee": null,
+      "interphone": null,
+      "videophone": null,
+      "alarme": null,
+      "concierge": null,
+      "gardiennage": null,
+      "eau_chaude": "Chauffe-eau",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": null,
+      "dressing": null,
+      "salle_de_sport": null,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Appartement au 1er étage à Trocadéro, Sousse",
+      "texte": "À Vendre – Appartement au 1er étage à Trocadéro, Sousse\r\nSaisissez cette belle opportunité d'investissement avec cet appartement de 57 m², situé au 1er étage d'un immeuble bénéficiant d'un emplacement stratégique au cœur de Trocadéro – Sousse.\r\n\r\nGrâce à sa situation privilégiée, ce bien constitue un excellent choix pour un investissement locatif ou un futur usage personnel.\r\n\r\nCaractéristiques :\r\n📐 Superficie : 57 m²\r\n🏢 Étage : 1er étage\r\n📍 Emplacement : Trocadéro – Sousse\r\n🪑 Possibilité d'acquérir le bien avec ou sans mobilier, selon vos besoins.\r\nCet appartement représente une excellente opportunité grâce à son emplacement recherché et à son fort potentiel de valorisation.",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d889a3968cc9a52a312d424a33969897.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8ab7ed54cdf7c22291b4d18b34059be4.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/83923fd563178d6bad565853762be3e6.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1ac3fec9953d844a2748fa618e8a3930.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/23d158f6ce62c2335e0d8c94cbedc458.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c8b4248086698b54c431215802045e21.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9a5e75475e2a5bc774c576b98085e315.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 7
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Nesrine GAFSI Secrétariat",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 73 210 426",
+        "+216 98 363 062"
+      ],
+      "whatsapp": null,
+      "email": "contact@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812"
+            },
+            "name": " Appartement au 1er étage à Trocadéro, Sousse",
+            "identifier": "87218812",
+            "sku": "87218812",
+            "description": "À Vendre – Appartement au 1er étage à Trocadéro, Sousse\r\nSaisissez cette belle opportunité d'investissement avec cet appartement de 57 m², situé au 1er étage d'un immeuble bénéficiant d'un emplacement stratégique au cœur de Trocadéro – Sousse.\r\n\r\nGrâce à sa situation privilégiée, ce bien constitue un excellent choix pour un investissement locatif ou un futur usage personnel.\r\n\r\nCaractéristiques :\r\n📐 Superficie : 57 m²\r\n🏢 Étage : 1er étage\r\n📍 Emplacement : Trocadéro – Sousse\r\n🪑 Possibilité d'acquérir le bien avec ou sans mobilier, selon vos besoins.\r\nCet appartement représente une excellente opportunité grâce à son emplacement recherché et à son fort potentiel de valorisation.",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d889a3968cc9a52a312d424a33969897.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8ab7ed54cdf7c22291b4d18b34059be4.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/83923fd563178d6bad565853762be3e6.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1ac3fec9953d844a2748fa618e8a3930.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/23d158f6ce62c2335e0d8c94cbedc458.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c8b4248086698b54c431215802045e21.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9a5e75475e2a5bc774c576b98085e315.jpg"
+            ],
+            "numberOfRooms": 2,
+            "datePosted": "2026-07-21",
+            "dateModified": "2026-07-21",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Trocadero",
+              "addressLocality": "Sousse",
+              "postalCode": "4000",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.82975,
+              "longitude": 10.62864
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812",
+              "price": "160000.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-21",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87218812#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87215065",
+      "id_universel": "HIT_87215065",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065",
+      "date_scraping": "2026-07-27T15:48:52.808788+00:00",
+      "date_publication": "2026-07-18",
+      "date_maj": "2026-07-18",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 267800,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-18"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 124,
+      "superficie_habitable": 110,
+      "superficie_terrain": null,
+      "nombre_pieces": 4,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "2ème",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": null,
+      "standing": null,
+      "meuble": null,
+      "orientation": "Est, Sud-est",
+      "vue": "Dégagée Mer"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Tantana",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Tantana, Neptune residence",
+      "code_postal": "4042",
+      "proximites": [],
+      "coordonnees": {
+        "latitude": 35.87136,
+        "longitude": 10.57177
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Climatisation, Sans chauffage",
+      "ascenseur": false,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": false,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": false,
+      "volets_roulants": false,
+      "porte_blindee": false,
+      "interphone": false,
+      "videophone": false,
+      "alarme": false,
+      "concierge": false,
+      "gardiennage": false,
+      "eau_chaude": "Chauffe-eau",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "S3 à vendre avec vue mer",
+      "texte": "On vous propose à la vente un appartement S3 proche de la mer dans une residence familiale sans ascenseur d’une superficie de 100m2 à Tantana.\r\n\r\nCe dernier se compose comme suite:\r\n\r\n- Un grand salon très spacieux avec une banquette qui peut accueillir jusqu’à 10 personnes avec une baie vitrée qui donne une vue sur la mer.\r\n- Un couloir qui mène au reste de la maison avec plein de rangement tout le long\r\n- Deux petites chambres pour enfant avec dressing\r\n- Une chambre parentale avec un lit construit et tout habillé en faïence d'époque et un grand dressing. Elle présente aussi une vue mer exceptionnelle.\r\n- Une salle de bain avec receveur de douche.\r\n- Une cuisine équipé en électro Menager électrique et une banquette pour prendre le petit déjeuner ou manger quelque chose vite fait.\r\n\r\nCe bien est vendu avec ses meubles et une place de parking dans le garage attenant à la residence.\r\n\r\nPour plus d’informations ou une visite veuillez me contacter le plutot possible.",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fa670afa0508724fd874cf25ae77fd25.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/398fefc12c685fda5b7ec66fd503e888.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/07ddf0bc9fb7ad0364acaa3d253d866b.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/b6e0ecbf4dfd43e940d117ef1204efbb.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/135e590f76f02f23a2a62ea06c92e59e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c299fa77cc2aa0d8a9931a6740c81a60.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d44220ba85e8f66d3184cf53ce6506ab.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a8593b02575aa1db72a6565ae76a24bc.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/956f9aec198e4a9c900022595ce36176.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/55d06dfc6a0c5f94863e9d1a0bcf7dd2.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3b8da982500fb9b4102bbed153344015.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cfaeea533cff3783495880d8084ede80.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/65dc8c4723cd5178c1a7637fa14a60a8.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 12,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/f4fa12e5375c867fa480878c344d83bb.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 13,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 14
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Belhassen ZERZERI Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 98 793 398"
+      ],
+      "whatsapp": null,
+      "email": "belhassen@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065"
+            },
+            "name": " S3 à vendre avec vue mer",
+            "identifier": "87215065",
+            "sku": "87215065",
+            "description": "On vous propose à la vente un appartement S3 proche de la mer dans une residence familiale sans ascenseur d’une superficie de 100m2 à Tantana.\r\n\r\nCe dernier se compose comme suite:\r\n\r\n- Un grand salon très spacieux avec une banquette qui peut accueillir jusqu’à 10 personnes avec une baie vitrée qui donne une vue sur la mer.\r\n- Un couloir qui mène au reste de la maison avec plein de rangement tout le long\r\n- Deux petites chambres pour enfant avec dressing\r\n- Une chambre parentale avec un lit construit et tout habillé en faïence d'époque et un grand dressing. Elle présente aussi une vue mer exceptionnelle.\r\n- Une salle de bain avec receveur de douche.\r\n- Une cuisine équipé en électro Menager électrique et une banquette pour prendre le petit déjeuner ou manger quelque chose vite fait.\r\n\r\nCe bien est vendu avec ses meubles et une place de parking dans le garage attenant à la residence.\r\n\r\nPour plus d’informations ou une visite veuillez me contacter le plutot possible.",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fa670afa0508724fd874cf25ae77fd25.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/398fefc12c685fda5b7ec66fd503e888.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/07ddf0bc9fb7ad0364acaa3d253d866b.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/b6e0ecbf4dfd43e940d117ef1204efbb.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/135e590f76f02f23a2a62ea06c92e59e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c299fa77cc2aa0d8a9931a6740c81a60.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d44220ba85e8f66d3184cf53ce6506ab.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a8593b02575aa1db72a6565ae76a24bc.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/956f9aec198e4a9c900022595ce36176.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/55d06dfc6a0c5f94863e9d1a0bcf7dd2.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3b8da982500fb9b4102bbed153344015.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cfaeea533cff3783495880d8084ede80.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/65dc8c4723cd5178c1a7637fa14a60a8.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/f4fa12e5375c867fa480878c344d83bb.jpg"
+            ],
+            "numberOfRooms": 4,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 110.0,
+              "unitCode": "MTK"
+            },
+            "datePosted": "2026-07-18",
+            "dateModified": "2026-07-18",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Tantana, Neptune residence",
+              "addressLocality": "Tantana",
+              "postalCode": "4042",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.87136,
+              "longitude": 10.57177
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065",
+              "price": "267800.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-18",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87215065#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87213070",
+      "id_universel": "HIT_87213070",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070",
+      "date_scraping": "2026-07-27T15:48:55.472510+00:00",
+      "date_publication": "2026-07-17",
+      "date_maj": "2026-07-17",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 1030000,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-17"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 300,
+      "superficie_habitable": 260,
+      "superficie_terrain": null,
+      "nombre_pieces": 5,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "Rez-de-chaussée",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "bon",
+      "standing": null,
+      "meuble": null,
+      "orientation": "Sud-est",
+      "vue": "Dégagée Mer"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Hammam Sousse",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Hammam Sousse, Accés de la mer rou",
+      "code_postal": "4011",
+      "proximites": [],
+      "coordonnees": {
+        "latitude": 35.90499,
+        "longitude": 10.57901
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Radiateur, Climatisation, Central",
+      "ascenseur": true,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": false,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": true,
+      "volets_roulants": false,
+      "porte_blindee": false,
+      "interphone": true,
+      "videophone": false,
+      "alarme": false,
+      "concierge": false,
+      "gardiennage": false,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Appartement S4 à vendre",
+      "texte": "On vous propose à la vente un appartement S+4 d'une superficie totale de 300m² pied dans l'eau avec une vue dégagé sur la mer.\r\n\r\nCe dernier se compose comme suite :\r\n\r\n- Une Suite Parentale\r\n- Trois Chambres à coucher\r\n- Deux Salles de bain dont une avec jacuzzi \r\n- Une Grande Cuisine équipé ouverte une Salle à manger\r\n- Un Salon très spacieux \r\n- Une grande terrasse avec une pergola en charpente de bois très esthétique\r\n\r\nL'appartement dispose aussi d'une Place de Parking Sous-Sol.\r\n\r\nPour plus d'information ou une visite n'hésité pas à nous contacter",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bb47b55adcb84f4aeac1a30a4245f720.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cabe7192e32c4363aa5cb7319f9b403b.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/deebc88dfb7bb34bd73566aeb506cbc5.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bfcd6da7778709f0729c824e6cb97465.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/12c958944fa8aac2ad1cb5652d29ea64.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/298c08fbda622044364cf78c9a142447.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/b4f66a84f97a19a8d0c437806606a1f8.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/456aff363fc0667b6a0c9dea4e9c5d74.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/86862f0115446fc0d09c89628e9c44bc.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3dec9883064b6dc720251c8354cd7125.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/52d84fd4e6ac994736f4ec189c042ec3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8b359ad9521d331a3d217a291f75bede.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/db46c7f7ae18a1ce384b0611e4e3b65b.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 12,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4a365eef40b8396547a9b1ed06fb0610.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 13,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1f9ab2444d632f4883e22cad5b7fc02e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 14,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0806df014cf0cc2037b7ae9e81c6b151.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 15,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/474ac597d1a6b5ddf720fec61e41c798.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 16,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/005f4b668df876cf01ff0dacbc700a6c.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 17,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fa8af87aff0e40041e2b599f2d76ed23.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 18,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/97e48a4306da48398c78c9b2cdc098d1.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 19,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4e73de6e4938e8e92ecb90ceccb03c35.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 20,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c223b93285f42be107ad6fa6d2cf7dbf.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 21,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fce75c4490e28ffeccaa5e5d1b5d8a51.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 22,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/6e071f056ab8afea6d3d6d4c04d00932.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 23,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4f8fa9785d31506c43411cfe8b34a588.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 24,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9df15f9d650176e7bec0fe2c93b4707b.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 25,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/661d55158a80a6de089a52d36988f9b8.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 26,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cc857bb9b1bd6f8beaa6075bc4b7f093.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 27,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8172505c0537c7d64c755ffe4ad58723.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 28,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 29
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Belhassen ZERZERI Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 98 793 398"
+      ],
+      "whatsapp": null,
+      "email": "belhassen@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070"
+            },
+            "name": " Appartement S4 à vendre",
+            "identifier": "87213070",
+            "sku": "87213070",
+            "description": "On vous propose à la vente un appartement S+4 d'une superficie totale de 300m² pied dans l'eau avec une vue dégagé sur la mer.\r\n\r\nCe dernier se compose comme suite :\r\n\r\n- Une Suite Parentale\r\n- Trois Chambres à coucher\r\n- Deux Salles de bain dont une avec jacuzzi \r\n- Une Grande Cuisine équipé ouverte une Salle à manger\r\n- Un Salon très spacieux \r\n- Une grande terrasse avec une pergola en charpente de bois très esthétique\r\n\r\nL'appartement dispose aussi d'une Place de Parking Sous-Sol.\r\n\r\nPour plus d'information ou une visite n'hésité pas à nous contacter",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bb47b55adcb84f4aeac1a30a4245f720.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cabe7192e32c4363aa5cb7319f9b403b.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/deebc88dfb7bb34bd73566aeb506cbc5.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bfcd6da7778709f0729c824e6cb97465.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/12c958944fa8aac2ad1cb5652d29ea64.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/298c08fbda622044364cf78c9a142447.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/b4f66a84f97a19a8d0c437806606a1f8.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/456aff363fc0667b6a0c9dea4e9c5d74.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/86862f0115446fc0d09c89628e9c44bc.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3dec9883064b6dc720251c8354cd7125.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/52d84fd4e6ac994736f4ec189c042ec3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8b359ad9521d331a3d217a291f75bede.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/db46c7f7ae18a1ce384b0611e4e3b65b.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4a365eef40b8396547a9b1ed06fb0610.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1f9ab2444d632f4883e22cad5b7fc02e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0806df014cf0cc2037b7ae9e81c6b151.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/474ac597d1a6b5ddf720fec61e41c798.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/005f4b668df876cf01ff0dacbc700a6c.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fa8af87aff0e40041e2b599f2d76ed23.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/97e48a4306da48398c78c9b2cdc098d1.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4e73de6e4938e8e92ecb90ceccb03c35.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c223b93285f42be107ad6fa6d2cf7dbf.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fce75c4490e28ffeccaa5e5d1b5d8a51.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/6e071f056ab8afea6d3d6d4c04d00932.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4f8fa9785d31506c43411cfe8b34a588.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9df15f9d650176e7bec0fe2c93b4707b.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/661d55158a80a6de089a52d36988f9b8.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cc857bb9b1bd6f8beaa6075bc4b7f093.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8172505c0537c7d64c755ffe4ad58723.jpg"
+            ],
+            "numberOfRooms": 5,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 260.0,
+              "unitCode": "MTK"
+            },
+            "datePosted": "2026-07-17",
+            "dateModified": "2026-07-17",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Hammam Sousse, Accés de la mer rou",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.90499,
+              "longitude": 10.57901
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070",
+              "price": "1030000.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-17",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87213070#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87184697",
+      "id_universel": "HIT_87184697",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697",
+      "date_scraping": "2026-07-27T15:48:58.172777+00:00",
+      "date_publication": "2026-07-10",
+      "date_maj": "2026-07-11",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 165000,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-10"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 45,
+      "superficie_habitable": 45,
+      "superficie_terrain": null,
+      "nombre_pieces": 2,
+      "nombre_chambres": 1,
+      "nombre_salles_bain": 1,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "2ème étage / 3",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "neuf",
+      "standing": null,
+      "meuble": null,
+      "orientation": null,
+      "vue": "Dégagée"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Hergla",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Afh hergla",
+      "code_postal": "4012",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Autoroute",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Bus",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Commerces",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Crèche",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Lac",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Médecin",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Mer",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Plage",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Port",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Route principale",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Supermarché",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Taxi",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 36.01268,
+        "longitude": 10.51422
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Radiateur, Climatisation",
+      "ascenseur": false,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": false,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": false,
+      "volets_roulants": false,
+      "porte_blindee": true,
+      "interphone": false,
+      "videophone": true,
+      "alarme": false,
+      "concierge": false,
+      "gardiennage": false,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Vente S+1 meuble à Hergla",
+      "texte": "🏡 À VENDRE – Coquet Appartement S+1 Meublé à Hergla 🌊\r\n\r\n✨ Opportunité d'investissement à ne pas manquer !\r\n\r\nDécouvrez ce coquet appartement S+1 neuf, jamais habité, situé au 2ᵉ étage (sans ascenseur), dans un quartier calme de Hergla côté terre, à seulement 2 minutes de la magnifique plage de sable fin.\r\n\r\n🔑 Caractéristiques :\r\n\r\n✅ Appartement meublé\r\n✅ Titre foncier individuel\r\n✅ Hall d'entrée\r\n✅ Séjour lumineux\r\n✅ Cuisine aménagée et équipée\r\n✅ Chambre à coucher confortable\r\n✅ Salle de bain avec WC\r\n✅ Balcon avec vue mer lointaine\r\n✅ Finitions soignées\r\n✅ Prix négociable\r\n\r\n📍 Emplacement idéal\r\n\r\nÀ proximité immédiate de tous les commerces, cafés et services.\r\nÀ seulement 20 minutes de Port El Kantaoui et du Mall of Sousse.\r\nAccès rapide aux principaux axes routiers.\r\n\r\n🌅 Hergla, véritable perle du littoral tunisien, séduit par :\r\n💙 Ses maisons blanches aux volets bleus\r\n⚓ Son authentique port de pêche\r\n🏖️ Ses criques et ses plages de sable fin\r\n🌊 Son cadre paisible et son charme méditerranéen unique.\r\n\r\n💼 Idéal pour :\r\n✔️ Investissement locatif\r\n✔️ Résidence secondaire\r\n✔️ Premier achat\r\n✔️ Location saisonnière\r\n\r\n📞 Contactez-nous dès aujourd'hui pour organiser une visite et découvrir ce bien au fort potentiel !\r\n\r\n#AppartementAVendre #Hergla #S1 #AppartementMeublé #InvestissementImmobilier #ImmobilierTunisie #VueMer #Plage #TitreFoncier #PortKantaoui #MallOfSousse #AppartementNeuf #BonInvestissement #PrixNégociable #Tunisie #MaisonDeVacances",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0b9b9e14815cc5db4a34069dbe521a0a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/37a6e96dac5261287bf897ad3acc97e0.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/ac7886a7e80b4324a5a6867250077105.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/627d7ae17b04ab18c3bcc016c97829a3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5fe10977b5d19791505917d2d284179f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d81dbcea4540a4dea0aaccbc19b686b3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/18572dd8a57290302190a683c55ac131.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/7fa11e9e17b42a362ceb43f89255238e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/59e6e2955fbf3351fb8049dec8dac31f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0bcc786077f528079d1d16b0c7440b83.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9bcdf57506075da1a97692a1e0da6bf1.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/7748c3af98bcf9f3b381d57bac7693d8.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 12
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Samira HENIA Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 98 470 657"
+      ],
+      "whatsapp": null,
+      "email": "samira@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697"
+            },
+            "name": " Vente S+1 meuble à Hergla",
+            "identifier": "87184697",
+            "sku": "87184697",
+            "description": "🏡 À VENDRE – Coquet Appartement S+1 Meublé à Hergla 🌊\r\n\r\n✨ Opportunité d'investissement à ne pas manquer !\r\n\r\nDécouvrez ce coquet appartement S+1 neuf, jamais habité, situé au 2ᵉ étage (sans ascenseur), dans un quartier calme de Hergla côté terre, à seulement 2 minutes de la magnifique plage de sable fin.\r\n\r\n🔑 Caractéristiques :\r\n\r\n✅ Appartement meublé\r\n✅ Titre foncier individuel\r\n✅ Hall d'entrée\r\n✅ Séjour lumineux\r\n✅ Cuisine aménagée et équipée\r\n✅ Chambre à coucher confortable\r\n✅ Salle de bain avec WC\r\n✅ Balcon avec vue mer lointaine\r\n✅ Finitions soignées\r\n✅ Prix négociable\r\n\r\n📍 Emplacement idéal\r\n\r\nÀ proximité immédiate de tous les commerces, cafés et services.\r\nÀ seulement 20 minutes de Port El Kantaoui et du Mall of Sousse.\r\nAccès rapide aux principaux axes routiers.\r\n\r\n🌅 Hergla, véritable perle du littoral tunisien, séduit par :\r\n💙 Ses maisons blanches aux volets bleus\r\n⚓ Son authentique port de pêche\r\n🏖️ Ses criques et ses plages de sable fin\r\n🌊 Son cadre paisible et son charme méditerranéen unique.\r\n\r\n💼 Idéal pour :\r\n✔️ Investissement locatif\r\n✔️ Résidence secondaire\r\n✔️ Premier achat\r\n✔️ Location saisonnière\r\n\r\n📞 Contactez-nous dès aujourd'hui pour organiser une visite et découvrir ce bien au fort potentiel !\r\n\r\n#AppartementAVendre #Hergla #S1 #AppartementMeublé #InvestissementImmobilier #ImmobilierTunisie #VueMer #Plage #TitreFoncier #PortKantaoui #MallOfSousse #AppartementNeuf #BonInvestissement #PrixNégociable #Tunisie #MaisonDeVacances",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0b9b9e14815cc5db4a34069dbe521a0a.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/37a6e96dac5261287bf897ad3acc97e0.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/ac7886a7e80b4324a5a6867250077105.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/627d7ae17b04ab18c3bcc016c97829a3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5fe10977b5d19791505917d2d284179f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d81dbcea4540a4dea0aaccbc19b686b3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/18572dd8a57290302190a683c55ac131.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/7fa11e9e17b42a362ceb43f89255238e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/59e6e2955fbf3351fb8049dec8dac31f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0bcc786077f528079d1d16b0c7440b83.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9bcdf57506075da1a97692a1e0da6bf1.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/7748c3af98bcf9f3b381d57bac7693d8.jpg"
+            ],
+            "numberOfRooms": 2,
+            "numberOfBedrooms": 1,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 45.0,
+              "unitCode": "MTK"
+            },
+            "datePosted": "2026-07-10",
+            "dateModified": "2026-07-11",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Afh hergla",
+              "addressLocality": "Hergla",
+              "postalCode": "4012",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 36.01268,
+              "longitude": 10.51422
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697",
+              "price": "165000.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-10",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87184697#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87181475",
+      "id_universel": "HIT_87181475",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475",
+      "date_scraping": "2026-07-27T15:48:59.995958+00:00",
+      "date_publication": "2026-07-09",
+      "date_maj": "2026-07-09",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 17510000,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-09"
+    },
+    "bien": {
+      "type": "villa",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 2400,
+      "superficie_habitable": 600,
+      "superficie_terrain": 2400,
+      "nombre_pieces": null,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "Rez-de-jardin",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "bon",
+      "standing": null,
+      "meuble": null,
+      "orientation": "Est",
+      "vue": "Panoramique Mer Collines"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Amilcar",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Rue De Sidi Bou Said",
+      "code_postal": "1054",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Aéroport15 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville20 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Golf10 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Mer500 mètres",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Plage500 mètres",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 36.85416,
+        "longitude": 10.2832
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Central",
+      "ascenseur": false,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": true,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": false,
+      "volets_roulants": false,
+      "porte_blindee": true,
+      "interphone": false,
+      "videophone": true,
+      "alarme": true,
+      "concierge": false,
+      "gardiennage": false,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Villa de luxe — Vue mer panoramique — Carthage Présidence",
+      "texte": "Magnifique villa en pierre construite en 2006, bénéficiant d'une vue panoramique exceptionnelle d'environ 200° sur la baie de Sidi Bou Saïd. Exposition Sud-Est idéale, sans vis-à-vis.\r\n\r\nCARACTÉRISTIQUES TECHNIQUES\r\n• Fondations de 6 mètres — construction solide et pérenne\r\n• 2 niveaux habitables + potentiel de surélévation (3ᵉ étage possible)\r\n• Menuiserie aluminium blanc avec grilles de sécurité en fer forgé\r\n• Chauffage central à radiateurs en fonte + Climatisation split\r\n• Chaudière à gaz + Tout-à-l'égout\r\n• Terrain : plus de 2 400 m²\r\n• Surface habitable : 600 m²\r\n\r\nPRESTATIONS DE LUXE\r\n• Piscine privée rectangulaire avec espace détente et bar extérieur\r\n• Jardin paysager planté de palmiers dattiers, cyprès, pins parasols et oliviers\r\n• Terrasse pergola avec colonnes\r\n• Sols en marbre/pierre polie dans tout le rez-de-chaussée\r\n• Moulures et corniches en plâtre au plafond\r\n• Colonnes architecturales intégrées\r\n• Lustre à pampilles en cristal (salle à manger)\r\n• Cheminée dans le salon\r\n• Garage (1 place) + cour pouvant accueillir plusieurs véhicules\r\n• Balustrades en fer forgé blanc ceinturant l'ensemble du terrain\r\n• Cuisine entièrement équipée\r\n• Portail électrique + Visiophone\r\n\r\nDISTRIBUTION\r\n\r\n— Entrées —\r\n• Entrée principale avec WC invités\r\n• Entrée de service\r\n• Escalier principal + escalier de service\r\n\r\n— Rez-de-Jardin —\r\n• 3 suites (chambres avec salles de bain privatives)\r\n• Local technique / Buanderie\r\n• Placards\r\n\r\n— Rez-de-Chaussée —\r\n• Grande salle à manger avec lustre en cristal\r\n• Grand salon d'environ 52 m² en plan ouvert, inondé de lumière, offrant une vue mer panoramique (4 fenêtres + 1 porte-fenêtre)\r\n• Hauteur sous plafond généreuse, moulures et colonnes\r\n\r\nPOTENTIEL\r\nPossibilité de construire un étage supplémentaire, offrant une belle réserve de valorisation.\r\n\r\nPrix : 17 510 000 DT (honoraires d'agence inclus 3%)",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/58f7c5b8c34cb3b8de5ca822533b805e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/6dd9ed40f1567987f593980ff4552223.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cdcc3a3d7abadecb52d52ffdb16d4ff0.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3e6eaba3dd9f8b5e918bdd579792db40.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/eedca9a4b5c3aa867599b1af2ee509e0.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e3bf6c3cb7abff9358e29ef87ae45d4c.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9efad8b81eb8b23e0295213da71c4a27.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/600678bdc7aed47ec12390560dc3cc40.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c48c03d54149eae126e102cccfc9d5ca.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c772b083efe704d07ee2150db9963e29.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/42adac296838cf740b8274e579c35c71.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d017be2e0177fc0c3b7c613288e8f04f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/afc3da9393275e3aeedd14542b3536ab.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 12,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a40663dd2bf376ed8b827fa9279cd677.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 13,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c01b435a63d87e3d544ce85a15a029d0.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 14,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/6211bca8ca0cd6fa27494841ec9cc3ef.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 15,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/ff22928842d7f01ebc3cff97fbc7687b.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 16,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c3bbe082bd4147b86dec8e72fc890234.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 17,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1f5ab5335cf0758034491d143b2f7cc8.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 18,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0fffd13b81deeeb719dd53bf4d9c1fbd.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 19,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/32c18b9018e104ccae03719baa58e057.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 20,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a65adceac03d9a13b8f954d70d19d97a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 21,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8e4afda14a65b23cb4c745ebf21d1135.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 22,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e904b9dcf0e075af9188155e2c48d983.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 23,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4ebb475ac5b11e0b462873f9f1b84c95.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 24,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3ff870b502e951269b88e930d794510d.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 25,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c01b435a63d87e3d544ce85a15a029d0.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 26,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a584f127fd2b05c11ea1531876239428.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 27,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/27c6044fa22cf0e2f8928978192844f4.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 28,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 29
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Ouissem HAMILA International Property & Tourism Consultant",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 73 210 426",
+        "+216 25 801 000"
+      ],
+      "whatsapp": null,
+      "email": "wis@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "House",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475"
+            },
+            "name": " Villa de luxe — Vue mer panoramique — Carthage Présidence",
+            "identifier": "87181475",
+            "sku": "87181475",
+            "description": "Magnifique villa en pierre construite en 2006, bénéficiant d'une vue panoramique exceptionnelle d'environ 200° sur la baie de Sidi Bou Saïd. Exposition Sud-Est idéale, sans vis-à-vis.\r\n\r\nCARACTÉRISTIQUES TECHNIQUES\r\n• Fondations de 6 mètres — construction solide et pérenne\r\n• 2 niveaux habitables + potentiel de surélévation (3ᵉ étage possible)\r\n• Menuiserie aluminium blanc avec grilles de sécurité en fer forgé\r\n• Chauffage central à radiateurs en fonte + Climatisation split\r\n• Chaudière à gaz + Tout-à-l'égout\r\n• Terrain : plus de 2 400 m²\r\n• Surface habitable : 600 m²\r\n\r\nPRESTATIONS DE LUXE\r\n• Piscine privée rectangulaire avec espace détente et bar extérieur\r\n• Jardin paysager planté de palmiers dattiers, cyprès, pins parasols et oliviers\r\n• Terrasse pergola avec colonnes\r\n• Sols en marbre/pierre polie dans tout le rez-de-chaussée\r\n• Moulures et corniches en plâtre au plafond\r\n• Colonnes architecturales intégrées\r\n• Lustre à pampilles en cristal (salle à manger)\r\n• Cheminée dans le salon\r\n• Garage (1 place) + cour pouvant accueillir plusieurs véhicules\r\n• Balustrades en fer forgé blanc ceinturant l'ensemble du terrain\r\n• Cuisine entièrement équipée\r\n• Portail électrique + Visiophone\r\n\r\nDISTRIBUTION\r\n\r\n— Entrées —\r\n• Entrée principale avec WC invités\r\n• Entrée de service\r\n• Escalier principal + escalier de service\r\n\r\n— Rez-de-Jardin —\r\n• 3 suites (chambres avec salles de bain privatives)\r\n• Local technique / Buanderie\r\n• Placards\r\n\r\n— Rez-de-Chaussée —\r\n• Grande salle à manger avec lustre en cristal\r\n• Grand salon d'environ 52 m² en plan ouvert, inondé de lumière, offrant une vue mer panoramique (4 fenêtres + 1 porte-fenêtre)\r\n• Hauteur sous plafond généreuse, moulures et colonnes\r\n\r\nPOTENTIEL\r\nPossibilité de construire un étage supplémentaire, offrant une belle réserve de valorisation.\r\n\r\nPrix : 17 510 000 DT (honoraires d'agence inclus 3%)",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/58f7c5b8c34cb3b8de5ca822533b805e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/6dd9ed40f1567987f593980ff4552223.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/cdcc3a3d7abadecb52d52ffdb16d4ff0.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3e6eaba3dd9f8b5e918bdd579792db40.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/eedca9a4b5c3aa867599b1af2ee509e0.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e3bf6c3cb7abff9358e29ef87ae45d4c.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9efad8b81eb8b23e0295213da71c4a27.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/600678bdc7aed47ec12390560dc3cc40.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c48c03d54149eae126e102cccfc9d5ca.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c772b083efe704d07ee2150db9963e29.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/42adac296838cf740b8274e579c35c71.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d017be2e0177fc0c3b7c613288e8f04f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/afc3da9393275e3aeedd14542b3536ab.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a40663dd2bf376ed8b827fa9279cd677.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c01b435a63d87e3d544ce85a15a029d0.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/6211bca8ca0cd6fa27494841ec9cc3ef.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/ff22928842d7f01ebc3cff97fbc7687b.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c3bbe082bd4147b86dec8e72fc890234.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1f5ab5335cf0758034491d143b2f7cc8.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0fffd13b81deeeb719dd53bf4d9c1fbd.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/32c18b9018e104ccae03719baa58e057.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a65adceac03d9a13b8f954d70d19d97a.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8e4afda14a65b23cb4c745ebf21d1135.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e904b9dcf0e075af9188155e2c48d983.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4ebb475ac5b11e0b462873f9f1b84c95.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3ff870b502e951269b88e930d794510d.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c01b435a63d87e3d544ce85a15a029d0.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a584f127fd2b05c11ea1531876239428.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/27c6044fa22cf0e2f8928978192844f4.jpg"
+            ],
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 600.0,
+              "unitCode": "MTK"
+            },
+            "numberOfFloors": 2,
+            "yearBuilt": 2004,
+            "datePosted": "2026-07-09",
+            "dateModified": "2026-07-09",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue De Sidi Bou Said",
+              "addressLocality": "Amilcar",
+              "postalCode": "1054",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 36.85416,
+              "longitude": 10.2832
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475",
+              "price": "17510000.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-09",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87181475#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87165106",
+      "id_universel": "HIT_87165106",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106",
+      "date_scraping": "2026-07-27T15:49:01.710144+00:00",
+      "date_publication": "2026-07-02",
+      "date_maj": "2026-07-02",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 520000,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-07-02"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 160,
+      "superficie_habitable": 108,
+      "superficie_terrain": null,
+      "nombre_pieces": 4,
+      "nombre_chambres": 2,
+      "nombre_salles_bain": 1,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "5ème étage / 7",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "bon",
+      "standing": null,
+      "meuble": null,
+      "orientation": "Nord",
+      "vue": "Vis-à-vis Mer Ciel"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Hammam Sousse",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Hammam Sousse",
+      "code_postal": "4011",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Autoroute",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Médecin",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Mer",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Supermarché",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Taxi",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 35.88995,
+        "longitude": 10.59213
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Central",
+      "ascenseur": true,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": true,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": true,
+      "volets_roulants": false,
+      "porte_blindee": false,
+      "interphone": false,
+      "videophone": false,
+      "alarme": false,
+      "concierge": true,
+      "gardiennage": true,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Magnifique S+3 en résidence pied dans l'eau – Zone touristique",
+      "texte": "Découvrez ce bel appartement de type S+3 de 160 m², idéalement situé au cœur de la zone touristique, dans une résidence sécurisée pieds dans l'eau.\r\n\r\nUn emplacement exceptionnel qui allie confort, prestige et qualité de vie.\r\n\r\nLes atouts du bien :\r\n\r\n160 m² de superficie\r\nEtage élevé\r\n3 chambres spacieuses\r\nBeaux volumes et excellente luminosité\r\nRésidence sécurisée\r\nAccès direct à la plage\r\nQuartier recherché et à proximité de toutes les commodités\r\nIdéal pour une résidence principale, secondaire ou un investissement locatif\r\nPlace de parking sous-sol et cellier \r\n\r\nRésidence avec ascenseurs\r\n\r\nPrix exceptionnel et très compétitif sur le marché !",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bf2f46488a17173aa4c8c926feb0702e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9234c3262066afd8ac8b49b3243d6885.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9a11f4fc61ff274efe43a4ecf12ef647.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/876fa1ccc0338ab8c2ffc6f7330e196e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/24b20fd4a1d91172d0bcc921778e66cb.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/f8b518150252b06ef9518cb1fd691051.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5b6cd06ae1733b3e066e1f1fbb639e7d.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bb43b7852c31361bf790de34369475d9.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/01059ac20e31a4a495626b25aee2d7f4.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/70f623339077061efb9af6ad70f5ec4a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/07ed9d014e0aff647676203a2bfcb1a5.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 11
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Salowa HAMILA Gérant",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 98 372 584"
+      ],
+      "whatsapp": null,
+      "email": "salowa@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106"
+            },
+            "name": " Magnifique S+3 en résidence pied dans l'eau – Zone touristique",
+            "identifier": "87165106",
+            "sku": "87165106",
+            "description": "Découvrez ce bel appartement de type S+3 de 160 m², idéalement situé au cœur de la zone touristique, dans une résidence sécurisée pieds dans l'eau.\r\n\r\nUn emplacement exceptionnel qui allie confort, prestige et qualité de vie.\r\n\r\nLes atouts du bien :\r\n\r\n160 m² de superficie\r\nEtage élevé\r\n3 chambres spacieuses\r\nBeaux volumes et excellente luminosité\r\nRésidence sécurisée\r\nAccès direct à la plage\r\nQuartier recherché et à proximité de toutes les commodités\r\nIdéal pour une résidence principale, secondaire ou un investissement locatif\r\nPlace de parking sous-sol et cellier \r\n\r\nRésidence avec ascenseurs\r\n\r\nPrix exceptionnel et très compétitif sur le marché !",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bf2f46488a17173aa4c8c926feb0702e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9234c3262066afd8ac8b49b3243d6885.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9a11f4fc61ff274efe43a4ecf12ef647.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/876fa1ccc0338ab8c2ffc6f7330e196e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/24b20fd4a1d91172d0bcc921778e66cb.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/f8b518150252b06ef9518cb1fd691051.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5b6cd06ae1733b3e066e1f1fbb639e7d.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/bb43b7852c31361bf790de34369475d9.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/01059ac20e31a4a495626b25aee2d7f4.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/70f623339077061efb9af6ad70f5ec4a.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/07ed9d014e0aff647676203a2bfcb1a5.jpg"
+            ],
+            "numberOfRooms": 4,
+            "numberOfBedrooms": 2,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 108.0,
+              "unitCode": "MTK"
+            },
+            "numberOfFloors": 7,
+            "yearBuilt": 2012,
+            "datePosted": "2026-07-02",
+            "dateModified": "2026-07-02",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Hammam Sousse",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.88995,
+              "longitude": 10.59213
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106",
+              "price": "520000.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-07-02",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87165106#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87151378",
+      "id_universel": "HIT_87151378",
+      "url_source": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378",
+      "url_canonique": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378",
+      "date_scraping": "2026-07-27T15:49:03.412696+00:00",
+      "date_publication": "2026-06-28",
+      "date_maj": "2026-06-28",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 716880,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-06-28"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 74,
+      "superficie_habitable": 74,
+      "superficie_terrain": null,
+      "nombre_pieces": 2,
+      "nombre_chambres": 1,
+      "nombre_salles_bain": 1,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "Rez-de-chaussée",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "neuf",
+      "standing": null,
+      "meuble": null,
+      "orientation": "Ouest, Sud",
+      "vue": "Aperçu Piscine"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Les Berges du Lac",
+      "localite": null,
+      "quartier": null,
+      "adresse": "La Perle du Lac",
+      "code_postal": "1053",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Aéroport2 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Autoroute",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Bus",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville7 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Cinéma",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Commerces",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Crèche5 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École primaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École secondaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Garderie",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Gare",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Golf10 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Hôpital/clinique",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Lac",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Médecin",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Mer",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Palais des congrès",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parc",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parking public",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Piscine publique",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Plage",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Port15 minutes",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Route principale",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Salle de sport",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Supermarché",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Taxi",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Tennis",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Université",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 36.83429,
+        "longitude": 10.22007
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Central",
+      "ascenseur": true,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": true,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": true,
+      "volets_roulants": true,
+      "porte_blindee": false,
+      "interphone": true,
+      "videophone": false,
+      "alarme": true,
+      "concierge": true,
+      "gardiennage": true,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": true,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Vente immobilière : Appartement à Les Berges du Lac  2 pièces 74 m² 716 880 TND- Home in Tunisia.",
+      "texte": "Vente immobilière : Appartement 2 pièces de 74 m², situé à Les Berges du Lac  - Home in Tunisia.",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d00d81e400ba2d9809dc9ffcfecea18d.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a9c2c19f86362e6177b9fb2111366212.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1787991420b1777d90ff868cb9de0ea6.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c2818597e0abe3dca2cc02d2713a7fa1.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4fbdb29e39cfdf8084962094f65f3384.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a915df834f5c56842b9e89db637a331f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fe7f6300ad20cedff6ef72e467555233.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/634cc95b08f611381b6a57c73fe6df7a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/68137d346720e6601be0168d6238e502.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/de38553eb881f7c23e3ff0ebbdf53b2e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0c157848e7c8eba259c94b6cf60971a3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/75b6be7be84034c784315b2c59fae985.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/45093984fab2f15754c7b685c3136407.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 12,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/72958e54e4c7bde7a59676a4e89950cd.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 13,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/502cc0b3637492ce837c7878ceaaeac5.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 14,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1287475ad5e35f5065b81a5b0a7265ca.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 15,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/f765f5f6b3edd7009bc9d55a18cbac39.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 16,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0f430e32c6916c395e2c345a6fb2ab04.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 17,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4abba285ba5e9c887a2adca8a5ed45fe.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 18,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9b723fc3883f39a1a14f807ab20408a0.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 19,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/33d8e93180077200e7cb8c020cc60064.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 20,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5408aa0b29938fbd1ab28bcaf1924afb.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 21,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d10b511715fa4ded759aafa592143a40.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 22,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/36e80a30e1e5029fc4e835110b038ced.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 23,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/31b6eb98a286719b2e054bf3884a9fc3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 24,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 25
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Adam GABSI Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 99 811 069",
+        "+216 99 811 069"
+      ],
+      "whatsapp": null,
+      "email": "adem@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378"
+            },
+            "name": " Vente immobilière : Appartement à Les Berges du Lac  2 pièces 74 m² 716 880 TND- Home in Tunisia.",
+            "identifier": "87151378",
+            "sku": "87151378",
+            "description": "Vente immobilière : Appartement 2 pièces de 74 m², situé à Les Berges du Lac  - Home in Tunisia.",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d00d81e400ba2d9809dc9ffcfecea18d.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a9c2c19f86362e6177b9fb2111366212.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1787991420b1777d90ff868cb9de0ea6.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c2818597e0abe3dca2cc02d2713a7fa1.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4fbdb29e39cfdf8084962094f65f3384.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a915df834f5c56842b9e89db637a331f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fe7f6300ad20cedff6ef72e467555233.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/634cc95b08f611381b6a57c73fe6df7a.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/68137d346720e6601be0168d6238e502.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/de38553eb881f7c23e3ff0ebbdf53b2e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0c157848e7c8eba259c94b6cf60971a3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/75b6be7be84034c784315b2c59fae985.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/45093984fab2f15754c7b685c3136407.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/72958e54e4c7bde7a59676a4e89950cd.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/502cc0b3637492ce837c7878ceaaeac5.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1287475ad5e35f5065b81a5b0a7265ca.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/f765f5f6b3edd7009bc9d55a18cbac39.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0f430e32c6916c395e2c345a6fb2ab04.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4abba285ba5e9c887a2adca8a5ed45fe.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9b723fc3883f39a1a14f807ab20408a0.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/33d8e93180077200e7cb8c020cc60064.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5408aa0b29938fbd1ab28bcaf1924afb.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d10b511715fa4ded759aafa592143a40.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/36e80a30e1e5029fc4e835110b038ced.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/31b6eb98a286719b2e054bf3884a9fc3.jpg"
+            ],
+            "numberOfRooms": 2,
+            "numberOfBedrooms": 1,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 74.0,
+              "unitCode": "MTK"
+            },
+            "yearBuilt": 2027,
+            "datePosted": "2026-06-28",
+            "dateModified": "2026-06-28",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "La Perle du Lac",
+              "addressLocality": "Les Berges du Lac",
+              "postalCode": "1053",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 36.83429,
+              "longitude": 10.22007
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378",
+              "price": "716880.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-06-28",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87151378#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87146742",
+      "id_universel": "HIT_87146742",
+      "url_source": "https://www.homeintunisia.com/fr/propriété/87146742",
+      "url_canonique": "https://www.homeintunisia.com/fr/propriété/87146742",
+      "date_scraping": "2026-07-27T15:49:07.259959+00:00",
+      "date_publication": "2026-06-25",
+      "date_maj": "2026-06-27",
+      "statut": "inconnu",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 381100,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-06-25"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 123,
+      "superficie_habitable": 100,
+      "superficie_terrain": null,
+      "nombre_pieces": 3,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "Rez-de-chaussée",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "neuf",
+      "standing": null,
+      "meuble": null,
+      "orientation": null,
+      "vue": "Aperçu"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Sousse",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Sahloul",
+      "code_postal": "4000",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Autoroute",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Bus",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Cinéma",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Commerces",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Crèche",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École primaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École secondaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Garderie",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Gare",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Hôpital/clinique",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Médecin",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parc",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parking public",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Port",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Route principale",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Salle de sport",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Supermarché",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Taxi",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Tennis",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Université",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 35.83744,
+        "longitude": 10.5942
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Central",
+      "ascenseur": true,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": true,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": true,
+      "volets_roulants": false,
+      "porte_blindee": false,
+      "interphone": true,
+      "videophone": false,
+      "alarme": true,
+      "concierge": false,
+      "gardiennage": false,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": true,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "À Vendre – Appartement S+2 Haut Standing à Sahloul 4",
+      "texte": "Découvrez ce magnifique appartement S+2 de 123 m² situé dans une résidence neuve de haut standing au cœur de Sahloul 4, à proximité immédiate d’Oxford Library, des tribunaux de Sahloul et de toutes les commodités nécessaires au quotidien.\r\n\r\nL'appartement bénéficie d'un emplacement stratégique dans l'un des quartiers les plus recherchés de Sousse, offrant un excellent cadre de vie ainsi qu'un fort potentiel d'investissement locatif.\r\n\r\nCaractéristiques de la résidence :\r\n✔ Piscine couverte\r\n✔ Salle de sport moderne\r\n✔ Sauna\r\n✔ Résidence sécurisée\r\n✔ Environnement calme et résidentiel\r\n✔ Proximité des commerces, écoles, cafés, services et transports\r\n\r\nCaractéristiques de l'appartement :\r\n✔ Typologie : S+2\r\n✔ Superficie : 123 m²\r\n✔ Finitions haut standing\r\n✔ Espaces lumineux et bien agencés\r\n\r\nQue ce soit pour une résidence principale ou un investissement rentable, cet appartement représente une excellente opportunité dans un secteur à forte demande locative et à fort potentiel de valorisation.\r\n\r\nPour plus d'informations ou pour organiser une visite, contactez-nous",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3d8e5e9fc207557a02d2f4187e970f03.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/60f9ee9a0539320d9ca0efaa07c457ab.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d080319317c35bde329698d65e4ce860.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/15941eb8abe78dfab4c42e6becb5fd74.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c8fe65f953324cd4c333166066d95785.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8c998dd09f1a0f79b5711c27a7c200b3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/067d1c8136ec2a078447a7e62a823343.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/31282482fdf1c244c937063840f32b97.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e96d5bac18789ee2bd0c3399e5a8ca59.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/af662e6a6cc47d11f87de834eef9dca6.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1377cc1357d1820dc124cd4d275003d3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5a7b2a3b79ed1d9d1a905684a706934a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 12
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Adam GABSI Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 99 811 069",
+        "+216 99 811 069"
+      ],
+      "whatsapp": null,
+      "email": "adem@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87146742#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87146742#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87146742",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87146742"
+            },
+            "name": " À Vendre – Appartement S+2 Haut Standing à Sahloul 4",
+            "identifier": "87146742",
+            "sku": "87146742",
+            "description": "Découvrez ce magnifique appartement S+2 de 123 m² situé dans une résidence neuve de haut standing au cœur de Sahloul 4, à proximité immédiate d’Oxford Library, des tribunaux de Sahloul et de toutes les commodités nécessaires au quotidien.\r\n\r\nL'appartement bénéficie d'un emplacement stratégique dans l'un des quartiers les plus recherchés de Sousse, offrant un excellent cadre de vie ainsi qu'un fort potentiel d'investissement locatif.\r\n\r\nCaractéristiques de la résidence :\r\n✔ Piscine couverte\r\n✔ Salle de sport moderne\r\n✔ Sauna\r\n✔ Résidence sécurisée\r\n✔ Environnement calme et résidentiel\r\n✔ Proximité des commerces, écoles, cafés, services et transports\r\n\r\nCaractéristiques de l'appartement :\r\n✔ Typologie : S+2\r\n✔ Superficie : 123 m²\r\n✔ Finitions haut standing\r\n✔ Espaces lumineux et bien agencés\r\n\r\nQue ce soit pour une résidence principale ou un investissement rentable, cet appartement représente une excellente opportunité dans un secteur à forte demande locative et à fort potentiel de valorisation.\r\n\r\nPour plus d'informations ou pour organiser une visite, contactez-nous",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3d8e5e9fc207557a02d2f4187e970f03.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/60f9ee9a0539320d9ca0efaa07c457ab.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d080319317c35bde329698d65e4ce860.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/15941eb8abe78dfab4c42e6becb5fd74.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c8fe65f953324cd4c333166066d95785.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8c998dd09f1a0f79b5711c27a7c200b3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/067d1c8136ec2a078447a7e62a823343.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/31282482fdf1c244c937063840f32b97.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e96d5bac18789ee2bd0c3399e5a8ca59.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/af662e6a6cc47d11f87de834eef9dca6.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/1377cc1357d1820dc124cd4d275003d3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5a7b2a3b79ed1d9d1a905684a706934a.jpg"
+            ],
+            "numberOfRooms": 3,
+            "numberOfBedrooms": 2,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 100.0,
+              "unitCode": "MTK"
+            },
+            "numberOfFloors": 6,
+            "yearBuilt": 2025,
+            "datePosted": "2026-06-25",
+            "dateModified": "2026-06-27",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Sahloul",
+              "addressLocality": "Sousse",
+              "postalCode": "4000",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.83744,
+              "longitude": 10.5942
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87146742",
+              "price": "381100.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/OutOfStock",
+              "validFrom": "2026-06-25",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87146742#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87145796",
+      "id_universel": "HIT_87145796",
+      "url_source": "https://www.homeintunisia.com/fr/propriété/87145796",
+      "url_canonique": "https://www.homeintunisia.com/fr/propriété/87145796",
+      "date_scraping": "2026-07-27T15:49:08.921788+00:00",
+      "date_publication": "2026-06-25",
+      "date_maj": "2026-06-25",
+      "statut": "actif",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 530450,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-06-25"
+    },
+    "bien": {
+      "type": "appartement",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 135,
+      "superficie_habitable": 111,
+      "superficie_terrain": null,
+      "nombre_pieces": 3,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": "Rez-de-chaussée",
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": "bon",
+      "standing": null,
+      "meuble": null,
+      "orientation": "Est, Nord-est",
+      "vue": "Dégagée Piscine"
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Monastir",
+      "localite": null,
+      "quartier": null,
+      "adresse": "Golf Résidence Hôtel",
+      "code_postal": "5000",
+      "proximites": [],
+      "coordonnees": {
+        "latitude": 35.76266,
+        "longitude": 10.74615
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": "Climatisation, Central",
+      "ascenseur": false,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": true,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": true,
+      "volets_roulants": false,
+      "porte_blindee": false,
+      "interphone": true,
+      "videophone": false,
+      "alarme": false,
+      "concierge": true,
+      "gardiennage": true,
+      "eau_chaude": "Chaudière",
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Appartement S+2 à la vente au golf Monastir",
+      "texte": "On vous propose à la vente un appartement au Rez-de-chaussée, d'une résidence sécurisé prés du golf de Monastir, de 111m² habitable avec un accès directe sur la piscine.\r\n\r\nCe dernier se compose comme suite:\r\n\r\n- Un grand hall d'entrée\r\n- Un grand Salon et salle à manger\r\n- Deux grande Chambres à coucher avec dressing\r\n- Une grande cuisine fermé toute équipé\r\n- Un séchoir avec biendire\r\n- Une terrasse qui donne directement sur la piscine\r\n\r\n\r\nCet Appartement dispose d'une place parking attitré à usage personnel et à vie.\r\n\r\nP.S: L'appartement est vendu avec les meubles sauf quelques articles de décoration propre au propriétaire.",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4d8b6eb6dc59b31abfa1a67227ad501b.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0c4f33b764a304b434f205c4f9ad7086.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e77ff492fdc09f42fdf2f6b6343ac12e.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3228f513d72ec8094cf6efcd2bf83bdb.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/61b0b2ddc6c2a53ad4462c2693435e39.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/237c0d3ee5c7e91bfe5384ef5d209508.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0f7116e3be1224a218619ec92a0cda09.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/eb788734a61b76aecf4e05e272d8ff02.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/456b701d13aa1719b94e976796d0f8c4.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/88d86d12187f5a4798e677ab29890e2a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4da9a7bd81961681ba0beff3b041aaf2.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fe6cb302c98ef6c20d0b1f0857d7454f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/412576fcec4b253b74ed696cf793ff8a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 12,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 13
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Belhassen ZERZERI Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 98 793 398"
+      ],
+      "whatsapp": null,
+      "email": "belhassen@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87145796#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "Apartment",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87145796#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87145796",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87145796"
+            },
+            "name": " Appartement S+2 à la vente au golf Monastir",
+            "identifier": "87145796",
+            "sku": "87145796",
+            "description": "On vous propose à la vente un appartement au Rez-de-chaussée, d'une résidence sécurisé prés du golf de Monastir, de 111m² habitable avec un accès directe sur la piscine.\r\n\r\nCe dernier se compose comme suite:\r\n\r\n- Un grand hall d'entrée\r\n- Un grand Salon et salle à manger\r\n- Deux grande Chambres à coucher avec dressing\r\n- Une grande cuisine fermé toute équipé\r\n- Un séchoir avec biendire\r\n- Une terrasse qui donne directement sur la piscine\r\n\r\n\r\nCet Appartement dispose d'une place parking attitré à usage personnel et à vie.\r\n\r\nP.S: L'appartement est vendu avec les meubles sauf quelques articles de décoration propre au propriétaire.",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4d8b6eb6dc59b31abfa1a67227ad501b.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0c4f33b764a304b434f205c4f9ad7086.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/e77ff492fdc09f42fdf2f6b6343ac12e.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/3228f513d72ec8094cf6efcd2bf83bdb.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/61b0b2ddc6c2a53ad4462c2693435e39.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/237c0d3ee5c7e91bfe5384ef5d209508.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/0f7116e3be1224a218619ec92a0cda09.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/eb788734a61b76aecf4e05e272d8ff02.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/456b701d13aa1719b94e976796d0f8c4.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/88d86d12187f5a4798e677ab29890e2a.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/4da9a7bd81961681ba0beff3b041aaf2.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fe6cb302c98ef6c20d0b1f0857d7454f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/412576fcec4b253b74ed696cf793ff8a.jpg"
+            ],
+            "numberOfRooms": 3,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 111.0,
+              "unitCode": "MTK"
+            },
+            "datePosted": "2026-06-25",
+            "dateModified": "2026-06-25",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Golf Résidence Hôtel",
+              "addressLocality": "Monastir",
+              "postalCode": "5000",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.76266,
+              "longitude": 10.74615
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87145796",
+              "price": "530450.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/InStock",
+              "validFrom": "2026-06-25",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#Sell",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87145796#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  },
+  {
+    "listing": {
+      "id_source": "87103530",
+      "id_universel": "HIT_87103530",
+      "url_source": "https://www.homeintunisia.com/fr/propriété/87103530",
+      "url_canonique": "https://www.homeintunisia.com/fr/propriété/87103530",
+      "date_scraping": "2026-07-27T15:49:11.172908+00:00",
+      "date_publication": "2026-06-19",
+      "date_maj": "2026-06-19",
+      "statut": "inconnu",
+      "langue": "fr"
+    },
+    "transaction": {
+      "type": "vente",
+      "prix": 1050000,
+      "devise": "TND",
+      "prix_negociable": null,
+      "prix_m2": null,
+      "loyer_mensuel": null,
+      "charges_mensuelles": null,
+      "caution": null,
+      "frais_agence": null,
+      "disponibilite": null,
+      "disponibilite_date": "2026-06-19"
+    },
+    "bien": {
+      "type": "villa",
+      "sous_type": null,
+      "usage": "residentiel",
+      "superficie_totale": 570,
+      "superficie_habitable": 315,
+      "superficie_terrain": null,
+      "nombre_pieces": 5,
+      "nombre_chambres": null,
+      "nombre_salles_bain": null,
+      "nombre_salles_eau": null,
+      "nombre_etages_total": null,
+      "etage": null,
+      "dernier_etage": null,
+      "annee_construction": null,
+      "etat_general": null,
+      "standing": null,
+      "meuble": null,
+      "orientation": null,
+      "vue": null
+    },
+    "localisation": {
+      "pays": "Tunisie",
+      "pays_code": "TN",
+      "gouvernorat": null,
+      "delegation": null,
+      "ville": "Sousse Khezama",
+      "localite": null,
+      "quartier": null,
+      "adresse": "sousse",
+      "code_postal": "4051",
+      "proximites": [
+        {
+          "type": null,
+          "nom": "Bus",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Hôpital/clinique",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parc",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École primaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Parking public",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "École secondaire",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Commerces",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Supermarché",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Taxi",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Centre ville",
+          "distance_m": null
+        },
+        {
+          "type": null,
+          "nom": "Université",
+          "distance_m": null
+        }
+      ],
+      "coordonnees": {
+        "latitude": 35.83225,
+        "longitude": 10.61799
+      },
+      "zone": null
+    },
+    "equipements": {
+      "climatisation": false,
+      "chauffage": null,
+      "ascenseur": false,
+      "garage": false,
+      "places_parking": null,
+      "parking_exterieur": null,
+      "cave": false,
+      "terrasse": false,
+      "balcon": false,
+      "jardin": false,
+      "superficie_jardin": null,
+      "piscine": false,
+      "cuisine_equipee": false,
+      "cuisine_americaine": false,
+      "double_vitrage": false,
+      "volets_roulants": false,
+      "porte_blindee": false,
+      "interphone": false,
+      "videophone": false,
+      "alarme": true,
+      "concierge": false,
+      "gardiennage": false,
+      "eau_chaude": null,
+      "antenne_tv": null,
+      "internet": null,
+      "adsl": null,
+      "fibre_optique": null,
+      "cheminee": false,
+      "dressing": false,
+      "salle_de_sport": false,
+      "espace_enfants": null,
+      "autres": []
+    },
+    "description": {
+      "titre": "Splendide Villa d'Angle de Standing – Khezama Ouest, Sousse",
+      "texte": "Une opportunité rare à Khezama Ouest : Une magnifique villa d'angle offrant de beaux volumes, bâtie sur un terrain arboré de 570 m² avec une superficie couverte de 315 m². Conçue en 3 demi-niveaux, cette demeure de type S+5 allie charme, confort moderne et indépendance.\r\n\r\nComposition de la Villa :\r\n\r\nUn double salon lumineux et une salle à manger spacieuse avec une cheminée fonctionnelle.\r\n\r\n4 grandes chambres à coucher.\r\n\r\nUn très grand séjour (living room) idéal pour les moments en famille.\r\n\r\n2 cuisines entièrement équipées.\r\n\r\nEspaces sanitaires : Une salle de bain, une salle de douche, et des toilettes séparées.\r\n\r\nÉquipements & Atouts Majeurs :\r\n\r\nExtérieurs : Double garage privatif et un grand bassin d'eau traditionnel (Majel).\r\n\r\nÉnergie & Confort : Équipée de panneaux photovoltaïques (économie d'énergie majeure), chauffage central installé.\r\n\r\nSécurité : Système d'alarme complet.\r\n\r\nEmplacement : Terrain d'angle stratégique offrant une excellente luminosité et un accès facile dans un quartier résidentiel calme de Khezama Ouest.\r\n\r\nUne demeure d'exception idéale pour une grande famille ou un investissement de premier choix.",
+      "texte_ar": null,
+      "points_forts": [],
+      "mentions_legales": null
+    },
+    "medias": {
+      "photos": [
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/33882217537b2fae4e877a2b3b241643.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 0,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fbdd96eeae8a43f413fb5411bfc11080.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 1,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9e6897655bc2c751ea9d89d7c8f50a03.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 2,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8fb8df1ca0fafedb1a62eeea175af329.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 3,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a68ffd65f20d0bb314581edfe2a9b087.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 4,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c372b78cf10795bf619099baed73a52f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 5,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/db89b4f863d04042ca8e6a523a266eb9.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 6,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/db426390601ae50064cacaaf1c9725ce.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 7,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a2986116e546dc27dd5a55afe31916a3.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 8,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/af90c28e429cbd383f840a7691beb1fe.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 9,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d60c36c9b60cd603da8673315acc105a.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 10,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a579bf9d43c6d2331839958780f48cb9.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 11,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/ff0bb463e4dd2e3077e2a738f1e5120f.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 12,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/34686c515c7548f4cbfab92428a02289.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 13,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5e3b0c71a278e74f1e672e68c2d2e2e6.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 14,
+          "type": null
+        },
+        {
+          "url": "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/7cc3683bbccee6d6d76a6ea54b99ae14.jpg",
+          "url_thumb": null,
+          "legende": null,
+          "ordre": 15,
+          "type": null
+        }
+      ],
+      "videos": [],
+      "plans": [],
+      "visite_virtuelle": null,
+      "nombre_photos": 16
+    },
+    "contact": {
+      "type_vendeur": "agence",
+      "nom_vendeur": "Hadil BELKACEM Commercial",
+      "nom_agence": "Home in Tunisia",
+      "telephone": [
+        "+216 26 989 987"
+      ],
+      "whatsapp": null,
+      "email": "hadil@homeintunisia.com",
+      "site_web": "https://www.homeintunisia.com",
+      "logo_agence": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+      "photo_agence": null,
+      "url_profil": null,
+      "annonces_vendeur": null,
+      "membre_depuis": null,
+      "verifie": null
+    },
+    "metadonnees_scraping": {
+      "source": "home_in_tunisia",
+      "selecteur_html": {},
+      "methode": "playwright",
+      "statut_scraping": "succes",
+      "erreurs": [],
+      "temps_scraping_ms": null,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+      "proxy_utilise": null,
+      "cache": null
+    },
+    "scoring_ia": {
+      "prix_estime_marche": null,
+      "decote_pourcentage": null,
+      "score_opportunite": null,
+      "confiance_estimation": null,
+      "tendance_quartier": null,
+      "rentabilite_locative": null,
+      "delai_vente_estime": null,
+      "alertes": []
+    },
+    "donnees_brutes": {
+      "json_ld": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87103530#agency",
+            "name": "Home in Tunisia",
+            "url": "https://www.homeintunisia.com",
+            "email": "info@homeintunisia.com",
+            "telephone": "+216-73210426",
+            "logo": "https://media.apimo.pro/logos/e7e05f71949207e77f5cd3e59cd98e70_c75e8d7456-original.png",
+            "image": "https://media.apimo.pro/agency/f0bee86f23d1842142e621f7493e1a44_5063837b57_550-original.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rue des Caraïbes Résidence VIP",
+              "addressLocality": "Hammam Sousse",
+              "postalCode": "4011",
+              "addressRegion": "Hammam Sousse",
+              "addressCountry": "TN"
+            }
+          },
+          {
+            "@type": "House",
+            "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87103530#property",
+            "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87103530",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87103530"
+            },
+            "name": " Splendide Villa d'Angle de Standing – Khezama Ouest, Sousse",
+            "identifier": "87103530",
+            "sku": "87103530",
+            "description": "Une opportunité rare à Khezama Ouest : Une magnifique villa d'angle offrant de beaux volumes, bâtie sur un terrain arboré de 570 m² avec une superficie couverte de 315 m². Conçue en 3 demi-niveaux, cette demeure de type S+5 allie charme, confort moderne et indépendance.\r\n\r\nComposition de la Villa :\r\n\r\nUn double salon lumineux et une salle à manger spacieuse avec une cheminée fonctionnelle.\r\n\r\n4 grandes chambres à coucher.\r\n\r\nUn très grand séjour (living room) idéal pour les moments en famille.\r\n\r\n2 cuisines entièrement équipées.\r\n\r\nEspaces sanitaires : Une salle de bain, une salle de douche, et des toilettes séparées.\r\n\r\nÉquipements & Atouts Majeurs :\r\n\r\nExtérieurs : Double garage privatif et un grand bassin d'eau traditionnel (Majel).\r\n\r\nÉnergie & Confort : Équipée de panneaux photovoltaïques (économie d'énergie majeure), chauffage central installé.\r\n\r\nSécurité : Système d'alarme complet.\r\n\r\nEmplacement : Terrain d'angle stratégique offrant une excellente luminosité et un accès facile dans un quartier résidentiel calme de Khezama Ouest.\r\n\r\nUne demeure d'exception idéale pour une grande famille ou un investissement de premier choix.",
+            "image": [
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/33882217537b2fae4e877a2b3b241643.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/fbdd96eeae8a43f413fb5411bfc11080.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/9e6897655bc2c751ea9d89d7c8f50a03.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/8fb8df1ca0fafedb1a62eeea175af329.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a68ffd65f20d0bb314581edfe2a9b087.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/c372b78cf10795bf619099baed73a52f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/db89b4f863d04042ca8e6a523a266eb9.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/db426390601ae50064cacaaf1c9725ce.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a2986116e546dc27dd5a55afe31916a3.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/af90c28e429cbd383f840a7691beb1fe.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/d60c36c9b60cd603da8673315acc105a.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/a579bf9d43c6d2331839958780f48cb9.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/ff0bb463e4dd2e3077e2a738f1e5120f.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/34686c515c7548f4cbfab92428a02289.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/5e3b0c71a278e74f1e672e68c2d2e2e6.jpg",
+              "https://d36vnx92dgl2c5.cloudfront.net/prod/Zenia/2829/media/7cc3683bbccee6d6d76a6ea54b99ae14.jpg"
+            ],
+            "numberOfRooms": 5,
+            "floorSize": {
+              "@type": "QuantitativeValue",
+              "value": 315.0,
+              "unitCode": "MTK"
+            },
+            "numberOfFloors": 3,
+            "datePosted": "2026-06-19",
+            "dateModified": "2026-06-19",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "sousse",
+              "addressLocality": "Sousse Khezama",
+              "postalCode": "4051",
+              "addressCountry": "TN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.83225,
+              "longitude": 10.61799
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87103530",
+              "price": "1050000.00",
+              "priceCurrency": "TND",
+              "availability": "https://schema.org/OutOfStock",
+              "validFrom": "2026-06-19",
+              "priceValidUntil": "2026-08-27",
+              "businessFunction": "http://purl.org/goodrelations/v1#LeaseOut",
+              "seller": {
+                "@id": "https://www.homeintunisia.com/fr/propri%C3%A9t%C3%A9/87103530#agency"
+              }
+            }
+          }
+        ]
+      },
+      "html_snippet": null
+    }
+  }
+]
