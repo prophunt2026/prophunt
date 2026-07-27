@@ -34,19 +34,30 @@ TYPES_BIEN = {
     "terrain": "terrain",
     "bureau": "local_commercial",
     "local commercial": "local_commercial",
+    "usine": "local_industriel",
     "immeuble": "immeuble",
 }
 
 
-def deviner_type_bien(titre: str) -> str:
+def deviner_type_bien(titre: str, description: str = "") -> str:
+    """Détermine le type de bien à partir du titre et de la description."""
     titre_lower = (titre or "").lower()
+    description_lower = (description or "").lower()
+    texte_complet = f"{titre_lower} {description_lower}"
+
+    # Mots-clés pour détecter les types spécifiques
+    if "usine" in texte_complet or "industrie" in texte_complet or "atelier" in texte_complet:
+        return "local_industriel"
+    
     for mot_cle, valeur in TYPES_BIEN.items():
-        if mot_cle in titre_lower:
+        if mot_cle in titre_lower or mot_cle in description_lower:
             return valeur
+
     return "appartement"
 
 
 def construire_equipements(liste_brute: list) -> dict:
+    """Convertit la liste brute d'équipements en dictionnaire normalisé."""
     equip = {}
     autres = []
     for item in liste_brute or []:
@@ -68,10 +79,8 @@ def construire_equipements(liste_brute: list) -> dict:
 
 
 # ==========================================================
-# NOUVEAU : normalisation du téléphone
+# NORMALISATION DU TÉLÉPHONE
 # ==========================================================
-# mubawab_details.py + mubawab_telephone.py fournissent "telephone" comme
-# une liste (via Selenium). On sécurise quand même le cas d'une chaîne seule.
 def normaliser_telephones(valeur) -> list:
     if not valeur:
         return []
@@ -80,18 +89,181 @@ def normaliser_telephones(valeur) -> list:
     return [valeur]
 
 
-def normaliser_annonce_mubawab(brute: dict) -> dict:
+# ==========================================================
+# EXTRACTION DES SURFACES DEPUIS LA DESCRIPTION (AMÉLIORÉE)
+# ==========================================================
+PATTERN_SURFACE_TERRAIN = re.compile(
+    r"terrain\s*(?:de\s*)?(\d+(?:[.,]\d+)?)\s*m[²2]?", re.IGNORECASE
+)
+PATTERN_SURFACE_HABITABLE = re.compile(
+    r"(?:habitable|bâtie|batie|couverte|construite)\s*(?:de\s*)?(\d+(?:[.,]\d+)?)\s*m[²2]?", re.IGNORECASE
+)
+PATTERN_SURFACE_TOTALE = re.compile(
+    r"(?:surface|superficie)\s*(?:totale|tot)\s*(?:de\s*)?(\d+(?:[.,]\d+)?)\s*m[²2]?", re.IGNORECASE
+)
+
+
+def extraire_surfaces_description(description: str) -> dict:
+    """
+    Extrait les surfaces de la description.
+    Retourne: {
+        "terrain": float or None,
+        "habitable": float or None,
+        "totale": float or None,
+        "batie": float or None  # alias pour habitable
+    }
+    """
+    description = description or ""
+
+    resultat = {
+        "terrain": None,
+        "habitable": None,
+        "totale": None,
+        "batie": None
+    }
+
+    # Recherche du terrain
+    match_terrain = PATTERN_SURFACE_TERRAIN.search(description)
+    if match_terrain:
+        resultat["terrain"] = float(match_terrain.group(1).replace(",", "."))
+
+    # Recherche de l'habitable/bâtie
+    match_habitable = PATTERN_SURFACE_HABITABLE.search(description)
+    if match_habitable:
+        value = float(match_habitable.group(1).replace(",", "."))
+        resultat["habitable"] = value
+        resultat["batie"] = value
+
+    # Recherche de la surface totale
+    match_totale = PATTERN_SURFACE_TOTALE.search(description)
+    if match_totale:
+        resultat["totale"] = float(match_totale.group(1).replace(",", "."))
+
+    return resultat
+
+
+# ==========================================================
+# FONCTION PRINCIPALE DE NORMALISATION
+# ==========================================================
+def normaliser_annonce_mubawab(brute: dict):
+    """
+    Retourne None si l'annonce n'a pas de surface fiable, sinon le dict normalisé.
+    """
     match_id = re.search(r"/a/(\d+)/", brute.get("url", "") or "")
     id_source = match_id.group(1) if match_id else None
 
     surface = brute.get("surface")
+    if surface is None or surface == 1:
+        return None
+
+    type_bien = deviner_type_bien(brute.get("titre"), brute.get("description"))
+    est_terrain = type_bien == "terrain"
+    est_villa = type_bien == "villa"
+    est_industriel = type_bien == "local_industriel"
+
+    surfaces_desc = extraire_surfaces_description(brute.get("description"))
+    surface_brute = brute.get("surface")
+
+    # ==========================================================
+    # LOGIQUE DE GESTION DES SURFACES
+    # ==========================================================
+    
+    # Initialisation
+    superficie_totale = surface_brute
+    superficie_habitable = None
+    superficie_terrain = None
+
+    if est_terrain:
+        # Cas 1: C'est un terrain
+        superficie_totale = surface_brute
+        superficie_habitable = None
+        superficie_terrain = surface_brute
+
+    elif est_villa:
+        # Cas 2: C'est une villa
+        if surfaces_desc["terrain"] is not None and surfaces_desc["habitable"] is not None:
+            superficie_terrain = surfaces_desc["terrain"]
+            superficie_habitable = surfaces_desc["habitable"]
+            superficie_totale = surfaces_desc["habitable"]
+        elif surfaces_desc["terrain"] is not None and surfaces_desc["batie"] is not None:
+            superficie_terrain = surfaces_desc["terrain"]
+            superficie_habitable = surfaces_desc["batie"]
+            superficie_totale = surfaces_desc["batie"]
+        elif surfaces_desc["terrain"] is not None:
+            superficie_terrain = surfaces_desc["terrain"]
+            if surfaces_desc["totale"] is not None:
+                superficie_totale = surfaces_desc["totale"]
+                superficie_habitable = surfaces_desc["totale"]
+            else:
+                superficie_totale = surface_brute
+                superficie_habitable = surface_brute
+        else:
+            superficie_terrain = surface_brute
+            superficie_habitable = surface_brute
+            superficie_totale = surface_brute
+
+    elif est_industriel:
+        # Cas 3: C'est un bien industriel (usine, atelier, etc.)
+        # Le terrain
+        if surfaces_desc["terrain"] is not None:
+            superficie_terrain = surfaces_desc["terrain"]
+        else:
+            superficie_terrain = surface_brute
+
+        # La surface habitable = surface couverte/bâtie pour un bien industriel
+        if surfaces_desc["totale"] is not None:
+            superficie_habitable = surfaces_desc["totale"]
+            superficie_totale = surfaces_desc["totale"]
+        elif surfaces_desc["habitable"] is not None:
+            superficie_habitable = surfaces_desc["habitable"]
+            superficie_totale = surfaces_desc["habitable"]
+        elif surfaces_desc["batie"] is not None:
+            superficie_habitable = surfaces_desc["batie"]
+            superficie_totale = surfaces_desc["batie"]
+        else:
+            # Si aucune surface couverte n'est trouvée, on utilise la surface du JSON-LD
+            superficie_habitable = surface_brute
+            superficie_totale = surface_brute
+
+    else:
+        # Cas 4: Appartement, Duplex, Studio, etc.
+        superficie_totale = surface_brute
+        superficie_habitable = surface_brute
+        superficie_terrain = None
+
+    # Vérification finale pour les villas
+    if type_bien == "villa" and superficie_terrain is not None and superficie_habitable is None:
+        if surface_brute is not None and surface_brute != superficie_terrain:
+            superficie_habitable = surface_brute
+            superficie_totale = surface_brute
+        elif surfaces_desc["totale"] is not None:
+            superficie_habitable = surfaces_desc["totale"]
+            superficie_totale = surfaces_desc["totale"]
+
+    # Calcul du prix_m2
+    prix_m2 = None
+    if brute.get("prix") and superficie_totale and superficie_totale > 0:
+        # Pour les biens industriels, on utilise superficie_totale (surface couverte/bâtie)
+        # Pour les autres, on utilise superficie_habitable
+        if est_industriel:
+            surface_calcule = superficie_totale
+        else:
+            surface_calcule = superficie_habitable or superficie_totale
+        
+        if surface_calcule and surface_calcule > 0:
+            prix_m2 = round(brute["prix"] / surface_calcule, 2)
+
     telephones = normaliser_telephones(brute.get("telephone"))
 
     alertes = []
-    if surface is not None and surface < 5:
-        alertes.append(f"Surface suspecte ({surface} m²) — à vérifier manuellement")
     if not telephones:
         alertes.append("Aucun téléphone récupéré pour cette annonce")
+    
+    if type_bien == "villa" and superficie_terrain is None:
+        alertes.append("Villa sans surface de terrain détectée")
+    
+    if type_bien == "local_industriel" and superficie_terrain is None:
+        alertes.append("Bien industriel sans surface de terrain détectée")
 
     return {
         "listing": {
@@ -110,11 +282,7 @@ def normaliser_annonce_mubawab(brute: dict) -> dict:
             "prix": brute.get("prix"),
             "devise": brute.get("devise", "TND"),
             "prix_negociable": None,
-            "prix_m2": (
-                round(brute["prix"] / surface, 2)
-                if brute.get("prix") and surface
-                else None
-            ),
+            "prix_m2": prix_m2,
             "loyer_mensuel": None,
             "charges_mensuelles": None,
             "caution": None,
@@ -123,12 +291,12 @@ def normaliser_annonce_mubawab(brute: dict) -> dict:
             "disponibilite_date": None,
         },
         "bien": {
-            "type": deviner_type_bien(brute.get("titre")),
+            "type": type_bien,
             "sous_type": None,
-            "usage": "residentiel",
-            "superficie_totale": surface,
-            "superficie_habitable": surface,
-            "superficie_terrain": None,
+            "usage": "commercial" if type_bien in ["local_commercial", "local_industriel"] else "residentiel",
+            "superficie_totale": superficie_totale,
+            "superficie_habitable": superficie_habitable,
+            "superficie_terrain": superficie_terrain,
             "nombre_pieces": brute.get("pieces"),
             "nombre_chambres": brute.get("chambres"),
             "nombre_salles_bain": brute.get("salles_de_bain"),
@@ -215,20 +383,52 @@ def normaliser_annonce_mubawab(brute: dict) -> dict:
     }
 
 
+# ==========================================================
+# SCRIPT PRINCIPAL
+# ==========================================================
 if __name__ == "__main__":
-    # <-- changez ce chemin par le vôtre (là où se trouve votre mubawab.json)
-    with open("mubawab.json", encoding="utf-8") as f:
-        annonces_brutes = json.load(f)
+    try:
+        with open("mubawab.json", encoding="utf-8") as f:
+            annonces_brutes = json.load(f)
+        
+        print(f"✅ Chargé {len(annonces_brutes)} annonces brutes")
+        
+        resultats_bruts = []
+        for i, annonce in enumerate(annonces_brutes, 1):
+            print(f"\r⏳ Traitement {i}/{len(annonces_brutes)}", end="")
+            resultat = normaliser_annonce_mubawab(annonce)
+            if resultat:
+                resultats_bruts.append(resultat)
+        
+        print("\n✅ Normalisation terminée")
+        
+        annonces_normalisees = [a for a in resultats_bruts if a is not None]
+        nombre_exclues = len(resultats_bruts) - len(annonces_normalisees)
 
-    annonces_normalisees = [normaliser_annonce_mubawab(a) for a in annonces_brutes]
-
-    # <-- et celui-ci, pour le fichier de sortie
-    with open("mubawab_standard.json", "w", encoding="utf-8") as f:
-        json.dump(annonces_normalisees, f, ensure_ascii=False, indent=2)
-
-    suspectes = [a for a in annonces_normalisees if a["metadonnees_scraping"]["erreurs"]]
-
-    print(f"{len(annonces_normalisees)} annonces normalisées")
-    print(f"{len(suspectes)} annonces avec une alerte qualité à vérifier")
-    for a in suspectes[:10]:
-        print(" -", a["listing"]["url_source"], "->", a["metadonnees_scraping"]["erreurs"])
+        with open("mubawab_standard.json", "w", encoding="utf-8") as f:
+            json.dump(annonces_normalisees, f, ensure_ascii=False, indent=2)
+        
+        print(f"📊 Statistiques :")
+        print(f"  - Annonces totales : {len(annonces_brutes)}")
+        print(f"  - Annonces exclues : {nombre_exclues}")
+        print(f"  - Annonces normalisées : {len(annonces_normalisees)}")
+        
+        suspectes = [a for a in annonces_normalisees if a["metadonnees_scraping"]["erreurs"]]
+        print(f"  - Annonces avec alertes : {len(suspectes)}")
+        
+        # Comptage par type
+        types = {}
+        for a in annonces_normalisees:
+            t = a["bien"]["type"]
+            types[t] = types.get(t, 0) + 1
+        
+        print("\n📋 Répartition par type :")
+        for t, count in sorted(types.items(), key=lambda x: x[1], reverse=True):
+            print(f"  - {t}: {count}")
+        
+        print(f"\n✅ Fichier créé : mubawab_standard.json")
+        
+    except FileNotFoundError:
+        print("❌ Erreur : fichier mubawab.json non trouvé")
+    except Exception as e:
+        print(f"❌ Erreur : {e}")

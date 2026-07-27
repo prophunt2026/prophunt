@@ -14,7 +14,7 @@ TYPES_BIEN_URL = {
     "local-commercial": "local_commercial",
 }
 
-
+# Traduction "libellé français Tecnocasa" -> clé standard equipements
 EQUIPEMENT_LABELS = {
     "climatisation": "climatisation",
     "ascenseur": "ascenseur",
@@ -107,6 +107,14 @@ def normaliser_annonce_tecnocasa(brute: dict) -> dict:
     surface = brute.get("surface")
     ville, quartier = separer_ville(brute.get("ville"))
 
+    # Un terrain n'a pas de "surface habitable" : la surface va dans
+    # superficie_terrain, pas superficie_habitable.
+    est_terrain = type_bien == "terrain"
+
+    superficie_totale = surface
+    superficie_habitable = None if est_terrain else surface
+    superficie_terrain = surface if est_terrain else None
+
     titre = brute.get("titre") or None
     description = brute.get("description")
     if not titre and description:
@@ -157,9 +165,9 @@ def normaliser_annonce_tecnocasa(brute: dict) -> dict:
             "type": type_bien,
             "sous_type": None,
             "usage": "residentiel" if type_bien != "local_commercial" else "commercial",
-            "superficie_totale": surface,
-            "superficie_habitable": surface,
-            "superficie_terrain": None,
+            "superficie_totale": superficie_totale,
+            "superficie_habitable": superficie_habitable,
+            "superficie_terrain": superficie_terrain,
             "nombre_pieces": extraire_nombre(brute.get("pieces")),
             "nombre_chambres": extraire_nombre(brute.get("chambres")),
             "nombre_salles_bain": extraire_nombre(brute.get("salles_de_bain")),
@@ -247,13 +255,13 @@ def normaliser_annonce_tecnocasa(brute: dict) -> dict:
 
 
 if __name__ == "__main__":
-   
+    # <-- changez ce chemin par le vôtre
     with open("tecnocasa.json", encoding="utf-8") as f:
         annonces_brutes = json.load(f)
 
     annonces_normalisees = [normaliser_annonce_tecnocasa(a) for a in annonces_brutes]
 
-   
+    # <-- et celui-ci
     with open("tecnocasa_standard.json", "w", encoding="utf-8") as f:
         json.dump(annonces_normalisees, f, ensure_ascii=False, indent=2)
 
