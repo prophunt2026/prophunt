@@ -1,0 +1,311 @@
+2026-07-27 21:56:04,726 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 21:56:04,727 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 21:56:17,236 [INFO] tayara: Scroll 0 : 32 annonces collectées
+2026-07-27 21:56:29,854 [INFO] tayara: Plus de nouvelles annonces après plusieurs scrolls — arrêt (fin du catalogue ?).
+2026-07-27 21:56:30,050 [INFO] tayara: Total collecté : 32 annonces
+2026-07-27 21:56:30,051 [INFO] main: --- Tayara : enrichissement des fiches détail (superficie...) ---
+2026-07-27 21:57:38,772 [INFO] utils: 32 annonces exportées vers data/tayara/tayara.json
+2026-07-27 21:57:38,787 [INFO] utils: 32 annonces exportées vers data/tayara/tayara.csv
+2026-07-27 21:57:38,789 [INFO] main: --- Tunisie-Annonce (40 pages, objectif 1000+) ---
+2026-07-27 21:57:39,402 [INFO] tunisie_annonce: Page 1 : 25 annonces extraites (total : 25)
+2026-07-27 21:57:41,358 [INFO] tunisie_annonce: Page 2 : 25 annonces extraites (total : 50)
+2026-07-27 21:57:43,840 [INFO] tunisie_annonce: Page 3 : 25 annonces extraites (total : 75)
+2026-07-27 21:57:46,002 [INFO] tunisie_annonce: Page 4 : 25 annonces extraites (total : 100)
+2026-07-27 21:57:47,759 [INFO] tunisie_annonce: Page 5 : 25 annonces extraites (total : 125)
+2026-07-27 21:57:49,966 [INFO] tunisie_annonce: Page 6 : 25 annonces extraites (total : 150)
+2026-07-27 21:57:52,433 [INFO] tunisie_annonce: Page 7 : 25 annonces extraites (total : 175)
+2026-07-27 21:57:56,013 [INFO] tunisie_annonce: Page 8 : 25 annonces extraites (total : 200)
+2026-07-27 21:57:57,232 [INFO] tunisie_annonce: Page 9 : 25 annonces extraites (total : 225)
+2026-07-27 21:57:59,865 [INFO] tunisie_annonce: Page 10 : 25 annonces extraites (total : 250)
+2026-07-27 21:58:01,306 [INFO] tunisie_annonce: Page 11 : 25 annonces extraites (total : 275)
+2026-07-27 21:58:03,753 [INFO] tunisie_annonce: Page 12 : 25 annonces extraites (total : 300)
+2026-07-27 21:58:05,433 [INFO] tunisie_annonce: Page 13 : 25 annonces extraites (total : 325)
+2026-07-27 21:58:07,572 [INFO] tunisie_annonce: Page 14 : 25 annonces extraites (total : 350)
+2026-07-27 21:58:09,717 [INFO] tunisie_annonce: Page 15 : 25 annonces extraites (total : 375)
+2026-07-27 21:58:11,384 [INFO] tunisie_annonce: Page 16 : 25 annonces extraites (total : 400)
+2026-07-27 21:58:13,146 [INFO] tunisie_annonce: Page 17 : 25 annonces extraites (total : 425)
+2026-07-27 21:58:16,494 [INFO] tunisie_annonce: Page 18 : 25 annonces extraites (total : 450)
+2026-07-27 21:58:17,635 [INFO] tunisie_annonce: Page 19 : 25 annonces extraites (total : 475)
+2026-07-27 21:58:19,881 [INFO] tunisie_annonce: Page 20 : 25 annonces extraites (total : 500)
+2026-07-27 21:58:22,462 [INFO] tunisie_annonce: Page 21 : 25 annonces extraites (total : 525)
+2026-07-27 21:58:24,848 [INFO] tunisie_annonce: Page 22 : 25 annonces extraites (total : 550)
+2026-07-27 21:58:26,600 [INFO] tunisie_annonce: Page 23 : 25 annonces extraites (total : 575)
+2026-07-27 21:58:28,650 [INFO] tunisie_annonce: Page 24 : 25 annonces extraites (total : 600)
+2026-07-27 21:58:30,977 [INFO] tunisie_annonce: Page 25 : 25 annonces extraites (total : 625)
+2026-07-27 21:58:33,448 [INFO] tunisie_annonce: Page 26 : 25 annonces extraites (total : 650)
+2026-07-27 21:58:35,036 [INFO] tunisie_annonce: Page 27 : 25 annonces extraites (total : 675)
+2026-07-27 21:58:37,775 [INFO] tunisie_annonce: Page 28 : 25 annonces extraites (total : 700)
+2026-07-27 21:58:40,827 [INFO] tunisie_annonce: Page 29 : 25 annonces extraites (total : 725)
+2026-07-27 21:58:43,136 [INFO] tunisie_annonce: Page 30 : 25 annonces extraites (total : 750)
+2026-07-27 21:58:44,434 [INFO] tunisie_annonce: Page 31 : 25 annonces extraites (total : 775)
+2026-07-27 21:58:46,437 [INFO] tunisie_annonce: Page 32 : 25 annonces extraites (total : 800)
+2026-07-27 21:58:49,472 [INFO] tunisie_annonce: Page 33 : 25 annonces extraites (total : 825)
+2026-07-27 21:58:52,748 [INFO] tunisie_annonce: Page 34 : 25 annonces extraites (total : 850)
+2026-07-27 21:58:55,056 [INFO] tunisie_annonce: Page 35 : 25 annonces extraites (total : 875)
+2026-07-27 21:58:56,575 [INFO] tunisie_annonce: Page 36 : 25 annonces extraites (total : 900)
+2026-07-27 21:58:58,604 [INFO] tunisie_annonce: Page 37 : 25 annonces extraites (total : 925)
+2026-07-27 21:59:01,199 [INFO] tunisie_annonce: Page 38 : 25 annonces extraites (total : 950)
+2026-07-27 21:59:03,149 [INFO] tunisie_annonce: Page 39 : 25 annonces extraites (total : 975)
+2026-07-27 21:59:05,793 [INFO] tunisie_annonce: Page 40 : 25 annonces extraites (total : 1000)
+2026-07-27 21:59:05,795 [INFO] main: --- Tunisie-Annonce : enrichissement des fiches détail (superficie...) ---
+2026-07-27 22:01:00,739 [INFO] tunisie_annonce: Fiches détail : 50/1000 traitées
+2026-07-27 22:13:12,172 [WARNING] utils: Erreur réseau sur http://www.tunisie-annonce.com/Details_Annonces_Immobilier.asp?cod_ann=3421965&titre=S2 à la marsa ville (tentative 1/3) : ("Connection broken: ConnectionResetError(10054, 'Une connexion existante a dû être fermée par l’hôte distant', None, 10054, None)", ConnectionResetError(10054, 'Une connexion existante a dû être fermée par l’hôte distant', None, 10054, None))
+2026-07-27 22:13:14,235 [WARNING] utils: Erreur réseau sur http://www.tunisie-annonce.com/Details_Annonces_Immobilier.asp?cod_ann=3421965&titre=S2 à la marsa ville (tentative 2/3) : HTTPConnectionPool(host='www.tunisie-annonce.com', port=80): Max retries exceeded with url: /Details_Annonces_Immobilier.asp?cod_ann=3421965&titre=S2%20%C3%A0%20la%20marsa%20ville (Caused by NameResolutionError("HTTPConnection(host='www.tunisie-annonce.com', port=80): Failed to resolve 'www.tunisie-annonce.com' ([Errno 11001] getaddrinfo failed)"))
+2026-07-27 22:20:49,878 [WARNING] utils: Erreur réseau sur http://www.tunisie-annonce.com/Details_Annonces_Immobilier.asp?cod_ann=3421965&titre=S2 à la marsa ville (tentative 3/3) : HTTPConnectionPool(host='www.tunisie-annonce.com', port=80): Max retries exceeded with url: /Details_Annonces_Immobilier.asp?cod_ann=3421965&titre=S2%20%C3%A0%20la%20marsa%20ville (Caused by NameResolutionError("HTTPConnection(host='www.tunisie-annonce.com', port=80): Failed to resolve 'www.tunisie-annonce.com' ([Errno 11001] getaddrinfo failed)"))
+2026-07-27 22:20:57,924 [ERROR] utils: Échec définitif après 3 tentatives : http://www.tunisie-annonce.com/Details_Annonces_Immobilier.asp?cod_ann=3421965&titre=S2 à la marsa ville
+2026-07-27 22:21:06,038 [INFO] tunisie_annonce: Fiches détail : 100/1000 traitées
+2026-07-27 22:33:22,435 [WARNING] utils: Erreur réseau sur http://www.tunisie-annonce.com/Details_Annonces_Immobilier.asp?cod_ann=3469509&titre=Appartement à lafayette au centre ville de tunis (tentative 1/3) : ('Connection aborted.', ConnectionResetError(10054, 'Une connexion existante a dû être fermée par l’hôte distant', None, 10054, None))
+2026-07-27 22:33:32,217 [WARNING] utils: Erreur réseau sur http://www.tunisie-annonce.com/Details_Annonces_Immobilier.asp?cod_ann=3469509&titre=Appartement à lafayette au centre ville de tunis (tentative 2/3) : ('Connection aborted.', ConnectionResetError(10054, 'Une connexion existante a dû être fermée par l’hôte distant', None, 10054, None))
+2026-07-27 22:35:17,348 [INFO] tunisie_annonce: Fiches détail : 150/1000 traitées
+2026-07-27 22:36:10,905 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 22:36:10,905 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 22:36:25,896 [INFO] tayara: Scroll 0 : 32 annonces collectées
+2026-07-27 22:36:39,175 [INFO] tayara: Plus de nouvelles annonces après plusieurs scrolls — arrêt (fin du catalogue ?).
+2026-07-27 22:36:39,347 [INFO] tayara: Total collecté : 32 annonces
+2026-07-27 22:36:39,348 [INFO] main: --- Tayara : enrichissement des fiches détail (superficie...) ---
+2026-07-27 22:37:28,373 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 22:37:28,374 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 22:37:35,152 [INFO] tayara: Scroll 0 : 32 annonces collectées
+2026-07-27 22:37:48,419 [INFO] tayara: Plus de nouvelles annonces après plusieurs scrolls — arrêt (fin du catalogue ?).
+2026-07-27 22:37:48,605 [INFO] tayara: Total collecté : 32 annonces
+2026-07-27 22:37:48,605 [INFO] main: --- Tayara : enrichissement des fiches détail (superficie...) ---
+2026-07-27 22:38:57,124 [INFO] utils: 32 annonces exportées vers data/tayara/tayara.json
+2026-07-27 22:38:57,134 [INFO] utils: 32 annonces exportées vers data/tayara/tayara.csv
+2026-07-27 22:38:57,134 [INFO] main: --- Tunisie-Annonce (40 pages, objectif 1000+) ---
+2026-07-27 22:38:57,494 [INFO] tunisie_annonce: Page 1 : 25 annonces extraites (total : 25)
+2026-07-27 22:39:00,187 [INFO] tunisie_annonce: Page 2 : 25 annonces extraites (total : 50)
+2026-07-27 22:39:01,944 [INFO] tunisie_annonce: Page 3 : 25 annonces extraites (total : 75)
+2026-07-27 22:39:04,472 [INFO] tunisie_annonce: Page 4 : 25 annonces extraites (total : 100)
+2026-07-27 22:39:07,094 [INFO] tunisie_annonce: Page 5 : 25 annonces extraites (total : 125)
+2026-07-27 22:39:08,500 [INFO] tunisie_annonce: Page 6 : 25 annonces extraites (total : 150)
+2026-07-27 22:39:10,984 [INFO] tunisie_annonce: Page 7 : 25 annonces extraites (total : 175)
+2026-07-27 22:39:12,919 [INFO] tunisie_annonce: Page 8 : 25 annonces extraites (total : 200)
+2026-07-27 22:39:15,112 [INFO] tunisie_annonce: Page 9 : 25 annonces extraites (total : 225)
+2026-07-27 22:39:17,445 [INFO] tunisie_annonce: Page 10 : 25 annonces extraites (total : 250)
+2026-07-27 22:39:20,142 [INFO] tunisie_annonce: Page 11 : 25 annonces extraites (total : 275)
+2026-07-27 22:39:22,549 [INFO] tunisie_annonce: Page 12 : 25 annonces extraites (total : 300)
+2026-07-27 22:39:25,337 [INFO] tunisie_annonce: Page 13 : 25 annonces extraites (total : 325)
+2026-07-27 22:39:27,416 [INFO] tunisie_annonce: Page 14 : 25 annonces extraites (total : 350)
+2026-07-27 22:39:30,088 [INFO] tunisie_annonce: Page 15 : 25 annonces extraites (total : 375)
+2026-07-27 22:39:32,660 [INFO] tunisie_annonce: Page 16 : 25 annonces extraites (total : 400)
+2026-07-27 22:39:34,919 [INFO] tunisie_annonce: Page 17 : 25 annonces extraites (total : 425)
+2026-07-27 22:39:36,555 [INFO] tunisie_annonce: Page 18 : 25 annonces extraites (total : 450)
+2026-07-27 22:39:39,533 [INFO] tunisie_annonce: Page 19 : 25 annonces extraites (total : 475)
+2026-07-27 22:39:42,042 [INFO] tunisie_annonce: Page 20 : 25 annonces extraites (total : 500)
+2026-07-27 22:39:44,358 [INFO] tunisie_annonce: Page 21 : 25 annonces extraites (total : 525)
+2026-07-27 22:39:46,986 [INFO] tunisie_annonce: Page 22 : 25 annonces extraites (total : 550)
+2026-07-27 22:39:49,461 [INFO] tunisie_annonce: Page 23 : 25 annonces extraites (total : 575)
+2026-07-27 22:39:52,666 [INFO] tunisie_annonce: Page 24 : 25 annonces extraites (total : 600)
+2026-07-27 22:39:55,006 [INFO] tunisie_annonce: Page 25 : 25 annonces extraites (total : 625)
+2026-07-27 22:39:57,367 [INFO] tunisie_annonce: Page 26 : 25 annonces extraites (total : 650)
+2026-07-27 22:39:59,335 [INFO] tunisie_annonce: Page 27 : 25 annonces extraites (total : 675)
+2026-07-27 22:40:01,109 [INFO] tunisie_annonce: Page 28 : 25 annonces extraites (total : 700)
+2026-07-27 22:40:03,780 [INFO] tunisie_annonce: Page 29 : 25 annonces extraites (total : 725)
+2026-07-27 22:40:06,642 [INFO] tunisie_annonce: Page 30 : 25 annonces extraites (total : 750)
+2026-07-27 22:40:09,224 [INFO] tunisie_annonce: Page 31 : 25 annonces extraites (total : 775)
+2026-07-27 22:40:10,864 [INFO] tunisie_annonce: Page 32 : 25 annonces extraites (total : 800)
+2026-07-27 22:40:13,844 [INFO] tunisie_annonce: Page 33 : 25 annonces extraites (total : 825)
+2026-07-27 22:40:16,490 [INFO] tunisie_annonce: Page 34 : 25 annonces extraites (total : 850)
+2026-07-27 22:40:19,443 [INFO] tunisie_annonce: Page 35 : 25 annonces extraites (total : 875)
+2026-07-27 22:40:21,717 [INFO] tunisie_annonce: Page 36 : 25 annonces extraites (total : 900)
+2026-07-27 22:40:23,637 [INFO] tunisie_annonce: Page 37 : 25 annonces extraites (total : 925)
+2026-07-27 22:40:26,554 [INFO] tunisie_annonce: Page 38 : 25 annonces extraites (total : 950)
+2026-07-27 22:40:28,370 [INFO] tunisie_annonce: Page 39 : 25 annonces extraites (total : 975)
+2026-07-27 22:40:30,507 [INFO] tunisie_annonce: Page 40 : 25 annonces extraites (total : 1000)
+2026-07-27 22:40:30,510 [INFO] main: --- Tunisie-Annonce : enrichissement des fiches détail (superficie...) ---
+2026-07-27 22:42:19,019 [INFO] tunisie_annonce: Fiches détail : 50/1000 traitées
+2026-07-27 22:43:01,272 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 22:43:01,272 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 22:43:10,076 [INFO] tayara: Chargement initial : 106 annonces
+2026-07-27 22:43:12,468 [INFO] tayara: Scroll 0 : +0 nouvelles -> 106 annonces au total
+2026-07-27 22:43:24,251 [INFO] tayara: Scroll 5 : +0 nouvelles -> 106 annonces au total
+2026-07-27 22:43:35,591 [INFO] tayara: Scroll 10 : +0 nouvelles -> 106 annonces au total
+2026-07-27 22:43:37,777 [WARNING] tayara: Plus de nouvelles annonces après 12 scrolls sans résultat. Soit c'est la fin réelle du catalogue pour ce mot-clé, soit le scroll ne déclenche pas le chargement (relancer avec debug_network=True pour investiguer).
+2026-07-27 22:43:37,898 [INFO] tayara: Total collecté : 106 annonces
+2026-07-27 22:43:37,898 [INFO] main: --- Tayara : enrichissement des fiches détail (superficie...) ---
+2026-07-27 22:45:25,153 [INFO] tayara: Fiches détail : 50/106 traitées
+2026-07-27 22:46:48,310 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 22:46:48,310 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 22:49:53,324 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 22:49:53,324 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 22:50:05,953 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-27 22:50:05,953 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-27 22:50:07,657 [INFO] tayara: Chargement initial : 106 annonces
+2026-07-27 22:50:13,935 [INFO] tayara: Scroll 0 (bouton cliqué: False) : +0 nouvelles -> 106 annonces au total
+2026-07-27 22:50:46,112 [INFO] tayara: Scroll 5 (bouton cliqué: False) : +0 nouvelles -> 106 annonces au total
+2026-07-28 02:46:21,113 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-28 02:46:21,115 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-28 02:46:26,532 [INFO] tayara: Chargement initial : 105 annonces
+2026-07-28 02:46:32,986 [INFO] tayara: Scroll 0 (bouton cliqué: False) : +0 nouvelles -> 105 annonces au total
+2026-07-28 02:47:04,766 [INFO] tayara: Scroll 5 (bouton cliqué: False) : +0 nouvelles -> 105 annonces au total
+2026-07-28 02:47:37,165 [INFO] tayara: Scroll 10 (bouton cliqué: False) : +0 nouvelles -> 105 annonces au total
+2026-07-28 02:47:43,652 [WARNING] tayara: Plus de nouvelles annonces après 12 tentatives sans résultat. Soit c'est la fin réelle du catalogue, soit le bouton/scroll ne déclenche pas le chargement (relancer avec debug_network=True pour investiguer).
+2026-07-28 02:47:43,828 [INFO] tayara: Total collecté : 105 annonces
+2026-07-28 02:47:43,829 [INFO] main: --- Tayara : enrichissement des fiches détail (superficie...) ---
+2026-07-28 02:49:33,582 [INFO] tayara: Fiches détail : 50/105 traitées
+2026-07-28 02:51:25,133 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-28 02:51:25,133 [INFO] main: --- Tayara (scroll infini, objectif 1000+) ---
+2026-07-28 02:51:30,179 [INFO] tayara: [DEBUG] 95 textes cliquables trouvés -> data/tayara_debug_buttons.txt (et capture -> data/tayara_debug.png)
+2026-07-28 02:51:30,341 [INFO] tayara: Chargement initial : 105 annonces
+2026-07-28 02:51:33,973 [INFO] tayara: Scroll 0 (bouton cliqué: False) : +0 nouvelles -> 105 annonces au total
+2026-07-28 02:51:45,193 [INFO] tayara: Scroll 5 (bouton cliqué: False) : +0 nouvelles -> 105 annonces au total
+2026-07-28 02:51:56,252 [INFO] tayara: Scroll 10 (bouton cliqué: False) : +0 nouvelles -> 105 annonces au total
+2026-07-28 02:51:58,480 [WARNING] tayara: Plus de nouvelles annonces après 12 tentatives sans résultat. Soit c'est la fin réelle du catalogue, soit le bouton/scroll ne déclenche pas le chargement (relancer avec debug_network=True pour investiguer).
+2026-07-28 02:51:58,604 [INFO] tayara: Total collecté : 105 annonces
+2026-07-28 02:51:58,604 [INFO] tayara: 49 appels API distincts loggés dans data/tayara_network_log.txt
+2026-07-28 02:51:58,605 [INFO] main: --- Tayara : enrichissement des fiches détail (superficie...) ---
+2026-07-28 02:53:51,914 [INFO] tayara: Fiches détail : 50/105 traitées
+2026-07-28 02:55:43,533 [INFO] tayara: Fiches détail : 100/105 traitées
+2026-07-28 02:55:54,627 [INFO] utils: 105 annonces exportées vers data/tayara/tayara.json
+2026-07-28 02:55:54,671 [INFO] utils: 105 annonces exportées vers data/tayara/tayara.csv
+2026-07-28 02:55:54,674 [INFO] main: --- Tunisie-Annonce (40 pages, objectif 1000+) ---
+2026-07-28 02:55:55,605 [INFO] tunisie_annonce: Page 1 : 25 annonces extraites (total : 25)
+2026-07-28 02:55:57,299 [INFO] tunisie_annonce: Page 2 : 25 annonces extraites (total : 50)
+2026-07-28 02:55:59,901 [INFO] tunisie_annonce: Page 3 : 25 annonces extraites (total : 75)
+2026-07-28 02:56:01,744 [INFO] tunisie_annonce: Page 4 : 25 annonces extraites (total : 100)
+2026-07-28 02:56:04,807 [INFO] tunisie_annonce: Page 5 : 25 annonces extraites (total : 125)
+2026-07-28 02:56:07,419 [INFO] tunisie_annonce: Page 6 : 25 annonces extraites (total : 150)
+2026-07-28 02:56:10,106 [INFO] tunisie_annonce: Page 7 : 25 annonces extraites (total : 175)
+2026-07-28 02:56:12,163 [INFO] tunisie_annonce: Page 8 : 25 annonces extraites (total : 200)
+2026-07-28 02:56:14,955 [INFO] tunisie_annonce: Page 9 : 25 annonces extraites (total : 225)
+2026-07-28 02:56:17,396 [INFO] tunisie_annonce: Page 10 : 25 annonces extraites (total : 250)
+2026-07-28 02:56:19,144 [INFO] tunisie_annonce: Page 11 : 25 annonces extraites (total : 275)
+2026-07-28 02:56:20,786 [INFO] tunisie_annonce: Page 12 : 25 annonces extraites (total : 300)
+2026-07-28 02:56:23,297 [INFO] tunisie_annonce: Page 13 : 25 annonces extraites (total : 325)
+2026-07-28 02:56:25,801 [INFO] tunisie_annonce: Page 14 : 25 annonces extraites (total : 350)
+2026-07-28 02:56:27,731 [INFO] tunisie_annonce: Page 15 : 25 annonces extraites (total : 375)
+2026-07-28 02:56:30,567 [INFO] tunisie_annonce: Page 16 : 25 annonces extraites (total : 400)
+2026-07-28 02:56:32,459 [INFO] tunisie_annonce: Page 17 : 25 annonces extraites (total : 425)
+2026-07-28 02:56:35,216 [INFO] tunisie_annonce: Page 18 : 25 annonces extraites (total : 450)
+2026-07-28 02:56:37,310 [INFO] tunisie_annonce: Page 19 : 25 annonces extraites (total : 475)
+2026-07-28 02:56:40,283 [INFO] tunisie_annonce: Page 20 : 25 annonces extraites (total : 500)
+2026-07-28 02:56:42,361 [INFO] tunisie_annonce: Page 21 : 25 annonces extraites (total : 525)
+2026-07-28 02:56:45,218 [INFO] tunisie_annonce: Page 22 : 25 annonces extraites (total : 550)
+2026-07-28 02:56:47,795 [INFO] tunisie_annonce: Page 23 : 25 annonces extraites (total : 575)
+2026-07-28 02:56:49,543 [INFO] tunisie_annonce: Page 24 : 25 annonces extraites (total : 600)
+2026-07-28 02:56:51,900 [INFO] tunisie_annonce: Page 25 : 25 annonces extraites (total : 625)
+2026-07-28 02:56:53,974 [INFO] tunisie_annonce: Page 26 : 25 annonces extraites (total : 650)
+2026-07-28 02:56:56,658 [INFO] tunisie_annonce: Page 27 : 25 annonces extraites (total : 675)
+2026-07-28 02:56:58,493 [INFO] tunisie_annonce: Page 28 : 25 annonces extraites (total : 700)
+2026-07-28 02:57:00,469 [INFO] tunisie_annonce: Page 29 : 25 annonces extraites (total : 725)
+2026-07-28 02:57:02,813 [INFO] tunisie_annonce: Page 30 : 25 annonces extraites (total : 750)
+2026-07-28 02:57:05,396 [INFO] tunisie_annonce: Page 31 : 25 annonces extraites (total : 775)
+2026-07-28 02:57:07,032 [INFO] tunisie_annonce: Page 32 : 25 annonces extraites (total : 800)
+2026-07-28 02:57:09,262 [INFO] tunisie_annonce: Page 33 : 25 annonces extraites (total : 825)
+2026-07-28 02:57:12,095 [INFO] tunisie_annonce: Page 34 : 25 annonces extraites (total : 850)
+2026-07-28 02:57:15,002 [INFO] tunisie_annonce: Page 35 : 25 annonces extraites (total : 875)
+2026-07-28 02:57:17,136 [INFO] tunisie_annonce: Page 36 : 25 annonces extraites (total : 900)
+2026-07-28 02:57:19,709 [INFO] tunisie_annonce: Page 37 : 25 annonces extraites (total : 925)
+2026-07-28 02:57:21,551 [INFO] tunisie_annonce: Page 38 : 25 annonces extraites (total : 950)
+2026-07-28 02:57:23,161 [INFO] tunisie_annonce: Page 39 : 25 annonces extraites (total : 975)
+2026-07-28 02:57:25,637 [INFO] tunisie_annonce: Page 40 : 25 annonces extraites (total : 1000)
+2026-07-28 02:57:25,640 [INFO] main: --- Tunisie-Annonce : enrichissement des fiches détail (superficie...) ---
+2026-07-28 02:59:22,265 [INFO] tunisie_annonce: Fiches détail : 50/1000 traitées
+2026-07-28 03:01:15,256 [INFO] tunisie_annonce: Fiches détail : 100/1000 traitées
+2026-07-28 03:04:06,643 [INFO] main: === Démarrage du scraping PropHunter TN ===
+2026-07-28 03:04:06,644 [INFO] main: --- Tayara (API interne, objectif 1000+) ---
+2026-07-28 03:04:07,467 [INFO] tayara: buildId Tayara détecté : Q424Oc2taf5mKbI3fI51T
+2026-07-28 03:04:07,682 [INFO] tayara: Page 1 : +30 annonces -> 30 au total
+2026-07-28 03:04:09,325 [INFO] tayara: Page 2 : +30 annonces -> 60 au total
+2026-07-28 03:04:10,664 [INFO] tayara: Page 3 : +30 annonces -> 90 au total
+2026-07-28 03:04:11,858 [INFO] tayara: Page 4 : +30 annonces -> 120 au total
+2026-07-28 03:04:13,469 [INFO] tayara: Page 5 : +30 annonces -> 150 au total
+2026-07-28 03:04:15,355 [INFO] tayara: Page 6 : +30 annonces -> 180 au total
+2026-07-28 03:04:16,677 [INFO] tayara: Page 7 : +30 annonces -> 210 au total
+2026-07-28 03:04:17,991 [INFO] tayara: Page 8 : +30 annonces -> 240 au total
+2026-07-28 03:04:19,462 [INFO] tayara: Page 9 : +30 annonces -> 270 au total
+2026-07-28 03:04:20,689 [INFO] tayara: Page 10 : +30 annonces -> 300 au total
+2026-07-28 03:04:22,431 [INFO] tayara: Page 11 : +30 annonces -> 330 au total
+2026-07-28 03:04:24,271 [INFO] tayara: Page 12 : +30 annonces -> 360 au total
+2026-07-28 03:04:25,322 [INFO] tayara: Page 13 : +30 annonces -> 390 au total
+2026-07-28 03:04:26,727 [INFO] tayara: Page 14 : +30 annonces -> 420 au total
+2026-07-28 03:04:28,508 [INFO] tayara: Page 15 : +30 annonces -> 450 au total
+2026-07-28 03:04:29,570 [INFO] tayara: Page 16 : +30 annonces -> 480 au total
+2026-07-28 03:04:31,192 [INFO] tayara: Page 17 : +30 annonces -> 510 au total
+2026-07-28 03:04:33,144 [INFO] tayara: Page 18 : +30 annonces -> 540 au total
+2026-07-28 03:04:35,131 [INFO] tayara: Page 19 : +30 annonces -> 570 au total
+2026-07-28 03:04:36,407 [INFO] tayara: Page 20 : +30 annonces -> 600 au total
+2026-07-28 03:04:37,756 [INFO] tayara: Page 21 : +30 annonces -> 630 au total
+2026-07-28 03:04:38,773 [INFO] tayara: Page 22 : +30 annonces -> 660 au total
+2026-07-28 03:04:40,773 [INFO] tayara: Page 23 : +30 annonces -> 690 au total
+2026-07-28 03:04:42,473 [INFO] tayara: Page 24 : +30 annonces -> 720 au total
+2026-07-28 03:04:43,564 [INFO] tayara: Page 25 : +30 annonces -> 750 au total
+2026-07-28 03:04:45,468 [INFO] tayara: Page 26 : +30 annonces -> 780 au total
+2026-07-28 03:04:46,498 [INFO] tayara: Page 27 : +30 annonces -> 810 au total
+2026-07-28 03:04:48,179 [INFO] tayara: Page 28 : +30 annonces -> 840 au total
+2026-07-28 03:04:49,256 [INFO] tayara: Page 29 : +30 annonces -> 870 au total
+2026-07-28 03:04:50,419 [INFO] tayara: Page 30 : +30 annonces -> 900 au total
+2026-07-28 03:04:51,459 [INFO] tayara: Page 31 : +30 annonces -> 930 au total
+2026-07-28 03:04:53,080 [INFO] tayara: Page 32 : +30 annonces -> 960 au total
+2026-07-28 03:04:54,275 [INFO] tayara: Page 33 : +30 annonces -> 990 au total
+2026-07-28 03:04:56,026 [INFO] tayara: Page 34 : +30 annonces -> 1020 au total
+2026-07-28 03:04:56,027 [INFO] tayara: Objectif de 1000 annonces atteint.
+2026-07-28 03:04:56,322 [INFO] utils: 1020 annonces exportées vers data/tayara/tayara.json
+2026-07-28 03:04:56,431 [INFO] utils: 1020 annonces exportées vers data/tayara/tayara.csv
+2026-07-28 03:04:56,434 [INFO] main: --- Tunisie-Annonce (40 pages, objectif 1000+) ---
+2026-07-28 03:04:56,864 [INFO] tunisie_annonce: Page 1 : 25 annonces extraites (total : 25)
+2026-07-28 03:04:58,681 [INFO] tunisie_annonce: Page 2 : 25 annonces extraites (total : 50)
+2026-07-28 03:05:00,539 [INFO] tunisie_annonce: Page 3 : 25 annonces extraites (total : 75)
+2026-07-28 03:05:03,023 [INFO] tunisie_annonce: Page 4 : 25 annonces extraites (total : 100)
+2026-07-28 03:05:05,887 [INFO] tunisie_annonce: Page 5 : 25 annonces extraites (total : 125)
+2026-07-28 03:05:08,343 [INFO] tunisie_annonce: Page 6 : 25 annonces extraites (total : 150)
+2026-07-28 03:05:09,706 [INFO] tunisie_annonce: Page 7 : 25 annonces extraites (total : 175)
+2026-07-28 03:05:11,620 [INFO] tunisie_annonce: Page 8 : 25 annonces extraites (total : 200)
+2026-07-28 03:05:13,699 [INFO] tunisie_annonce: Page 9 : 25 annonces extraites (total : 225)
+2026-07-28 03:05:15,342 [INFO] tunisie_annonce: Page 10 : 25 annonces extraites (total : 250)
+2026-07-28 03:05:17,534 [INFO] tunisie_annonce: Page 11 : 25 annonces extraites (total : 275)
+2026-07-28 03:05:19,587 [INFO] tunisie_annonce: Page 12 : 25 annonces extraites (total : 300)
+2026-07-28 03:05:21,478 [INFO] tunisie_annonce: Page 13 : 25 annonces extraites (total : 325)
+2026-07-28 03:05:23,952 [INFO] tunisie_annonce: Page 14 : 25 annonces extraites (total : 350)
+2026-07-28 03:05:26,152 [INFO] tunisie_annonce: Page 15 : 25 annonces extraites (total : 375)
+2026-07-28 03:05:27,669 [INFO] tunisie_annonce: Page 16 : 25 annonces extraites (total : 400)
+2026-07-28 03:05:29,717 [INFO] tunisie_annonce: Page 17 : 25 annonces extraites (total : 425)
+2026-07-28 03:05:32,177 [INFO] tunisie_annonce: Page 18 : 25 annonces extraites (total : 450)
+2026-07-28 03:05:34,651 [INFO] tunisie_annonce: Page 19 : 25 annonces extraites (total : 475)
+2026-07-28 03:05:37,622 [INFO] tunisie_annonce: Page 20 : 25 annonces extraites (total : 500)
+2026-07-28 03:05:39,798 [INFO] tunisie_annonce: Page 21 : 25 annonces extraites (total : 525)
+2026-07-28 03:05:42,204 [INFO] tunisie_annonce: Page 22 : 25 annonces extraites (total : 550)
+2026-07-28 03:05:44,727 [INFO] tunisie_annonce: Page 23 : 25 annonces extraites (total : 575)
+2026-07-28 03:05:47,478 [INFO] tunisie_annonce: Page 24 : 25 annonces extraites (total : 600)
+2026-07-28 03:05:49,371 [INFO] tunisie_annonce: Page 25 : 25 annonces extraites (total : 625)
+2026-07-28 03:05:51,667 [INFO] tunisie_annonce: Page 26 : 25 annonces extraites (total : 650)
+2026-07-28 03:05:53,802 [INFO] tunisie_annonce: Page 27 : 25 annonces extraites (total : 675)
+2026-07-28 03:05:55,385 [INFO] tunisie_annonce: Page 28 : 25 annonces extraites (total : 700)
+2026-07-28 03:05:57,979 [INFO] tunisie_annonce: Page 29 : 25 annonces extraites (total : 725)
+2026-07-28 03:05:59,550 [INFO] tunisie_annonce: Page 30 : 25 annonces extraites (total : 750)
+2026-07-28 03:06:01,390 [INFO] tunisie_annonce: Page 31 : 25 annonces extraites (total : 775)
+2026-07-28 03:06:03,132 [INFO] tunisie_annonce: Page 32 : 25 annonces extraites (total : 800)
+2026-07-28 03:06:09,077 [INFO] tunisie_annonce: Page 33 : 25 annonces extraites (total : 825)
+2026-07-28 03:06:09,842 [INFO] tunisie_annonce: Page 34 : 25 annonces extraites (total : 850)
+2026-07-28 03:06:11,927 [INFO] tunisie_annonce: Page 35 : 25 annonces extraites (total : 875)
+2026-07-28 03:06:14,411 [INFO] tunisie_annonce: Page 36 : 25 annonces extraites (total : 900)
+2026-07-28 03:06:16,298 [INFO] tunisie_annonce: Page 37 : 25 annonces extraites (total : 925)
+2026-07-28 03:06:18,413 [INFO] tunisie_annonce: Page 38 : 25 annonces extraites (total : 950)
+2026-07-28 03:06:21,213 [INFO] tunisie_annonce: Page 39 : 25 annonces extraites (total : 975)
+2026-07-28 03:06:22,885 [INFO] tunisie_annonce: Page 40 : 25 annonces extraites (total : 1000)
+2026-07-28 03:06:22,887 [INFO] main: --- Tunisie-Annonce : enrichissement des fiches détail (superficie...) ---
+2026-07-28 03:08:14,341 [INFO] tunisie_annonce: Fiches détail : 50/1000 traitées
+2026-07-28 03:10:08,011 [INFO] tunisie_annonce: Fiches détail : 100/1000 traitées
+2026-07-28 03:11:58,927 [INFO] tunisie_annonce: Fiches détail : 150/1000 traitées
+2026-07-28 03:13:54,484 [INFO] tunisie_annonce: Fiches détail : 200/1000 traitées
+2026-07-28 03:15:54,430 [INFO] tunisie_annonce: Fiches détail : 250/1000 traitées
+2026-07-28 03:17:48,433 [INFO] tunisie_annonce: Fiches détail : 300/1000 traitées
+2026-07-28 03:19:38,849 [INFO] tunisie_annonce: Fiches détail : 350/1000 traitées
+2026-07-28 03:21:31,041 [INFO] tunisie_annonce: Fiches détail : 400/1000 traitées
+2026-07-28 03:23:23,989 [INFO] tunisie_annonce: Fiches détail : 450/1000 traitées
+2026-07-28 03:25:17,457 [INFO] tunisie_annonce: Fiches détail : 500/1000 traitées
+2026-07-28 03:27:03,220 [INFO] tunisie_annonce: Fiches détail : 550/1000 traitées
+2026-07-28 03:28:53,537 [INFO] tunisie_annonce: Fiches détail : 600/1000 traitées
+2026-07-28 03:30:51,052 [INFO] tunisie_annonce: Fiches détail : 650/1000 traitées
+2026-07-28 03:32:46,935 [INFO] tunisie_annonce: Fiches détail : 700/1000 traitées
+2026-07-28 03:34:35,315 [INFO] tunisie_annonce: Fiches détail : 750/1000 traitées
+2026-07-28 03:36:24,663 [INFO] tunisie_annonce: Fiches détail : 800/1000 traitées
+2026-07-28 03:38:19,869 [INFO] tunisie_annonce: Fiches détail : 850/1000 traitées
+2026-07-28 03:40:13,615 [INFO] tunisie_annonce: Fiches détail : 900/1000 traitées
+2026-07-28 03:42:09,519 [INFO] tunisie_annonce: Fiches détail : 950/1000 traitées
+2026-07-28 03:43:58,693 [INFO] tunisie_annonce: Fiches détail : 1000/1000 traitées
+2026-07-28 03:43:59,072 [INFO] utils: 1000 annonces exportées vers data/tunisie_annonce/tunisie_annonce.json
+2026-07-28 03:43:59,273 [INFO] utils: 1000 annonces exportées vers data/tunisie_annonce/tunisie_annonce.csv
+2026-07-28 03:44:00,189 [INFO] utils: 2020 annonces exportées vers data/annonces_merged.json
+2026-07-28 03:44:00,627 [INFO] utils: 2020 annonces exportées vers data/annonces_merged.csv
+2026-07-28 03:44:00,645 [INFO] main: === Terminé : 1020 (Tayara) + 1000 (Tunisie-Annonce) = 2020 annonces au total ===
