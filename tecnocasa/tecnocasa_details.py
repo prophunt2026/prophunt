@@ -97,6 +97,111 @@ def extraire_contact_agence(soup):
         return {}
 
 
+# ==========================================================
+# NOUVEAU : extraction des points d'intérêt à proximité
+# ==========================================================
+# Comme le contact, cette donnée est déjà en HTML statique (pas besoin de
+# Selenium), dans le même attribut :estate, sous la clé "points_of_interest".
+# Les catégories présentes varient selon l'annonce (school, pharmacy,
+# hospital, market, shop, bar, restaurant, public_transport...), on prend
+# donc tout ce qui est présent au lieu d'une liste figée.
+CATEGORIES_PROXIMITE = {
+    "school": "ecole",
+    "pharmacy": "pharmacie",
+    "hospital": "hopital",
+    "market": "supermarche",
+    "shop": "commerce",
+    "bar": "bar",
+    "restaurant": "restaurant",
+    "public_transport": "transport_public",
+}
+
+
+def convertir_distance_en_metres(distance_texte):
+    """'510 m' -> 510.0, '1,0 Km' -> 1000.0"""
+
+    if not distance_texte:
+        return None
+
+    texte = distance_texte.strip().lower().replace(",", ".")
+
+    match = re.match(r"([\d.]+)\s*(km|m)", texte)
+
+    if not match:
+        return None
+
+    valeur, unite = match.groups()
+    valeur = float(valeur)
+
+    return valeur * 1000 if unite == "km" else valeur
+
+
+def extraire_proximites(soup):
+
+    tag = soup.find("estate-show-v2")
+
+    if not tag or not tag.get(":estate"):
+        return []
+
+    try:
+
+        estate_data = json.loads(html.unescape(tag[":estate"]))
+
+        points_interet = estate_data.get("points_of_interest", {}) or {}
+
+        proximites = []
+
+        for cle_source, items in points_interet.items():
+
+            categorie = CATEGORIES_PROXIMITE.get(cle_source, cle_source)
+
+            for item in items or []:
+
+                proximites.append({
+                    "categorie": categorie,
+                    "nom": item.get("name"),
+                    "distance_m": convertir_distance_en_metres(item.get("distance")),
+                })
+
+        return proximites
+
+    except Exception as e:
+
+        print("Erreur extraction proximités :", e)
+
+        return []
+
+
+def extraire_images_completes(soup):
+    """La liste 'images' du résumé (tecnocasa_links.json) ne contient que
+    la photo de couverture. La galerie complète est dans le même attribut
+    :estate que le contact/les proximités, sous media.images."""
+
+    tag = soup.find("estate-show-v2")
+
+    if not tag or not tag.get(":estate"):
+        return []
+
+    try:
+        estate_data = json.loads(html.unescape(tag[":estate"]))
+
+        images_media = estate_data.get("media", {}).get("images", []) or []
+
+        urls = []
+
+        for img in images_media:
+            try:
+                urls.append(img["url"]["detail"])
+            except Exception:
+                pass
+
+        return urls
+
+    except Exception as e:
+        print("Erreur extraction galerie d'images :", e)
+        return []
+
+
 def scraper_annonce(data):
 
     url = data.get("detail_url")
@@ -106,17 +211,34 @@ def scraper_annonce(data):
 
     try:
 
-        response = requests.get(
-            url,
-            headers=headers,
-            timeout=20
-        )
+        response = None
+
+        for tentative in range(1, 4):
+
+            try:
+                response = requests.get(url, headers=headers, timeout=20)
+
+                if response.status_code == 200:
+                    break
+
+                if response.status_code == 429:
+                    print(f"Bloqué temporairement (429), pause longue... (tentative {tentative})")
+                    time.sleep(9 * tentative)
+                    continue
+
+                print(f"Status {response.status_code} (tentative {tentative})")
+                time.sleep(3 * tentative)
+
+            except requests.exceptions.RequestException as e:
+                print(f"Erreur réseau ({e}) - tentative {tentative}/3")
+                time.sleep(3 * tentative)
+
+        if response is None or response.status_code != 200:
+            print("Echec définitif pour :", url)
+            return None
 
         print("\nURL :", url)
         print("Status :", response.status_code)
-
-        if response.status_code != 200:
-            return None
 
         soup = BeautifulSoup(
             response.text,
@@ -181,17 +303,19 @@ def scraper_annonce(data):
             return None
 
         # =============================
-        # IMAGE
+        # IMAGES (galerie complète)
         # =============================
 
-        images = []
+        images = extraire_images_completes(soup)
 
-        for img in data.get("images", []):
-
-            try:
-                images.append(img["url"]["detail"])
-            except Exception:
-                pass
+        if not images:
+            # Repli : au moins la photo de couverture du résumé, au cas où
+            # la galerie complète serait absente pour une annonce donnée.
+            for img in data.get("images", []):
+                try:
+                    images.append(img["url"]["detail"])
+                except Exception:
+                    pass
 
         # =============================
         # SURFACE
@@ -225,6 +349,8 @@ def scraper_annonce(data):
 
         contact = extraire_contact_agence(soup)
 
+        proximites = extraire_proximites(soup)
+
         agence = contact.get("nom_agence")
 
         if not agence and data.get("agency"):
@@ -256,6 +382,7 @@ def scraper_annonce(data):
             "whatsapp": contact.get("whatsapp"),
             "email": contact.get("email"),
             "adresse_agence": contact.get("adresse_agence"),
+            "proximites": proximites,
         }
 
         return annonce
@@ -269,16 +396,39 @@ def scraper_annonce(data):
 # PROGRAMME PRINCIPAL
 # =====================================
 
+import os
+
+SAUVEGARDE_TOUTES_LES = 25
+FICHIER_SORTIE = "tecnocasa.json"
+
 with open("tecnocasa_links.json", "r", encoding="utf-8") as f:
     annonces = json.load(f)
 
+# Reprise : si tecnocasa.json existe déjà (run précédent interrompu), on
+# repart de ce qui est déjà scrapé au lieu de tout refaire depuis zéro.
 resultats = []
-total = len(annonces)
+urls_deja_faites = set()
 
-for i, annonce in enumerate(annonces, start=1):
+if os.path.exists(FICHIER_SORTIE):
+    with open(FICHIER_SORTIE, encoding="utf-8") as f:
+        resultats = json.load(f)
+    urls_deja_faites = {r["url"] for r in resultats if r.get("url")}
+    print(f"Reprise : {len(resultats)} annonces déjà présentes dans {FICHIER_SORTIE}")
+
+
+def sauvegarder():
+    with open(FICHIER_SORTIE, "w", encoding="utf-8") as f:
+        json.dump(resultats, f, ensure_ascii=False, indent=4)
+
+
+a_faire = [a for a in annonces if a.get("detail_url") not in urls_deja_faites]
+
+print(f"{len(a_faire)} annonces restant à scraper (sur {len(annonces)})")
+
+for i, annonce in enumerate(a_faire, start=1):
 
     print("\n==========================")
-    print(f"Annonce {i}/{total}")
+    print(f"Annonce {i}/{len(a_faire)}")
     print("==========================")
 
     resultat = scraper_annonce(annonce)
@@ -289,12 +439,15 @@ for i, annonce in enumerate(annonces, start=1):
     else:
         print("Annonce ignorée")
 
+    if i % SAUVEGARDE_TOUTES_LES == 0:
+        sauvegarder()
+        print(f"Sauvegarde intermédiaire ({len(resultats)} annonces au total)")
+
     time.sleep(1)
 
-with open("tecnocasa.json", "w", encoding="utf-8") as f:
-    json.dump(resultats, f, ensure_ascii=False, indent=4)
+sauvegarder()
 
 print("\n==========================")
 print("SCRAPING TERMINE")
 print("Annonces sauvegardées :", len(resultats))
-print("Fichier créé : tecnocasa.json")
+print("Fichier créé :", FICHIER_SORTIE)

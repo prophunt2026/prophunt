@@ -1,4 +1,18 @@
+"""
+Récupération du numéro de téléphone sur Mubawab.
 
+Mubawab utilise au moins 2 templates différents selon les annonces :
+- "nouvelle" variante : <a class="contactPhoneClick">, onclick="sendPhoneLead(...)"
+- "ancienne" variante : <div class="phone-number-box contact-box">,
+  onclick="showPhoneAdPage(...)"
+
+Dans les deux cas, le clic ouvre une popup (div#phonePopup) contenant le(s)
+numéro(s) dans des <p class="phoneText dirLtr darkblue"> à l'intérieur de
+div#response. Il peut y avoir plusieurs numéros pour une même annonce.
+
+On simule donc : clic sur le bouton (peu importe la variante) -> attente de
+la popup -> lecture de tous les <p class="phoneText"> -> fermeture.
+"""
 
 import re
 import time
@@ -8,7 +22,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, InvalidSessionIdException, WebDriverException
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -18,7 +32,9 @@ USER_AGENT = (
 
 PATTERN_TELEPHONE = re.compile(r"^[\d\s\+]{6,}$")
 
-
+# Mubawab a au moins 2 templates différents selon les annonces :
+# - "nouvelle" variante : <a class="contactPhoneClick">, onclick="sendPhoneLead(...)"
+# - "ancienne" variante : <div class="phone-number-box contact-box">, onclick="showPhoneAdPage(...)"
 SELECTEURS_BOUTON_TELEPHONE = [
     "a.contactPhoneClick",
     "div.phone-number-box.contact-box",
@@ -207,6 +223,13 @@ def scraper_telephone_mubawab(url: str, driver, debug: bool = True) -> list:
 
         return numeros
 
+    except InvalidSessionIdException:
+        # Session Chrome morte / crashée : on laisse remonter cette erreur
+        # au script appelant, qui va redémarrer un navigateur frais.
+        # (Un simple [] ici cacherait le problème pour toutes les annonces
+        # suivantes, comme c'était le cas avant.)
+        raise
+
     except Exception as e:
         print("Erreur récupération téléphone :", url, "-", repr(e))
         return []
@@ -215,7 +238,7 @@ def scraper_telephone_mubawab(url: str, driver, debug: bool = True) -> list:
 if __name__ == "__main__":
     # Test manuel sur une seule annonce avant de lancer sur toute la liste.
     # Remplace l'URL par la vraie annonce que tu as testée dans DevTools.
-    url_test = "https://www.mubawab.tn/fr/a/8364318/s2-en-vente"
+    url_test = "https://www.mubawab.tn/fr/a/REMPLACE_MOI"
 
     driver = creer_driver(headless=False)  # headless=False pour observer le clic
 

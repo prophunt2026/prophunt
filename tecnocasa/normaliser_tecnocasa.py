@@ -192,7 +192,7 @@ def normaliser_annonce_tecnocasa(brute: dict) -> dict:
             "quartier": quartier,
             "adresse": brute.get("adresse_agence"),
             "code_postal": None,
-            "proximites": [],
+            "proximites": brute.get("proximites", []),
             "coordonnees": {"latitude": None, "longitude": None},
             "zone": None,
         },

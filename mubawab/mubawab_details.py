@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import time
 
 
 def scraper_annonce(url):
@@ -15,19 +16,30 @@ def scraper_annonce(url):
 
     try:
 
-        response = requests.get(
-            url,
-            headers=headers,
-            timeout=20
-        )
+        response = None
 
-        if response.status_code != 200:
+        for tentative in range(1, 4):
 
-            print(
-                "Erreur HTTP",
-                response.status_code
-            )
+            try:
+                response = requests.get(url, headers=headers, timeout=20)
 
+                if response.status_code == 200:
+                    break
+
+                if response.status_code == 429:
+                    print(f"Bloqué temporairement (429), pause longue... (tentative {tentative})")
+                    time.sleep(9 * tentative)
+                    continue
+
+                print(f"Status {response.status_code} (tentative {tentative})")
+                time.sleep(3 * tentative)
+
+            except requests.exceptions.RequestException as e:
+                print(f"Erreur réseau ({e}) - tentative {tentative}/3")
+                time.sleep(3 * tentative)
+
+        if response is None or response.status_code != 200:
+            print("Echec définitif pour :", url)
             return None
 
         soup = BeautifulSoup(
@@ -55,6 +67,23 @@ def scraper_annonce(url):
         data = json.loads(
             script_json.string
         )
+
+        # ==============================
+        # Caractéristiques générales (Type de bien, Etat, Etage...)
+        # ==============================
+        # Bien plus fiable que deviner le type depuis le titre : le site a
+        # un champ structuré "Type de bien" dans cette section.
+        caracteristiques = {}
+
+        blocs_carac = soup.find_all("div", class_="adMainFeature")
+
+        for bloc in blocs_carac:
+
+            label = bloc.find("p", class_="adMainFeatureContentLabel")
+            valeur = bloc.find("p", class_="adMainFeatureContentValue")
+
+            if label and valeur:
+                caracteristiques[label.get_text(strip=True)] = valeur.get_text(strip=True)
 
         # ==============================
         # Equipements
@@ -137,6 +166,9 @@ def scraper_annonce(url):
 
             "equipements":
                 equipements,
+
+            "caracteristiques":
+                caracteristiques,
 
             # Rempli plus tard par mubawab_telephone.py (Selenium) :
             # le numéro n'est jamais présent dans ce HTML statique.
