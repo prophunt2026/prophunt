@@ -10,10 +10,13 @@ Structure observée (analyse HTML) :
   type de bien, titre + lien vers la fiche détail, prix, date de modification.
 - Page HTML "à l'ancienne" (tableaux), aucun JavaScript nécessaire.
 
-Champs remplis à ce stade : listing.*, transaction.type/prix/devise,
-bien.type, localisation.localite, description.titre,
-metadonnees_scraping.*. Le reste nécessite la fiche annonce complète
-(prévu pour une itération future avec le NLP, R3).
+FICHE DÉTAIL — champs disponibles (observés sur le site) :
+  Localisation : Tunisie > Gouvernorat > Délégation > Ville
+  Adresse, Surface, Prix, Texte
+  Insérée le JJ/MM/AAAA, Modifiée le JJ/MM/AAAA
+  Photos : /upload2/YYYYMM/tunisie-annonce.com/photos/*.jpg (dupliquées dans le HTML)
+  Contact Particulier : "Contact : Particulier Mob : XXXXXXXX"
+  Contact Agence     : "Contact : Professionnel <NOM AGENCE> <ADRESSE> Tél : XXX Mob : XXX"
 """
 
 import re
@@ -176,85 +179,220 @@ def scrape(max_pages: int = 3, transaction_code: str | None = None) -> list[dict
 #   "Modifiée le JJ/MM/AAAA", "Contact : Particulier|Professionnel"
 # ---------------------------------------------------------------------------
 def parse_detail_page(html: str) -> dict:
+    """Parse la fiche détail d'une annonce tunisie-annonce.com.
+
+    Retourne un dict avec :
+        surface_m2       : float ou None
+        gouvernorat      : str ou None  (ex. "Tunis")
+        delegation       : str ou None  (ex. "Carthage")
+        ville            : str ou None  (ex. "Sidi Bousaid")
+        adresse          : str ou None
+        date_publication : str (JJ/MM/AAAA) ou None
+        date_maj         : str (JJ/MM/AAAA) ou None
+        type_vendeur     : "particulier" | "agence" | None
+        nom_vendeur      : str ou None  (nom agence si Professionnel)
+        adresse_agence   : str ou None
+        telephone        : list[str]   (Tél + Mob combinés, dédupliqués)
+        texte            : str ou None
+        photos           : list[str]   (URLs absolues, dédupliquées)
+    """
     soup = BeautifulSoup(html, "lxml")
     text = soup.get_text(" ", strip=True)
 
+    # --- Surface ---
     surface = None
     surf_match = re.search(r"Surface\s+([\d\s,.]+?)\s*m", text)
     if surf_match:
-        raw = surf_match.group(1).strip().replace(" ", "")
-        raw = raw.replace(",", ".")
         try:
-            surface = float(raw)
+            surface = float(surf_match.group(1).strip().replace(" ", "").replace(",", "."))
         except ValueError:
-            surface = None
+            pass
 
-    adresse_match = re.search(r"Adresse\s+(.+?)\s+(?:Surface|Prix)", text)
-    adresse = adresse_match.group(1).strip() if adresse_match else None
+    # --- Localisation : "Tunisie > Gouvernorat > Délégation > Ville" ---
+    gouvernorat = delegation = ville = None
+    loc_match = re.search(
+        r"Localisation\s+Tunisie\s*>\s*([^>]+?)\s*>\s*([^>]+?)\s*>\s*([^A-Z][^\s>]+(?:\s+[^\s>]+)*?)\s+(?:Adresse|Surface|Prix|Texte)",
+        text,
+    )
+    if loc_match:
+        gouvernorat = loc_match.group(1).strip()
+        delegation  = loc_match.group(2).strip()
+        ville       = loc_match.group(3).strip()
+    else:
+        # Fallback : seulement gouvernorat + délégation (sans ville)
+        loc2 = re.search(
+            r"Localisation\s+Tunisie\s*>\s*([^>]+?)\s*>\s*([^A-Z][^\s>]+(?:\s+[^\s>]+)*?)\s+(?:Adresse|Surface|Prix|Texte)",
+            text,
+        )
+        if loc2:
+            gouvernorat = loc2.group(1).strip()
+            delegation  = loc2.group(2).strip()
 
-    date_pub_match = re.search(r"Insérée le (\d{2}/\d{2}/\d{4})", text)
+    # --- Adresse ---
+    adresse = None
+    adresse_match = re.search(r"Adresse\s+(.+?)\s+(?:Surface|Prix|Texte)", text)
+    if adresse_match:
+        adresse = adresse_match.group(1).strip()
+
+    # --- Dates ---
+    date_pub_match = re.search(r"Ins[ée]r[ée]e?\s+le\s+(\d{2}/\d{2}/\d{4})", text)
     date_publication = date_pub_match.group(1) if date_pub_match else None
 
-    date_maj_match = re.search(r"Modifiée le (\d{2}/\d{2}/\d{4})", text)
+    date_maj_match = re.search(r"Modifi[ée]e?\s+le\s+(\d{2}/\d{2}/\d{4})", text)
     date_maj = date_maj_match.group(1) if date_maj_match else None
 
-    contact_match = re.search(r"Contact\s*:\s*(Particulier|Professionnel)", text)
-    type_vendeur = contact_match.group(1).lower() if contact_match else None
-    if type_vendeur == "particulier":
-        type_vendeur = "particulier"
-    elif type_vendeur == "professionnel":
-        type_vendeur = "agence"
+    # --- Bloc Contact ---
+    # Particulier : "Contact : Particulier Mob : 56497093"
+    # Agence      : "Contact : Professionnel Business immobilière <adresse> Tél : 71709337 Mob : +216 98 532 100"
+    type_vendeur = nom_vendeur = adresse_agence = None
+    phones: list[str] = []
 
-    phones = re.findall(r"(?:Tél|Mob)\s*:\s*([\d\s]{6,})", text)
-    phones = [p.strip() for p in phones]
+    contact_match = re.search(r"Contact\s*:\s*(Particulier|Professionnel)(.*?)(?:Mail\s*:|$)", text, re.DOTALL)
+    if contact_match:
+        kind = contact_match.group(1).strip()
+        bloc = contact_match.group(2).strip()
 
-    texte_match = re.search(r"Texte\s+(.+?)\s+Insérée le", text, flags=re.DOTALL)
-    texte = texte_match.group(1).strip() if texte_match else None
+        if kind == "Particulier":
+            type_vendeur = "particulier"
+        else:
+            type_vendeur = "agence"
+            # Le nom de l'agence est le premier morceau avant l'adresse/Tél/Mob
+            # "Business immobilière 1 avenue mostapha hjeij 1 er étage A3 ariana 2080 Tél : ..."
+            nom_match = re.match(r"^(.+?)\s+(?:\d|Tél\s*:|Mob\s*:)", bloc)
+            if nom_match:
+                nom_vendeur = nom_match.group(1).strip()
+            # Adresse agence : entre nom et Tél/Mob
+            addr_match = re.search(r"^.+?\s+(\d.+?)\s+(?:Tél\s*:|Mob\s*:)", bloc)
+            if addr_match:
+                adresse_agence = addr_match.group(1).strip()
+
+        # Téléphones (Tél et Mob) — on extrait tous les numéros
+        raw_phones = re.findall(r"(?:Tél|Mob)\s*:\s*([\d\s\+]{6,20})", bloc)
+        for p in raw_phones:
+            cleaned = re.sub(r"\s+", "", p.strip())
+            if cleaned and cleaned not in phones:
+                phones.append(cleaned)
+
+    # --- Texte descriptif ---
+    texte = None
+    texte_match = re.search(r"Texte\s+(.+?)\s+Ins[ée]r[ée]e?\s+le", text, flags=re.DOTALL)
+    if texte_match:
+        texte = texte_match.group(1).strip()
+
+    # --- Photos : /upload2/...jpg, dédupliquées, URLs absolues ---
+    BASE = "http://www.tunisie-annonce.com"
+    seen_photos: set[str] = set()
+    photos: list[str] = []
+    for img in soup.find_all("img"):
+        src = img.get("src", "")
+        if "/upload2/" in src and src.endswith(".jpg"):
+            full = src if src.startswith("http") else BASE + src
+            if full not in seen_photos:
+                seen_photos.add(full)
+                photos.append(full)
 
     return {
         "surface_m2": surface,
+        "gouvernorat": gouvernorat,
+        "delegation": delegation,
+        "ville": ville,
         "adresse": adresse,
         "date_publication": date_publication,
         "date_maj": date_maj,
         "type_vendeur": type_vendeur,
+        "nom_vendeur": nom_vendeur,
+        "adresse_agence": adresse_agence,
         "telephone": phones,
         "texte": texte,
+        "photos": photos,
     }
 
 
-def enrich_with_details(records: list[dict], session: requests.Session | None = None, limit: int | None = None) -> list[dict]:
-    """Visite la fiche détail de chaque annonce pour compléter la superficie,
-    l'adresse, les dates et le contact. ~1 requête HTTP par annonce en plus
-    (donc plus lent) — utiliser 'limit' pour tester sur un échantillon."""
+def enrich_with_details(
+    records: list[dict],
+    session: requests.Session | None = None,
+    limit: int | None = None,
+    max_failures: int = 50,
+) -> list[dict]:
+    """Visite la fiche détail de chaque annonce pour compléter :
+    - Toutes les photos
+    - Gouvernorat + délégation + ville
+    - Nom du vendeur (agence)
+    - Tél + Mob
+    - Surface, adresse, description, dates
+    """
     session = session or requests.Session()
     limiter = RateLimiter(min_delay=1.5, max_delay=3.0)
     targets = records[:limit] if limit else records
+    total = len(targets)
+    failures = 0
 
     for i, listing in enumerate(targets, start=1):
         url = listing["listing"]["url_source"]
         if not url:
             continue
+
         limiter.wait()
         resp = safe_get(url, session=session)
         if resp is None:
             listing["metadonnees_scraping"]["erreurs"].append(f"Échec fiche détail: {url}")
+            failures += 1
+            if failures >= max_failures:
+                logger.error("Trop d'échecs — arrêt de l'enrichissement.")
+                break
             continue
 
-        details = parse_detail_page(resp.text)
-        listing["bien"]["superficie_totale"] = details["surface_m2"]
-        listing["localisation"]["adresse"] = details["adresse"]
-        if details["date_publication"]:
-            listing["listing"]["date_publication"] = details["date_publication"]
-        if details["date_maj"]:
-            listing["listing"]["date_maj"] = details["date_maj"]
-        listing["contact"]["type_vendeur"] = details["type_vendeur"]
-        listing["contact"]["telephone"] = details["telephone"]
-        if details["texte"]:
-            listing["description"]["texte"] = details["texte"]
+        d = parse_detail_page(resp.text)
 
-        if i % 50 == 0:
-            logger.info(f"Fiches détail : {i}/{len(targets)} traitées")
+        # Surface
+        if d["surface_m2"] is not None:
+            listing["bien"]["superficie_totale"] = d["surface_m2"]
 
+        # Localisation
+        if d["gouvernorat"]:
+            listing["localisation"]["gouvernorat"] = d["gouvernorat"]
+        if d["delegation"]:
+            listing["localisation"]["delegation"] = d["delegation"]
+        if d["ville"]:
+            listing["localisation"]["ville"] = d["ville"]
+        if d["adresse"]:
+            listing["localisation"]["adresse"] = d["adresse"]
+
+        # Dates
+        if d["date_publication"]:
+            listing["listing"]["date_publication"] = d["date_publication"]
+        if d["date_maj"]:
+            listing["listing"]["date_maj"] = d["date_maj"]
+
+        # Contact
+        if d["type_vendeur"]:
+            listing["contact"]["type_vendeur"] = d["type_vendeur"]
+        if d["nom_vendeur"]:
+            listing["contact"]["nom_vendeur"] = d["nom_vendeur"]
+            listing["contact"]["nom_agence"]  = d["nom_vendeur"]
+        if d["adresse_agence"]:
+            listing["contact"]["site_web"] = None  # garder None, adresse_agence pas dans schema direct
+            # On met l'adresse agence dans la localisation si pas d'adresse déjà
+            if not listing["localisation"]["adresse"]:
+                listing["localisation"]["adresse"] = d["adresse_agence"]
+        if d["telephone"]:
+            listing["contact"]["telephone"] = d["telephone"]
+
+        # Description
+        if d["texte"]:
+            listing["description"]["texte"] = d["texte"]
+
+        # Photos — toujours mettre à jour nombre_photos même si 0
+        listing["medias"]["photos"] = [
+            {"url": u, "url_thumb": None, "legende": None, "ordre": idx, "type": None}
+            for idx, u in enumerate(d["photos"])
+        ]
+        listing["medias"]["nombre_photos"] = len(d["photos"])
+
+        if i % 100 == 0:
+            logger.info(f"Enrichissement fiches détail : {i}/{total}")
+
+    logger.info(f"Enrichissement terminé : {total - failures}/{total} annonces traitées")
     return records
 
 

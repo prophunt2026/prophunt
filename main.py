@@ -44,8 +44,10 @@ def run_all():
     logger.info("=== Démarrage du scraping PropHunter TN ===")
 
     # --- ÉTAPE 7a : scraping du site n°1 (Tayara) — via l'API interne ---
-    logger.info("--- Tayara (API interne, objectif 1000+) ---")
-    tayara_data = tayara_scraper.scrape_api(target=TARGET_PER_SITE)
+    # enrich_details=True : passe 2 qui visite chaque fiche /item/ID/ pour
+    # récupérer toutes les photos + le téléphone + les adParams structurés.
+    logger.info("--- Tayara (API interne + enrichissement fiches détail, objectif 1000+) ---")
+    tayara_data = tayara_scraper.scrape_api(target=TARGET_PER_SITE, enrich_details=True)
     export_to_json(tayara_data, "data/tayara/tayara.json")   # export brut (structure complète)
     export_to_csv(tayara_data, "data/tayara/tayara.csv")     # export aplati (pour Excel)
 
