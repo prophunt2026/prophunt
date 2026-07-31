@@ -187,6 +187,10 @@ async def _extract_proximites(page) -> list:
     """
     Extrait les proximités depuis les cartes 'Commodités' et 'Transport'
     (div[class*="bg-card"][class*="rounded-xl"] contenant l'intitulé).
+    Structure confirmée sur une page réelle (résidence Eddiar) :
+      div[class*="divide-y"] > lignes, chacune avec :
+        - le libellé dans div[class*="font-medium"][class*="text-gray-900"][class*="truncate"]
+        - la distance dans div[class*="text-xs"][class*="text-muted-foreground"]
     Retourne une liste de {"categorie", "libelle", "valeur"}.
     Retourne [] si les cartes sont absentes, vides, ou encore en squelette.
     """
@@ -203,10 +207,25 @@ async def _extract_proximites(page) -> list:
         if await card.locator(".bg-gray-100").count() > 0:
             continue  # toujours en squelette : pas de donnée exploitable
 
-        # Zone de contenu (tout ce qui suit l'en-tête du titre)
-        content = card.locator('div[class*="p-6"][class*="pt-0"]').last
+        # Cas 1 (structure réelle confirmée) : div[class*="divide-y"] avec
+        # libellé + distance dans des divs dédiés
+        divide = card.locator('div[class*="divide-y"]').first
+        if await divide.count() > 0:
+            names = divide.locator('div[class*="font-medium"][class*="text-gray-900"][class*="truncate"]')
+            distances = divide.locator('div[class*="text-xs"][class*="text-muted-foreground"]')
+            n = await names.count()
+            m = await distances.count()
+            for i in range(n):
+                libelle = (await names.nth(i).inner_text()).strip()
+                valeur = (await distances.nth(i).inner_text()).strip() if i < m else None
+                if libelle:
+                    proximites.append({"categorie": categorie, "libelle": libelle, "valeur": valeur or None})
+            if n > 0:
+                continue
 
-        # Cas 1 : lignes en paires de <div> (libellé + badge)
+        # Cas 2 (repli) : lignes en paires de <div> (libellé + badge), vu sur
+        # certaines variantes/squelettes de la page
+        content = card.locator('div[class*="p-6"][class*="pt-0"]').last
         rows = content.locator("div.flex.items-center.justify-between")
         n = await rows.count()
         if n > 0:
@@ -221,7 +240,7 @@ async def _extract_proximites(page) -> list:
                     proximites.append({"categorie": categorie, "libelle": libelle, "valeur": valeur})
             continue
 
-        # Cas 2 : contenu en <p>/<span> directement (pas de structure en paires de div)
+        # Cas 3 (repli) : contenu en <p>/<span> directement
         texts = content.locator("p, span")
         n = await texts.count()
         raw_texts = []
@@ -473,7 +492,7 @@ async def extract_detail_page_data(page, url: str) -> dict:
     # 9. Équipements DOM en dernier recours (si ni JSON-LD ni RSC n'en donnent)
     if not data_obj.get("_ld", {}).get("amenityFeature") and not data_obj.get("_rsc", {}).get("amenities"):
         eq_elements = await page.locator(
-            "ul li, div[class*='equipment'], div[class*='feature'], div[class*='amenity']"
+            "div[class*='equipment'] span, div[class*='feature'] span, div[class*='amenity'] span"
         ).all()
         dom_eqs = []
         for el in eq_elements:

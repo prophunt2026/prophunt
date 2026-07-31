@@ -25,8 +25,11 @@ _EQUIPMENT_ALIASES = {
     "climatisation": ["clim", "climatiseur", "climatisation", "airconditioning", "air conditioning"],
     "chauffage": ["chauffage", "heating"],
     "ascenseur": ["ascenseur", "elevator"],
-    "garage": ["garage", "parking couvert", "parking au sous-sol", "undergroundparking"],
-    "parking_exterieur": ["parking", "parking exterieur"],
+    "garage": [
+        "garage", "parking couvert", "parking au sous-sol", "parking souterrain",
+        "parking sous-sol", "sous-sol", "sous sol", "souterrain", "undergroundparking",
+    ],
+    "parking_exterieur": ["parking exterieur", "parking extérieur", "parking"],
     "cave": ["cave"],
     "terrasse": ["terrasse", "terrace"],
     "balcon": ["balcon", "balcony"],
@@ -54,13 +57,31 @@ def _dedupe_preserve_order(items: list) -> list:
     return result
 
 
+# Textes de menu/navigation ou de pied de page qui n'ont rien à voir avec des
+# équipements, mais qui peuvent se glisser dans les extractions DOM génériques.
+_NAV_BLOCKLIST = {
+    "accueil", "propriétés", "proprietes", "à propos", "a propos", "contact",
+    "blog", "connexion", "inscription", "favoris", "mon compte", "se connecter",
+    "s'inscrire", "recherche", "annonces", "acheter", "louer", "neuf",
+    "qui sommes-nous", "mentions légales", "mentions legales",
+    "politique de confidentialité", "politique de confidentialite",
+    "conditions d'utilisation", "cgu", "cgv", "aide", "faq", "accueil immobilier",
+}
+
+
 def _build_equipements(amenity_names: list) -> dict:
     """
     Transforme une liste de libellés d'équipements (FR ou EN, bruts du site)
     en dict standard {climatisation: bool, ...}. Tout ce qui ne matche aucun
     alias connu est conservé tel quel dans 'autres'.
+
+    Un même libellé ne peut déclencher qu'UNE seule clé (le premier match,
+    dans l'ordre du dict ci-dessus) : évite qu'un texte comme "Parking
+    souterrain" ne déclenche à la fois 'garage' ET 'parking_exterieur'
+    simplement parce qu'il contient le mot générique "parking".
     """
-    lowered = [str(a).strip().lower() for a in amenity_names if a]
+    filtered = [a for a in amenity_names if a and str(a).strip().lower() not in _NAV_BLOCKLIST]
+    lowered_pairs = [(str(a).strip().lower(), a) for a in filtered]
     result = {k: False for k in [
         "climatisation", "chauffage", "ascenseur", "garage", "parking_exterieur",
         "cave", "terrasse", "balcon", "jardin", "piscine", "cuisine_equipee",
@@ -69,13 +90,15 @@ def _build_equipements(amenity_names: list) -> dict:
     ]}
     matched_raw = set()
     for key, aliases in _EQUIPMENT_ALIASES.items():
-        for name in lowered:
-            if any(alias in name for alias in aliases):
+        for name_lower, _ in lowered_pairs:
+            if name_lower in matched_raw:
+                continue  # déjà attribué à une autre clé : on ne le réattribue pas
+            if any(alias in name_lower for alias in aliases):
                 result[key] = True
-                matched_raw.add(name)
+                matched_raw.add(name_lower)
                 break
 
-    autres = [a for a in amenity_names if a and str(a).strip().lower() not in matched_raw]
+    autres = [a for name_lower, a in lowered_pairs if name_lower not in matched_raw]
 
     # Champs non déterminables depuis cette liste : laissés à None (inconnu, pas "absent")
     for k in [
@@ -91,6 +114,15 @@ def _build_equipements(amenity_names: list) -> dict:
 
 def _feature_bool_equipements(features: dict) -> dict:
     """Équipements directement booléens fournis par le champ 'features' d'un bien individuel."""
+    underground = features.get("undergroundParking")
+    outdoor = features.get("outdoorParking")
+    generic_parking = features.get("parking")
+    # Si seul le flag générique 'parking' existe (sans détail sous-sol/extérieur),
+    # et qu'il n'y a pas de garage confirmé, on considère qu'il s'agit d'un
+    # parking extérieur par défaut plutôt que de ne rien enregistrer.
+    if outdoor is None and generic_parking is True and not underground:
+        outdoor = True
+
     mapping = {
         "chauffage": features.get("heating"),
         "climatisation": features.get("airConditioning"),
@@ -99,8 +131,8 @@ def _feature_bool_equipements(features: dict) -> dict:
         "piscine": features.get("pool"),
         "salle_de_sport": features.get("gym"),
         "internet": features.get("wifi"),
-        "garage": features.get("undergroundParking"),
-        "parking_exterieur": _first(features.get("outdoorParking"), features.get("parking")),
+        "garage": underground,
+        "parking_exterieur": outdoor,
     }
     return {k: v for k, v in mapping.items() if v is not None}
 
