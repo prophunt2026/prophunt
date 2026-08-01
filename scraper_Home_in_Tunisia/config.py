@@ -4,6 +4,15 @@ config.py - Paramètres globaux du scraper.
 
 BASE_URL = "https://www.homeintunisia.com"
 LISTING_URL = BASE_URL + "/fr/acheter"
+
+# Page de recherche filtrée sur la catégorie "Location" (bail annuel, hors
+# location saisonnière = catégorie 3, exclue ici).
+# Valeur confirmée en inspectant le fil d'Ariane d'une vraie fiche de location
+# (lien href="/fr/recherche?search_property_category=2" -> "Location") :
+# category=1 Vente, category=2 Location, category=3 Location saisonnière.
+# (Le premier essai avec juste "/fr/recherche" sans paramètre retombait par
+# défaut sur la catégorie Vente -> d'où le bug des ventes scrapées à la place.)
+LISTING_URL_LOCATION = BASE_URL + "/fr/recherche?search_property_category=2"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/125.0 Safari/537.36"

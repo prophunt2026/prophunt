@@ -41,14 +41,45 @@ def parse_summary_block(soup):
     return data
 
 
-def get_type_bien(soup):
+def get_breadcrumb_tabs(soup):
+    """
+    Retourne les textes des onglets du fil d'Ariane :
+    [0] catégorie de transaction ("Vente" / "Location" / "Location saisonnière")
+    [1] type de bien ("Appartement", "Maison", "Terrain", ...)
+    [2] titre complet de l'annonce (peu fiable, on ne s'en sert pas)
+    Structure réelle observée : <nav aria-label="breadcrumb"><ul>
+      <li class="module-breadcrumb-tab"><a>Location</a></li>
+      <li class="module-breadcrumb-tab"><a>Maison</a></li>
+      <li class="module-breadcrumb-tab"><h2><a>Location villa ...</a></h2></li>
+    </ul></nav>
+    (NB : le 3e onglet ne commence pas toujours par "Vente"/"Location" suivi
+    du type — s'appuyer dessus par regex est fragile, d'où l'usage des 2
+    premiers onglets qui sont des libellés propres et stables.)
+    """
     breadcrumb = soup.find("nav", attrs={"aria-label": "breadcrumb"})
-    if breadcrumb:
-        h2 = breadcrumb.find("h2")
-        if h2:
-            match = re.search(r"Vente (\w+)", h2.get_text(strip=True))
-            if match:
-                return match.group(1)
+    if not breadcrumb:
+        return []
+    tabs = breadcrumb.find_all("li", class_="module-breadcrumb-tab")
+    return [tab.get_text(strip=True) for tab in tabs]
+
+
+def get_type_bien(soup):
+    """Type de bien = 2e onglet du fil d'Ariane."""
+    tabs = get_breadcrumb_tabs(soup)
+    if len(tabs) >= 2:
+        return tabs[1]
+    return None
+
+
+def get_transaction_type(soup):
+    """Type de transaction = 1er onglet du fil d'Ariane ('Vente' ou 'Location*')."""
+    tabs = get_breadcrumb_tabs(soup)
+    if tabs:
+        first = tabs[0].lower()
+        if "location" in first:
+            return "location"
+        if "vente" in first:
+            return "vente"
     return None
 
 
@@ -137,6 +168,11 @@ def build_record(html, url, listing_extra=None):
     json_ld = get_json_ld(soup)
     record["donnees_brutes"]["json_ld"] = json_ld
 
+    # Détecté depuis le fil d'Ariane HTML (indépendant du JSON-LD, donc fiable
+    # même si le bloc JSON-LD est absent ou incomplet)
+    transaction_type = get_transaction_type(soup) or "vente"
+    record["transaction"]["type"] = transaction_type
+
     property_data, agency_data = None, None
     if json_ld:
         graph = json_ld.get("@graph", [])
@@ -155,7 +191,11 @@ def build_record(html, url, listing_extra=None):
         record["listing"]["statut"] = (
             "actif" if offers.get("availability", "").endswith("InStock") else "inconnu"
         )
-        record["transaction"]["prix"] = parse_number(offers.get("price"))
+        prix_json_ld = parse_number(offers.get("price"))
+        if transaction_type == "location":
+            record["transaction"]["loyer_mensuel"] = prix_json_ld
+        else:
+            record["transaction"]["prix"] = prix_json_ld
         record["transaction"]["devise"] = offers.get("priceCurrency", "TND")
         record["transaction"]["disponibilite_date"] = offers.get("validFrom")
 
@@ -227,6 +267,8 @@ def build_record(html, url, listing_extra=None):
         record["bien"]["nombre_salles_bain"] = listing_extra.get("nombre_salles_bain_liste")
     if record["bien"]["superficie_totale"] is None:
         record["bien"]["superficie_totale"] = listing_extra.get("superficie_liste")
+    if transaction_type == "location" and record["transaction"]["loyer_mensuel"] is None:
+        record["transaction"]["loyer_mensuel"] = listing_extra.get("loyer_liste")
 
     record["metadonnees_scraping"]["statut_scraping"] = (
         "succes" if property_data else "echec_partiel"
