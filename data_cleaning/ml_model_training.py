@@ -246,6 +246,16 @@ class LogTransformer(BaseEstimator, TransformerMixin):
         # explicit fitted marker so check_is_fitted() works correctly if this
         # transformer is ever placed as the last step of a pipeline.
         self.fitted_ = True
+        # BUG FIX: record input column names so get_feature_names_out() can
+        # report them. Without this, sklearn Pipeline.get_feature_names_out()
+        # raises AttributeError as soon as it reaches this step (it calls
+        # get_feature_names_out() on EVERY step, not just the last one),
+        # which was silently caught upstream in main() and made the whole
+        # pipeline fall back to generic 'feature_0', 'feature_1', ... names.
+        self.feature_names_in_ = np.asarray(
+            X.columns if hasattr(X, 'columns') else [f'x{i}' for i in range(np.asarray(X).shape[1])],
+            dtype=object,
+        )
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
@@ -258,6 +268,13 @@ class LogTransformer(BaseEstimator, TransformerMixin):
                 if col in X.columns:
                     X[col] = np.log1p(X[col].clip(lower=0))
         return X
+
+    def get_feature_names_out(self, input_features=None):
+        # Pass-through: this transformer only rescales values in place, it
+        # never adds, drops, or renames columns.
+        if input_features is not None:
+            return np.asarray(input_features, dtype=object)
+        return self.feature_names_in_
 
 
 class OutlierClipper(BaseEstimator, TransformerMixin):
@@ -288,6 +305,14 @@ class OutlierClipper(BaseEstimator, TransformerMixin):
                 upper = q3 + self.k * iqr
                 lower = q1 - self.k * iqr
                 self.bounds_[col] = (max(lower, 0), upper)  # Don't clip below 0
+        # BUG FIX: same reasoning as LogTransformer — record input column
+        # names so get_feature_names_out() works. This transformer is used
+        # as the FIRST step of the numeric sub-pipeline, so without this fix
+        # the whole pipeline's get_feature_names_out() failed immediately.
+        self.feature_names_in_ = np.asarray(
+            X_df.columns if hasattr(X_df, 'columns') else [f'x{i}' for i in range(np.asarray(X_df).shape[1])],
+            dtype=object,
+        )
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
@@ -299,6 +324,12 @@ class OutlierClipper(BaseEstimator, TransformerMixin):
             if col in X.columns:
                 X[col] = X[col].clip(lower, upper)
         return X
+
+    def get_feature_names_out(self, input_features=None):
+        # Pass-through: clipping never adds, drops, or renames columns.
+        if input_features is not None:
+            return np.asarray(input_features, dtype=object)
+        return self.feature_names_in_
 
 
 class RareCategoryMerger(BaseEstimator, TransformerMixin):
@@ -323,6 +354,15 @@ class RareCategoryMerger(BaseEstimator, TransformerMixin):
             if col in X_df.columns:
                 counts = X_df[col].value_counts(dropna=False)
                 self.frequent_categories_[col] = set(counts[counts >= self.threshold].index)
+        # BUG FIX: same reasoning as LogTransformer/OutlierClipper — record
+        # input column names for get_feature_names_out(). This transformer
+        # sits mid-pipeline in the 'cat_high_card' and 'cat_low_card'
+        # branches (before the encoder), so without this fix
+        # Pipeline.get_feature_names_out() broke there too.
+        self.feature_names_in_ = np.asarray(
+            X_df.columns if hasattr(X_df, 'columns') else [f'x{i}' for i in range(np.asarray(X_df).shape[1])],
+            dtype=object,
+        )
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
@@ -336,6 +376,13 @@ class RareCategoryMerger(BaseEstimator, TransformerMixin):
                     lambda x: x if x in frequent else 'Autre'
                 )
         return X
+
+    def get_feature_names_out(self, input_features=None):
+        # Pass-through: merging rare categories never adds, drops, or
+        # renames columns — only category values change.
+        if input_features is not None:
+            return np.asarray(input_features, dtype=object)
+        return self.feature_names_in_
 
 
 class ColumnSelector(BaseEstimator, TransformerMixin):
@@ -398,11 +445,26 @@ class BinaryImputer(BaseEstimator, TransformerMixin):
         # before delegating — without this attribute it always raises
         # NotFittedError, even right after a successful fit_transform().
         self.fitted_ = True
+        # BUG FIX: record input column names for get_feature_names_out().
+        # BinaryImputer is the ONLY step of the 'binary' sub-pipeline, so
+        # Pipeline.get_feature_names_out() failed on it immediately —
+        # this was the most direct cause of the AttributeError bubbling up
+        # to preprocessor.get_feature_names_out() and triggering the
+        # 'feature_0', 'feature_1', ... fallback for the ENTIRE feature set.
+        X_df = pd.DataFrame(X) if not isinstance(X, pd.DataFrame) else X
+        self.feature_names_in_ = np.asarray(X_df.columns, dtype=object)
         return self
 
     def transform(self, X):
         X_df = pd.DataFrame(X) if not isinstance(X, pd.DataFrame) else X
         return X_df.apply(_coerce_to_binary_numeric)
+
+    def get_feature_names_out(self, input_features=None):
+        # Pass-through: this transformer only coerces values to 0/1, it
+        # never adds, drops, or renames columns.
+        if input_features is not None:
+            return np.asarray(input_features, dtype=object)
+        return self.feature_names_in_
 
 
 class FeatureNameExtractor(BaseEstimator, TransformerMixin):
@@ -2394,12 +2456,25 @@ def main(
         },
     }
 
-    # Custom JSON serialization for numpy types
+    # Custom JSON serialization for numpy/pandas types.
+    # NOTE: np.generic is the base class for ALL numpy scalars (np.bool_,
+    # np.integer, np.floating, np.complexfloating...). Comparisons like
+    # `value <= target` in the validation pipeline (e.g. within_tolerance,
+    # passed) produce np.bool_, which is NOT a subclass of np.integer or
+    # np.floating and was previously falling through to the default
+    # encoder -> "Object of type bool is not JSON serializable" (NumPy 2.x
+    # renamed np.bool_'s __name__ to "bool", which is why the error message
+    # looked like it was about a native Python bool). Catching via
+    # np.generic covers this case and any future numpy scalar type in one
+    # place instead of enumerating subclasses one at a time.
     class NpEncoder(json.JSONEncoder):
         def default(self, obj):
-            if isinstance(obj, (np.integer,)): return int(obj)
-            if isinstance(obj, (np.floating,)): return float(obj)
-            if isinstance(obj, (np.ndarray,)): return obj.tolist()
+            if isinstance(obj, np.generic):
+                return obj.item()
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            if isinstance(obj, pd.Timestamp):
+                return obj.isoformat()
             return super().default(obj)
 
     with open(results_path, 'w') as f:
