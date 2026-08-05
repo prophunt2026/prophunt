@@ -1,0 +1,41 @@
+# ─── Node (gateway + crud-service) ──────────────────────────────────────────
+node_modules/
+dist/
+dist-scripts/
+
+# ─── Python (ai-service) ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ─── Environment variables ────────────────────────────────────────────────────
+# Never commit secrets or local config
+.env
+.env.local
+.env.*.local
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ─── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Editors ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Testing ─────────────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── MongoDB local data (if ever run locally inside the repo) ─────────────────
+data/db/
