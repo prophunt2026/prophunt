@@ -48,7 +48,7 @@ URLS_CATEGORIES = [
     "https://www.tecnocasa.tn/vendre/terrain/nord-ouest-no/bizerte.html",
 ]
 
-OBJECTIF_ANNONCES = 1000
+OBJECTIF_ANNONCES = 5
 MAX_PAGES_PAR_CATEGORIE = 150
 
 
@@ -119,7 +119,7 @@ def _recuperer_annonces_page(url: str) -> list:
 # FONCTION PUBLIQUE
 # ==========================================
 
-def scrape_links() -> list:
+def scrape_links(data=None) -> list:
    
     toutes_annonces = []
 
