@@ -4,11 +4,16 @@ from pymongo import MongoClient
 from pymongo.collection import Collection
 from pymongo.errors import ConnectionFailure
 
-
+# Charge le .env au moment de l'import du module
 load_dotenv()
+
+# ─── Client (singleton) ───────────────────────────────────────────────────────
+
+_client: MongoClient | None = None
 
 
 def _require_env(key: str) -> str:
+    """Lit une variable d'environnement et lève une erreur claire si absente."""
     value = os.getenv(key)
     if not value:
         raise EnvironmentError(
@@ -18,30 +23,26 @@ def _require_env(key: str) -> str:
     return value
 
 
-MONGODB_URI     = _require_env("MONGODB_URI")
-DATABASE_NAME   = _require_env("MONGODB_DATABASE")
-
-# ─── Client (singleton) ───────────────────────────────────────────────────────
-
-_client: MongoClient | None = None
-
-
 def get_client() -> MongoClient:
     """
     Retourne le client MongoClient (singleton).
-    Lève une erreur explicite si la connexion est impossible.
+    Les variables d'env sont lues ici (à la première connexion), pas à l'import,
+    ce qui permet au service de démarrer même sans .env et de lever une erreur
+    claire uniquement quand une requête DB est réellement effectuée.
     """
     global _client
 
     if _client is None:
+        mongodb_uri = _require_env("MONGODB_URI")
+        database_name = _require_env("MONGODB_DATABASE")
         try:
-            _client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+            _client = MongoClient(mongodb_uri, serverSelectionTimeoutMS=5000)
             _client.admin.command("ping")
-            print(f"[MongoDB] Connecté à {MONGODB_URI} — database : {DATABASE_NAME}")
+            print(f"[MongoDB] Connecté à {mongodb_uri} — database : {database_name}")
         except ConnectionFailure as e:
             _client = None
             raise ConnectionError(
-                f"[MongoDB] Impossible de se connecter à {MONGODB_URI} : {e}"
+                f"[MongoDB] Impossible de se connecter à {mongodb_uri} : {e}"
             )
 
     return _client
@@ -57,5 +58,7 @@ def get_collection(collection_name: str) -> Collection:
     Returns:
         Collection pymongo prête à l'emploi.
     """
+    mongodb_uri = _require_env("MONGODB_URI")
+    database_name = _require_env("MONGODB_DATABASE")
     client = get_client()
-    return client[DATABASE_NAME][collection_name]
+    return client[database_name][collection_name]

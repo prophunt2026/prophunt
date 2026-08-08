@@ -21,7 +21,7 @@ CATEGORIES = [
     "https://www.mubawab.tn/fr/sc/terrains-a-vendre",
 ]
 
-OBJECTIF_ANNONCES       = 2800
+OBJECTIF_ANNONCES       = 4
 MAX_PAGES_PAR_CATEGORIE = 150
 
 
