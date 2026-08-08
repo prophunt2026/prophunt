@@ -1,22 +1,37 @@
-# Byte-compiled / optimized / DLL files
+# ─── Node (gateway + crud-service) ──────────────────────────────────────────
+node_modules/
+dist/
+dist-scripts/
+*.tsbuildinfo
+
+# ─── Python (ai-service) ─────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Virtual environments
 .venv/
 venv/
 env/
-ENV/
-
-# Python packaging
-build/
-dist/
 *.egg-info/
 
-# IDEs
+# ─── Environment variables ────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ─── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Editors ─────────────────────────────────────────────────────────────────
 .vscode/
 .idea/
+*.swp
 
-# Environment variables
-.env
+# ─── Testing ─────────────────────────────────────────────────────────────────
+coverage/
