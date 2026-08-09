@@ -291,6 +291,123 @@ POST http://localhost:3000/v1/service-ia/scraping/tecnocasa
 
 ---
 
+## Phase 8.1 – Mubawab Scraper Integration ✅
+
+**Goal:** Integrate the full Mubawab scraper pipeline into the AI Service (Selenium-based).
+
+### Completed
+
+- [x] `mubawab_scraper.py` — refactored to expose `scrape_links() → list` (no file output)
+- [x] `mubawab_details.py` — refactored to expose `scrape_details(links) → list`
+- [x] `mubawab_telephone.py` — exposes `scrape_telephones(annonces) → list` + `retry_telephones(annonces) → list` (Selenium)
+- [x] `normaliser_mubawab.py` — refactored to expose `normaliser(annonces) → list`
+- [x] `registry.py` — mubawab pipeline registered (5 steps: links → details → telephones → retry → normalise)
+- [x] `POST /scraping/mubawab` — works via same generic endpoint
+- [x] `GET /scraping/mubawab/status` — job tracking in `scraping_jobs` collection
+
+### Data flow
+
+```
+POST /scraping/mubawab
+        ↓
+scrape_links()              →  liste d'URLs (~2800)
+        ↓
+scrape_details(links)       →  annonces enrichies (sans tél)
+        ↓
+scrape_telephones(annonces) →  1er passage Selenium
+        ↓
+retry_telephones(annonces)  →  2ème passage sur les ratés
+        ↓
+normaliser(annonces)        →  format standard PropHunter
+        ↓
+save_properties()           →  upsert dans MongoDB
+```
+
+### MongoDB storage
+
+- Database : **`prophunter_ia`**
+- Collection : **`mubawab_properties`**
+
+> ⚠️ Chrome doit être installé pour le pipeline Mubawab (Selenium headless)
+
+---
+
+## Phase 8.2 – AI Service Fixes & Job Tracking ✅
+
+**Goal:** Fix startup crashes and add async job tracking for long-running scraping jobs.
+
+### Completed
+
+- [x] `mongodb.py` — env vars (`MONGODB_URI`, `MONGODB_DATABASE`) déplacées hors du module-level pour éviter le crash à l'import
+- [x] `ai-service/.env` créé — `MONGODB_URI=mongodb://localhost:27017`, `MONGODB_DATABASE=prophunter_ia`
+- [x] `.venv` créé dans `ai-service/`, `pip install -r requirements.txt` — 41 packages installés
+- [x] `jobs/models.py` — `ScrapingJob` dataclass + `JobStatus` enum (pending/running/completed/failed)
+- [x] `jobs/job_repository.py` — `create_job()`, `update_job()`, `get_job()`, `get_latest_job()`, `is_running()`
+- [x] `jobs/job_manager.py` — `JobManager.submit()` lance un `threading.Thread` daemon
+- [x] `scraping_service.py` — met à jour le job à chaque étape du pipeline (step tracking)
+- [x] `POST /scraping/{source}` — retourne `202 Accepted` immédiatement avec `job_id`
+- [x] `GET /scraping/{source}/status` — retourne l'état courant du job (step, status, result, error)
+- [x] `409 Conflict` si un job est déjà en cours pour la même source
+- [x] `404` si la source n'est pas dans le registry
+
+### Job status flow
+
+```
+pending → running (step: scrape_links)
+       → running (step: scrape_details)
+       → running (step: normaliser)
+       → running (step: save_properties)
+       → completed (result: { scraped, inserted, updated, ignored })
+       OR failed   (error: "...")
+```
+
+### MongoDB storage
+
+- Collection jobs : **`prophunter_ia.scraping_jobs`**
+
+### API endpoints
+
+| Endpoint | Description |
+|---|---|
+| `POST /scraping/tecnocasa` | Lance le scraping Tecnocasa (202) |
+| `POST /scraping/mubawab` | Lance le scraping Mubawab (202) |
+| `GET /scraping/tecnocasa/status` | État du dernier job Tecnocasa |
+| `GET /scraping/mubawab/status` | État du dernier job Mubawab |
+
+### Called via Gateway
+
+```
+POST http://localhost:3000/v1/service-ia/scraping/tecnocasa
+POST http://localhost:3000/v1/service-ia/scraping/mubawab
+GET  http://localhost:3000/v1/service-ia/scraping/tecnocasa/status
+GET  http://localhost:3000/v1/service-ia/scraping/mubawab/status
+```
+
+---
+
+## Phase 8.3 – Services Startup Fixes ✅
+
+**Goal:** Fix all three services so they start cleanly with `npm run start:dev` / uvicorn.
+
+### CRUD Service fixes
+
+- [x] `node_modules` supprimé et réinstallé proprement (Node v24 — `@angular-devkit/core` avait un `ajv` corrompu)
+- [x] `tsconfig.json` — `"module": "nodenext"` → `"commonjs"`, `"moduleResolution": "nodenext"` → `"node"`, suppression de `resolvePackageJsonExports` et `isolatedModules`
+- [x] `crud-service/.env` — à créer manuellement : `PORT=3002`, `MONGODB_URI=mongodb://localhost:27017/prophunter`
+
+### Gateway fixes
+
+- [x] `tsconfig.json` — même correction `nodenext` → `commonjs` que le crud-service
+- [x] `@nestjs/config` installé (`app.module.ts` l'importait mais le package était absent)
+- [x] `gateway/.env` créé — `PORT=3000`, `AI_SERVICE_URL=http://localhost:3001`, `CRUD_SERVICE_URL=http://localhost:3002`
+- [x] Ancien processus node bloquant le port 3000 tué (`node dist/main` zombie)
+
+### AI Service fixes
+
+- [x] `MONGODB_DATABASE=prophunter` → `prophunter_ia` (mauvaise base, données allaient dans `prophunter` au lieu de `prophunter_ia`)
+
+---
+
 ## Phase 9 – Git Setup ✅
 
 **Goal:** Initialize Git properly and push to the remote repository.
@@ -326,9 +443,9 @@ git push -u origin darine
 - [ ] JWT guards in CRUD Service
 - [ ] Routed via `POST /v1/crud/auth/signup` + `POST /v1/crud/auth/signin`
 
-### Phase 11 – Additional Scrapers 🔲
+### Phase 11 – Additional Scrapers ✅
 
-- [ ] Mubawab scraper → `POST /v1/service-ia/scraping/mubawab`
+- [x] Mubawab scraper → `POST /v1/service-ia/scraping/mubawab` (voir Phase 8.1)
 - [ ] Tayara scraper → `POST /v1/service-ia/scraping/tayara`
 - [ ] Other sources follow the same pattern (no Gateway changes needed)
 

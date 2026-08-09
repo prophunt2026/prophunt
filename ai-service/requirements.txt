@@ -7,6 +7,7 @@ requests==2.32.3
 beautifulsoup4==4.12.3
 selenium==4.27.1
 lxml==6.1.1
+playwright==1.62.0
 
 # ─── Database ────────────────────────────────────────────────────────────────
 pymongo==4.10.1
