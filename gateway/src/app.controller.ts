@@ -1,8 +1,17 @@
-import { All, Controller, Get, Logger, Req, Res } from '@nestjs/common';
+import {
+  All,
+  Controller,
+  Get,
+  Logger,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import type { Request, Response } from 'express';
 
-import { AppService }   from './app.service';
-import { ProxyService } from './proxy/proxy.service';
+import { AppService }      from './app.service';
+import { ProxyService }    from './proxy/proxy.service';
+import { JwtAdminGuard }   from './guards/jwt-admin.guard';
 
 @Controller('v1')
 export class AppController {
@@ -19,15 +28,13 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  // ── Auth Service ──────────────────────────────────────────────────────────
-  // Routes: /v1/auth/signup → /auth/signup
-  //         /v1/auth/signin → /auth/signin
-  //         /v1/auth/refresh → /auth/refresh
+  // ── Auth Service — PUBLIC ─────────────────────────────────────────────────
+  // No guard — signup, signin, refresh are public.
   //
-  // buildTargetUrl strips /v1/<prefix> then appends the rest:
-  //   /v1/auth/signup → strip /v1/auth → /auth/signup
-  //   baseUrl = http://localhost:3003
-  //   → http://localhost:3003/auth/signup ✓
+  // URL mapping (buildTargetUrl strips /v1 only for auth):
+  //   /v1/auth/signup  → http://localhost:3003/auth/signup  ✓
+  //   /v1/auth/signin  → http://localhost:3003/auth/signin  ✓
+  //   /v1/auth/refresh → http://localhost:3003/auth/refresh ✓
   @All('auth/*path')
   async proxyToAuthService(
     @Req() req: Request,
@@ -37,9 +44,18 @@ export class AppController {
     await this.proxyService.proxyRequest(req, res, this.url('AUTH_SERVICE_URL'));
   }
 
-  // ── AI Service ────────────────────────────────────────────────────────────
-  // Routes: /v1/service-ia/* → AI Service
+  // ── AI Service — ADMIN ONLY ───────────────────────────────────────────────
+  // JwtAdminGuard verifies:
+  //   1. Authorization: Bearer <token> header present
+  //   2. JWT signature valid + not expired
+  //   3. token type === 'access'  (refresh tokens rejected → 401)
+  //   4. role === 'ADMIN'         (USER → 403 Forbidden)
+  //
+  // URL mapping:
+  //   /v1/service-ia/scraping/tecnocasa → http://localhost:3001/scraping/tecnocasa ✓
+  //   /v1/service-ia/health             → http://localhost:3001/health             ✓
   @All('service-ia/*path')
+  @UseGuards(JwtAdminGuard)
   async proxyToAiService(
     @Req() req: Request,
     @Res() res: Response,
@@ -48,8 +64,11 @@ export class AppController {
     await this.proxyService.proxyRequest(req, res, this.url('AI_SERVICE_URL'));
   }
 
-  // ── CRUD Service ──────────────────────────────────────────────────────────
-  // Routes: /v1/crud/* → CRUD Service
+  // ── CRUD Service — PUBLIC (for now) ──────────────────────────────────────
+  // Add JwtAdminGuard or a JwtAuthGuard here later when CRUD auth is needed.
+  //
+  // URL mapping:
+  //   /v1/crud/properties → http://localhost:3002/properties ✓
   @All('crud/*path')
   async proxyToCrudService(
     @Req() req: Request,
