@@ -68,14 +68,29 @@ export class ProxyService {
     }
 
     // ── Axios config ───────────────────────────────────────────────────────
+    // Sérialiser le body en JSON string si c'est un objet pour éviter
+    // que Axios l'envoie comme "[object Object]"
+    let requestData: unknown = undefined;
+    if (['post', 'put', 'patch'].includes(method)) {
+      const body = req.body;
+      if (body !== undefined && body !== null) {
+        requestData = typeof body === 'object' ? JSON.stringify(body) : body;
+        // S'assurer que Content-Type est bien application/json
+        if (!forwardedHeaders['content-type']) {
+          forwardedHeaders['content-type'] = 'application/json';
+        }
+      }
+    }
+
     const config: AxiosRequestConfig = {
       method,
       url: targetUrl,
       headers: forwardedHeaders,
       params: req.query,
-      data: ['post', 'put', 'patch'].includes(method) ? req.body : undefined,
+      data: requestData,
       responseType: 'arraybuffer',  // never touch the payload
       validateStatus: () => true,   // forward 4xx/5xx as-is
+      timeout: 30000,               // 30s max — couvre bcrypt (rounds=12 ~2-3s) + réseau
     };
 
     try {
@@ -113,6 +128,13 @@ export class ProxyService {
         );
         throw new ServiceUnavailableException(
           `Le microservice est indisponible (${targetUrl}). Veuillez réessayer plus tard.`,
+        );
+      }
+
+      if (axiosErr.code === 'ECONNABORTED' || axiosErr.message?.includes('timeout')) {
+        this.logger.error(`Timeout proxying to ${targetUrl}`);
+        throw new ServiceUnavailableException(
+          `Le microservice ne répond pas (timeout): ${targetUrl}`,
         );
       }
 

@@ -1,0 +1,381 @@
+{
+  "info": {
+    "name": "PropHunter TN - Auth Service",
+    "description": "Collection complète pour tester le auth-service (port 3003) et les permissions via Gateway (port 3000).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "auth_url",    "value": "http://localhost:3003" },
+    { "key": "gateway_url", "value": "http://localhost:3000/v1" },
+    { "key": "user_at",     "value": "" },
+    { "key": "user_rt",     "value": "" },
+    { "key": "admin_at",    "value": "" },
+    { "key": "admin_rt",    "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check - Auth Service direct",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3003/health", "host": ["localhost"], "port": "3003", "path": ["health"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('service = auth-service', () => {",
+            "  const j = pm.response.json();",
+            "  pm.expect(j.status).to.eql('ok');",
+            "  pm.expect(j.service).to.eql('auth-service');",
+            "});"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "Signup",
+      "item": [
+        {
+          "name": "POST - Signup USER normal (201)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signup", "host": ["localhost"], "port": "3003", "path": ["auth", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('role = USER', () => {",
+            "  const j = pm.response.json();",
+            "  pm.expect(j.role).to.eql('USER');",
+            "  pm.expect(j.email).to.eql('user1@test.com');",
+            "  pm.collectionVariables.set('created_user_id', j.id);",
+            "  console.log('User créé:', j.email, '| role:', j.role);",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "POST - Signup tentative ADMIN ignorée (201 role=USER)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"hacker@test.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"ADMIN\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signup", "host": ["localhost"], "port": "3003", "path": ["auth", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('role = USER malgre tentative ADMIN', () => {",
+            "  pm.expect(pm.response.json().role).to.eql('USER');",
+            "  console.log('SECURITE OK: role ADMIN ignore, cree comme USER');",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "POST - Signup email duplicate (409)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signup", "host": ["localhost"], "port": "3003", "path": ["auth", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('409 Conflict', () => pm.response.to.have.status(409));",
+            "console.log('409 detail:', pm.response.json().detail);"
+          ]}}]
+        },
+        {
+          "name": "POST - Signup email invalide (422)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"pas-un-email\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signup", "host": ["localhost"], "port": "3003", "path": ["auth", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('422 Unprocessable', () => pm.response.to.have.status(422));"
+          ]}}]
+        },
+        {
+          "name": "POST - Signup password faible (422)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"weak@test.com\",\n  \"password\": \"weak\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signup", "host": ["localhost"], "port": "3003", "path": ["auth", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('422 Unprocessable', () => pm.response.to.have.status(422));",
+            "console.log('422 detail:', pm.response.json().detail);"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "Signin",
+      "item": [
+        {
+          "name": "POST - Signin USER (200) — sauvegarde tokens",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signin", "host": ["localhost"], "port": "3003", "path": ["auth", "signin"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('tokens presents', () => {",
+            "  const j = pm.response.json();",
+            "  pm.expect(j.access_token).to.be.a('string');",
+            "  pm.expect(j.refresh_token).to.be.a('string');",
+            "  pm.expect(j.token_type).to.eql('bearer');",
+            "  pm.expect(j.expires_in).to.eql(1800);",
+            "  pm.collectionVariables.set('user_at', j.access_token);",
+            "  pm.collectionVariables.set('user_rt', j.refresh_token);",
+            "  console.log('USER AT sauvegardé');",
+            "});",
+            "pm.test('payload contient role USER', () => {",
+            "  const at = pm.collectionVariables.get('user_at');",
+            "  const payload = JSON.parse(atob(at.split('.')[1]));",
+            "  pm.expect(payload.role).to.eql('USER');",
+            "  pm.expect(payload.type).to.eql('access');",
+            "  console.log('Payload:', JSON.stringify(payload));",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "POST - Signin ADMIN (200) — sauvegarde token ADMIN",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@prophunter.tn\",\n  \"password\": \"Admin@PropHunter2026!\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signin", "host": ["localhost"], "port": "3003", "path": ["auth", "signin"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('tokens presents', () => {",
+            "  const j = pm.response.json();",
+            "  pm.collectionVariables.set('admin_at', j.access_token);",
+            "  pm.collectionVariables.set('admin_rt', j.refresh_token);",
+            "  console.log('ADMIN AT sauvegardé');",
+            "});",
+            "pm.test('payload contient role ADMIN', () => {",
+            "  const at = pm.collectionVariables.get('admin_at');",
+            "  const payload = JSON.parse(atob(at.split('.')[1]));",
+            "  pm.expect(payload.role).to.eql('ADMIN');",
+            "  pm.expect(payload.type).to.eql('access');",
+            "  console.log('ADMIN Payload:', JSON.stringify(payload));",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "POST - Signin mauvais password (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"WrongPass!1\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signin", "host": ["localhost"], "port": "3003", "path": ["auth", "signin"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));",
+            "pm.test('message generique', () => {",
+            "  pm.expect(pm.response.json().detail).to.eql('Email ou mot de passe incorrect.');",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "POST - Signin email inexistant (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"ghost@test.com\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/signin", "host": ["localhost"], "port": "3003", "path": ["auth", "signin"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));",
+            "pm.test('meme message que mauvais password', () => {",
+            "  pm.expect(pm.response.json().detail).to.eql('Email ou mot de passe incorrect.');",
+            "  console.log('SECURITE OK: message generique, pas de fuite info');",
+            "});"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "Refresh Token",
+      "item": [
+        {
+          "name": "POST - Refresh valide (200) — rotation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"{{user_rt}}\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/refresh", "host": ["localhost"], "port": "3003", "path": ["auth", "refresh"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('nouveaux tokens', () => {",
+            "  const j = pm.response.json();",
+            "  pm.expect(j.access_token).to.be.a('string');",
+            "  pm.expect(j.refresh_token).to.be.a('string');",
+            "  const old_rt = pm.collectionVariables.get('user_rt');",
+            "  pm.expect(j.refresh_token).to.not.eql(old_rt);",
+            "  pm.collectionVariables.set('user_at', j.access_token);",
+            "  pm.collectionVariables.set('user_rt', j.refresh_token);",
+            "  console.log('Rotation OK: nouveau RT different de lancien');",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "POST - Refresh token invalide (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"fake-token-invalide\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/refresh", "host": ["localhost"], "port": "3003", "path": ["auth", "refresh"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));"
+          ]}}]
+        },
+        {
+          "name": "POST - Access Token utilise comme Refresh (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"{{user_at}}\"\n}" },
+            "url": { "raw": "http://localhost:3003/auth/refresh", "host": ["localhost"], "port": "3003", "path": ["auth", "refresh"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));",
+            "console.log('SECURITE OK: Access Token refuse comme Refresh Token');"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "Gateway - Auth routes publiques",
+      "item": [
+        {
+          "name": "POST - Signup via Gateway (201)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"gw_user@test.com\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3000/v1/auth/signup", "host": ["localhost"], "port": "3000", "path": ["v1", "auth", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('201 ou 409', () => pm.expect([201, 409]).to.include(pm.response.code));"
+          ]}}]
+        },
+        {
+          "name": "POST - Signin via Gateway (200)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"Password123!\"\n}" },
+            "url": { "raw": "http://localhost:3000/v1/auth/signin", "host": ["localhost"], "port": "3000", "path": ["v1", "auth", "signin"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const j = pm.response.json();",
+            "pm.collectionVariables.set('user_at', j.access_token);",
+            "pm.collectionVariables.set('user_rt', j.refresh_token);"
+          ]}}]
+        },
+        {
+          "name": "POST - Refresh via Gateway (200)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"{{user_rt}}\"\n}" },
+            "url": { "raw": "http://localhost:3000/v1/auth/refresh", "host": ["localhost"], "port": "3000", "path": ["v1", "auth", "refresh"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const j = pm.response.json();",
+            "pm.collectionVariables.set('user_rt', j.refresh_token);"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "Gateway - Permissions scraping",
+      "item": [
+        {
+          "name": "POST - Scraping sans token (401)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "http://localhost:3000/v1/service-ia/scraping/tecnocasa", "host": ["localhost"], "port": "3000", "path": ["v1", "service-ia", "scraping", "tecnocasa"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));",
+            "console.log('OK: 401 sans token');"
+          ]}}]
+        },
+        {
+          "name": "POST - Scraping token USER (403)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{user_at}}" }],
+            "url": { "raw": "http://localhost:3000/v1/service-ia/scraping/tecnocasa", "host": ["localhost"], "port": "3000", "path": ["v1", "service-ia", "scraping", "tecnocasa"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('403 Forbidden', () => pm.response.to.have.status(403));",
+            "console.log('OK: USER ne peut pas lancer le scraping');"
+          ]}}]
+        },
+        {
+          "name": "POST - Scraping token ADMIN (202)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_at}}" }],
+            "url": { "raw": "http://localhost:3000/v1/service-ia/scraping/tecnocasa", "host": ["localhost"], "port": "3000", "path": ["v1", "service-ia", "scraping", "tecnocasa"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('202 Accepted', () => pm.response.to.have.status(202));",
+            "const j = pm.response.json();",
+            "pm.collectionVariables.set('scraping_job_id', j.job_id);",
+            "console.log('OK: ADMIN autorisé, job_id =', j.job_id);"
+          ]}}]
+        },
+        {
+          "name": "GET - Status scraping ADMIN (200)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_at}}" }],
+            "url": { "raw": "http://localhost:3000/v1/service-ia/scraping/tecnocasa/status", "host": ["localhost"], "port": "3000", "path": ["v1", "service-ia", "scraping", "tecnocasa", "status"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const j = pm.response.json();",
+            "console.log('Status:', j.status, '| Step:', j.step);"
+          ]}}]
+        },
+        {
+          "name": "POST - Scraping token invalide (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer fake-token" }],
+            "url": { "raw": "http://localhost:3000/v1/service-ia/scraping/tecnocasa", "host": ["localhost"], "port": "3000", "path": ["v1", "service-ia", "scraping", "tecnocasa"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));"
+          ]}}]
+        },
+        {
+          "name": "POST - Scraping Refresh Token comme Access (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_rt}}" }],
+            "url": { "raw": "http://localhost:3000/v1/service-ia/scraping/tecnocasa", "host": ["localhost"], "port": "3000", "path": ["v1", "service-ia", "scraping", "tecnocasa"] }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));",
+            "console.log('SECURITE OK: Refresh Token refuse comme Access Token');"
+          ]}}]
+        }
+      ]
+    }
+  ]
+}
