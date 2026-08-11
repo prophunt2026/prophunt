@@ -15,6 +15,8 @@ export class ProxyService {
   private readonly logger = new Logger(ProxyService.name);
 
   // Headers that must never be forwarded between proxies (RFC 2616 §13.5.1)
+  // Also strip content-length — it changes when we re-serialize the body,
+  // causing downstream services to abort with "request.aborted" (received != expected)
   private readonly HOP_BY_HOP = new Set([
     'host',
     'connection',
@@ -25,6 +27,7 @@ export class ProxyService {
     'proxy-authorization',
     'proxy-authenticate',
     'upgrade',
+    'content-length',   // recalculated by axios after body re-serialization
   ]);
 
   constructor(private readonly httpService: HttpService) {}
@@ -164,10 +167,16 @@ export class ProxyService {
    *     → 'http://localhost:3001/scraping/tayara'
    */
   private buildTargetUrl(baseUrl: string, requestPath: string): string {
-    // Remove the /v1/<prefix> prefix — everything after the second segment
-    // becomes the downstream path.
-    // /v1/service-ia/health  → strip "/v1/service-ia" → /health
-    // /v1/crud/properties    → strip "/v1/crud"        → /properties
+    // Auth service: strip only /v1 — keep /auth prefix
+    //   /v1/auth/signup  → /auth/signup → http://localhost:3003/auth/signup ✓
+    if (requestPath.startsWith('/v1/auth/')) {
+      const downstream = requestPath.replace(/^\/v1/, '') || '/';
+      return `${baseUrl}${downstream}`;
+    }
+
+    // All other services: strip /v1/<prefix>
+    //   /v1/service-ia/scraping/tecnocasa → /scraping/tecnocasa
+    //   /v1/crud/properties               → /properties
     const downstream = requestPath.replace(/^\/v1\/[^/]+/, '') || '/';
     return `${baseUrl}${downstream}`;
   }
