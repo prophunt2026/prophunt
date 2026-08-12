@@ -6,7 +6,7 @@ dist/
 dist-scripts/
 
 # ─── Environment variables ────────────────────────────────────────────────────
-.env
+
 .env.local
 .env.*.local
 

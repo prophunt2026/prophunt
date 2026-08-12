@@ -1,0 +1,101 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: prophunter-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - prophunter-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: prophunter-auth-service
+    restart: always
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - MONGODB_URI=mongodb://mongodb:27017/prophunter_auth
+      - JWT_SECRET=3f8a2b1c9d4e7f0a5b6c3d2e1f8a9b0c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9
+      - JWT_ACCESS_EXPIRES_IN=30m
+      - JWT_REFRESH_EXPIRES_DAYS=7
+      - ADMIN_EMAIL=admin@prophunter.tn
+      - ADMIN_PASSWORD=Admin@PropHunter2026!
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - prophunter-network
+
+  crud-service:
+    build:
+      context: ./crud-service
+      dockerfile: Dockerfile
+    container_name: prophunter-crud-service
+    restart: always
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGODB_URI=mongodb://mongodb:27017/prophunter
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - prophunter-network
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: prophunter-ai-service
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DATABASE=prophunter
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - prophunter-network
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: prophunter-gateway
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - AUTH_SERVICE_URL=http://auth-service:3003
+      - CRUD_SERVICE_URL=http://crud-service:3002
+      - AI_SERVICE_URL=http://ai-service:3001
+      - JWT_SECRET=3f8a2b1c9d4e7f0a5b6c3d2e1f8a9b0c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9
+    depends_on:
+      - auth-service
+      - crud-service
+      - ai-service
+    networks:
+      - prophunter-network
+
+networks:
+  prophunter-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local

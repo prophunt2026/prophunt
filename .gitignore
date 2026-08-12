@@ -11,7 +11,7 @@ venv/
 
 # ─── Environment variables ────────────────────────────────────────────────────
 # Never commit secrets or local config
-.env
+
 .env.local
 .env.*.local
 
