@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
 
 from app.api.scraping import router as scraping_router
@@ -39,8 +40,14 @@ def _cleanup_orphan_jobs() -> None:
 async def lifespan(app: FastAPI):
     # ── Au démarrage ──────────────────────────────────────────────────────────
     _cleanup_orphan_jobs()
+    try:
+        from app.database.property_repository import ensure_all_indexes
+        ensure_all_indexes()
+    except Exception as e:
+        print(f"[Startup] Erreur lors de l'initialisation des index : {e}")
     yield
     # ── À l'arrêt (optionnel) ─────────────────────────────────────────────────
+
 
 
 app = FastAPI(

@@ -27,8 +27,8 @@ API_URL_TEMPLATE    = "https://www.tayara.tn/_next/data/{build_id}/en/listing/c/
 ITEM_PAGE_URL_TEMPLATE = "https://www.tayara.tn/item/{listing_id}/"
 SOURCE_NAME         = "tayara"
 
-TARGET_ANNONCES = 1000
-MAX_PAGES       = 200
+TARGET_ANNONCES = 10
+MAX_PAGES       = 2
 
 logger = get_logger(SOURCE_NAME)
 

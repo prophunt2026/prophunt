@@ -92,3 +92,15 @@ def is_running(source: str) -> tuple[bool, str | None]:
     if doc:
         return True, str(doc["_id"])
     return False, None
+
+
+def get_all_latest_jobs() -> dict:
+    """
+    Retourne le dernier job pour chacune des sources enregistrées dans le registry.
+    """
+    from app.scrapers.registry import SCRAPERS
+    results = {}
+    for source in SCRAPERS.keys():
+        results[source] = get_latest_job(source)
+    return results
+

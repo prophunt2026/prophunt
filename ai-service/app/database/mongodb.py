@@ -1,7 +1,11 @@
 import os
+
 from dotenv import load_dotenv
+
 from pymongo import MongoClient
+
 from pymongo.collection import Collection
+
 from pymongo.errors import ConnectionFailure
 
 # Charge le .env au moment de l'import du module
@@ -50,7 +54,7 @@ def get_client() -> MongoClient:
 
 def get_collection(collection_name: str) -> Collection:
     """
-    Retourne une collection MongoDB depuis la database configurée dans .env.
+    Retourne une collection MongoDB depuis la database configurée dans .env (prophunter_ia).
 
     Args:
         collection_name: nom de la collection (ex: 'tecnocasa_properties')
@@ -58,7 +62,22 @@ def get_collection(collection_name: str) -> Collection:
     Returns:
         Collection pymongo prête à l'emploi.
     """
-    mongodb_uri = _require_env("MONGODB_URI")
     database_name = _require_env("MONGODB_DATABASE")
     client = get_client()
     return client[database_name][collection_name]
+
+
+def get_db_collection(db_name: str, collection_name: str) -> Collection:
+    """
+    Retourne une collection MongoDB depuis une database spécifique (ex: 'prophunter').
+
+    Args:
+        db_name: nom de la base de données (ex: 'prophunter')
+        collection_name: nom de la collection (ex: 'properties')
+
+    Returns:
+        Collection pymongo prête à l'emploi.
+    """
+    client = get_client()
+    return client[db_name][collection_name]
+

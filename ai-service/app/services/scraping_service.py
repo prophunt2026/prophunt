@@ -62,12 +62,18 @@ class ScrapingService:
                 job_repository.update_job(job_id, step=step_name)
                 data = step(data)
 
-            # ── Sauvegarde ───────────────────────────────────────────────────
-            print(f"[ScrapingService:{source}] Sauvegarde dans '{collection_name}'")
-            job_repository.update_job(job_id, step="save_properties")
+            # ── 1. Sauvegarde dans la collection dédiée IA ───────────────────
+            print(f"[ScrapingService:{source}] Étape 1 : Sauvegarde dans '{collection_name}' (prophunter_ia)")
+            job_repository.update_job(job_id, step="save_to_ia_collection")
             save_result = save_properties(data, collection_name)
 
-            # ── Succès ───────────────────────────────────────────────────────
+            # ── 2. Synchronisation automatique vers CRUD (prophunter.properties) ──
+            print(f"[ScrapingService:{source}] Étape 2 : Synchronisation vers prophunter.properties")
+            job_repository.update_job(job_id, step="sync_site_to_crud")
+            from app.services.sync_service import sync_site_to_crud
+            sync_result = sync_site_to_crud(source)
+
+            # ── 3. Succès ───────────────────────────────────────────────────────
             job_repository.update_job(
                 job_id,
                 status=JobStatus.COMPLETED,
@@ -78,15 +84,18 @@ class ScrapingService:
                     "inserted":  save_result["inserted"],
                     "updated":   save_result["updated"],
                     "ignored":   save_result["ignored"],
+                    "synced_crud": sync_result.get("synced", 0),
+                    "last_sync_date": sync_result.get("last_sync_date"),
                     "collection": collection_name,
                 },
             )
             print(
-                f"[ScrapingService:{source}] Terminé — "
-                f"scraped={len(data) if data else 0} "
-                f"inserted={save_result['inserted']} "
-                f"updated={save_result['updated']}"
+                f"[ScrapingService:{source}] Pipeline complet réussi — "
+                f"scraped={len(data) if data else 0} | "
+                f"inserted_ia={save_result['inserted']} | "
+                f"synced_crud={sync_result.get('synced', 0)}"
             )
+
 
         except Exception as e:
             # ── Échec ─────────────────────────────────────────────────────────

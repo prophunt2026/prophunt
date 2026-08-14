@@ -67,15 +67,26 @@ export class PropertiesController {
   }
 
   /**
-   * GET /properties/source/:source
-   * Returns all listings from a specific scraping source.
+   * GET /properties/source/:source?page=1&limit=10
+   * GET /properties/site/:site?page=1&limit=10
+   * Returns paginated listings from a specific scraping source (10 per page by default).
    */
   @Get('source/:source')
   findBySource(
     @Param('source') source: string,
-  ): Promise<PropertyDocument[]> {
-    return this.propertiesService.findBySource(source);
+    @Query() dto: PaginationDto,
+  ): Promise<PaginatedResult<PropertyDocument>> {
+    return this.propertiesService.findBySource(source, dto);
   }
+
+  @Get('site/:site')
+  findBySite(
+    @Param('site') site: string,
+    @Query() dto: PaginationDto,
+  ): Promise<PaginatedResult<PropertyDocument>> {
+    return this.propertiesService.findBySource(site, dto);
+  }
+
 
   // ── Parameterised routes ───────────────────────────────────────────────────
 

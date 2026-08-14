@@ -44,17 +44,23 @@ export class PropertiesService {
 
   async findAll(dto: PaginationDto): Promise<PaginatedResult<PropertyDocument>> {
     const { page, limit } = dto;
+    const siteFilter = dto.site ?? dto.source;
     const skip = (page - 1) * limit;
+
+    const filter: FilterQuery<PropertyDocument> = {};
+    if (siteFilter) {
+      filter['metadonnees_scraping.source'] = siteFilter;
+    }
 
     const [data, total] = await Promise.all([
       this.propertyModel
-        .find()
+        .find(filter)
         .sort({ 'listing.date_scraping': -1 })
         .skip(skip)
         .limit(limit)
         .lean()
         .exec(),
-      this.propertyModel.countDocuments().exec(),
+      this.propertyModel.countDocuments(filter).exec(),
     ]);
 
     return {
@@ -65,6 +71,7 @@ export class PropertiesService {
       totalPages: Math.ceil(total / limit),
     };
   }
+
 
   // ── 2. GET /properties/sources ─────────────────────────────────────────────
 
@@ -200,14 +207,13 @@ export class PropertiesService {
 
   // ── 6. GET /properties/source/:source ─────────────────────────────────────
 
-  async findBySource(source: string): Promise<PropertyDocument[]> {
-    const docs = await this.propertyModel
-      .find({ 'metadonnees_scraping.source': source })
-      .sort({ 'listing.date_scraping': -1 })
-      .lean()
-      .exec();
-    return docs as unknown as PropertyDocument[];
+  async findBySource(
+    source: string,
+    dto: PaginationDto = new PaginationDto(),
+  ): Promise<PaginatedResult<PropertyDocument>> {
+    return this.findAll({ ...dto, site: source });
   }
+
 
   // ── 7. GET /properties/:id ─────────────────────────────────────────────────
 

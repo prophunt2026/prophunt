@@ -16,6 +16,8 @@ class JobManager:
     def __init__(self, scraping_service):
         # Injection de dépendance — évite l'import circulaire
         self._service = scraping_service
+        self._site_locks: dict[str, threading.Lock] = {}
+        self._global_lock = threading.Lock()
 
     # ─── Public ──────────────────────────────────────────────────────────────
 
@@ -27,20 +29,27 @@ class JobManager:
             (job, False)  si le job a été créé et lancé
             (job, True)   si un job est déjà en cours (caller retourne 409)
         """
-        running, existing_id = job_repository.is_running(source)
-        if running:
-            existing = job_repository.get_job(existing_id)
-            # Reconstituer un objet minimal pour la réponse 409
-            job = ScrapingJob(
-                job_id=existing_id,
-                source=source,
-                status=JobStatus(existing.get("status", "running")),
-            )
-            return job, True
+        with self._global_lock:
+            if source not in self._site_locks:
+                self._site_locks[source] = threading.Lock()
+            site_lock = self._site_locks[source]
 
-        job = job_repository.create_job(source)
-        self._launch(job.job_id, source)
-        return job, False
+        with site_lock:
+            running, existing_id = job_repository.is_running(source)
+            if running:
+                existing = job_repository.get_job(existing_id)
+                # Reconstituer un objet minimal pour la réponse 409
+                job = ScrapingJob(
+                    job_id=existing_id,
+                    source=source,
+                    status=JobStatus(existing.get("status", "running") if existing else "running"),
+                )
+                return job, True
+
+            job = job_repository.create_job(source)
+            self._launch(job.job_id, source)
+            return job, False
+
 
     # ─── Private ─────────────────────────────────────────────────────────────
 

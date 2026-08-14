@@ -13,6 +13,41 @@ def _ensure_index(collection) -> None:
     )
 
 
+def ensure_all_indexes() -> None:
+
+    """
+    S'assure que les index uniques sur listing.id_universel existent sur toutes
+    les collections de prophunter_ia ainsi que sur prophunter.properties.
+    Appelé au démarrage de l'application (lifespan).
+    """
+    from app.scrapers.registry import SCRAPERS
+    from app.database.mongodb import get_db_collection
+
+    try:
+        # Index sur toutes les collections de l'IA
+        for source, config in SCRAPERS.items():
+            collection_name = config["collection"]
+            col = get_collection(collection_name)
+            _ensure_index(col)
+
+        # Index sur la collection unifiée prophunter.properties
+        crud_col = get_db_collection("prophunter", "properties")
+        _ensure_index(crud_col)
+
+        print("[Repository] Indexation unique (listing.id_universel) initialisée avec succès sur toutes les collections.")
+    except Exception as e:
+        print(f"[Repository] Avertissement lors de la création des index : {e}")
+
+
+def save_to_ia_collection(properties: list, collection_name: str) -> dict:
+    """
+    Alias pour save_properties.
+    Enregistre les annonces normalisées dans la collection MongoDB spécifiée dans prophunter_ia.
+    """
+    return save_properties(properties, collection_name)
+
+
+
 def save_properties(properties: list, collection_name: str) -> dict:
     """
     Enregistre les annonces normalisées dans la collection MongoDB spécifiée.
