@@ -38,7 +38,7 @@ export class PropertiesService {
   constructor(
     @InjectModel(Property.name)
     private readonly propertyModel: Model<PropertyDocument>,
-  ) {}
+  ) { }
 
   // ── 1. GET /properties ─────────────────────────────────────────────────────
 
@@ -50,6 +50,16 @@ export class PropertiesService {
     const filter: FilterQuery<PropertyDocument> = {};
     if (siteFilter) {
       filter['metadonnees_scraping.source'] = siteFilter;
+    }
+
+    if (dto.startDate || dto.endDate) {
+      filter['listing.date_scraping'] = {};
+      if (dto.startDate) {
+        filter['listing.date_scraping'].$gte = dto.startDate;
+      }
+      if (dto.endDate) {
+        filter['listing.date_scraping'].$lte = dto.endDate;
+      }
     }
 
     const [data, total] = await Promise.all([
@@ -195,15 +205,26 @@ export class PropertiesService {
     if (dto.nombreChambres !== undefined)
       filter['bien.nombre_chambres'] = dto.nombreChambres;
 
+    if (dto.startDate || dto.endDate) {
+      filter['listing.date_scraping'] = {};
+      if (dto.startDate) {
+        filter['listing.date_scraping'].$gte = dto.startDate;
+      }
+      if (dto.endDate) {
+        filter['listing.date_scraping'].$lte = dto.endDate;
+      }
+    }
+
     const docs = await this.propertyModel
       .find(filter)
       .sort({ 'listing.date_scraping': -1 })
-      .limit(100)
+      .limit(20)
       .lean()
       .exec();
 
     return docs as unknown as PropertyDocument[];
   }
+
 
   // ── 6. GET /properties/source/:source ─────────────────────────────────────
 

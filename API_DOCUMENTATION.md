@@ -232,6 +232,43 @@ Déclenchement API (POST) ──▶ Réponse 202 Accepted immédiate (Tâche en 
   - `http://localhost:3000/v1/crud/properties?site=fi_dari&page=1&limit=10`
   - `http://localhost:3000/v1/crud/properties?site=home_in_tunisia&page=1&limit=10`
 
+#### 3. Filtrer par Date & Période de Scraping (Nouveau)
+- **Méthode** : `GET`
+- **Paramètres supportés** : `startDate` (ISO), `endDate` (ISO)
+- **Exemples** :
+  - `http://localhost:3000/v1/crud/properties?startDate=2026-08-01&page=1&limit=10`
+  - `http://localhost:3000/v1/crud/properties?endDate=2026-08-15&page=1&limit=10`
+  - `http://localhost:3000/v1/crud/properties?startDate=2026-08-09&endDate=2026-08-14&page=1&limit=10`
+  - `http://localhost:3000/v1/crud/properties?site=tayara&startDate=2026-08-01&page=1&limit=10`
+
+#### 4. Recherche Multi-Critères Avancée (`/search`)
+- **Méthode** : `GET`
+- **URL** : `http://localhost:3000/v1/crud/properties/search`
+- **Paramètres combinables** :
+  - `source` : nom du site (`mubawab`, `tayara`, etc.)
+  - `ville` : filtre par ville (insensible à la casse, ex: `Tunis`, `Sousse`)
+  - `delegation` : filtre par délégation (ex: `La Marsa`, `Sahloul`)
+  - `type` : type de bien (`appartement`, `villa`, `terrain`, `local_commercial`, `duplex`, `studio`, `immeuble`)
+  - `transaction` : type de transaction (`vente`, `location`)
+  - `prixMin` / `prixMax` : fourchette de prix en TND
+  - `surfaceMin` / `surfaceMax` : surface totale en m²
+  - `nombreChambres` : nombre de pièces/chambres
+  - `startDate` / `endDate` : filtre par date de scraping
+- **Exemples** :
+  - `http://localhost:3000/v1/crud/properties/search?ville=Tunis&type=appartement&transaction=vente`
+  - `http://localhost:3000/v1/crud/properties/search?prixMin=200000&prixMax=500000&surfaceMin=100`
+  - `http://localhost:3000/v1/crud/properties/search?source=mubawab&ville=Sousse&type=appartement&prixMax=400000&startDate=2026-08-01`
+
+#### 5. Statistiques & Sources Actives
+- **Liste des sources actives** :
+  - `GET http://localhost:3000/v1/crud/properties/sources`
+- **Statistiques globales (comptes par site, par ville, prix min/max/moyen)** :
+  - `GET http://localhost:3000/v1/crud/properties/stats`
+- **Dernières annonces scrappées** :
+  - `GET http://localhost:3000/v1/crud/properties/latest?limit=10`
+- **Détail d'une annonce par son ID** :
+  - `GET http://localhost:3000/v1/crud/properties/:id`
+
 ---
 
 ## 🗄️ 4. Visualisation dans MongoDB Compass

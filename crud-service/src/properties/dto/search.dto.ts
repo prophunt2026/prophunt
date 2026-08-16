@@ -57,4 +57,12 @@ export class SearchDto {
   @IsOptional()
   @IsString()
   statut?: string;
+
+  @IsOptional()
+  @IsString()
+  startDate?: string;
+
+  @IsOptional()
+  @IsString()
+  endDate?: string;
 }
