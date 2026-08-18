@@ -19,6 +19,7 @@ import time
 from datetime import datetime, timezone
 
 import requests
+# pyrefly: ignore [missing-import]
 from bs4 import BeautifulSoup
 
 from app.scrapers.common.schema import new_listing

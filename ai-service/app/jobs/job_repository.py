@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime, timezone
+# pyrefly: ignore [missing-import]
 from pymongo.errors import PyMongoError
 from app.database.mongodb import get_collection
 from app.jobs.models import ScrapingJob, JobStatus
