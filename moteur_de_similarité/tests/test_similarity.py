@@ -1,6 +1,10 @@
+import os
+import sys
+# Ajouter le dossier parent au chemin de recherche pour pouvoir importer similarity_engine
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from similarity_engine import SimilarityEngine
-import os
 
 # We skip these tests if the DB is not built
 DB_PATH = "./chroma_db"
