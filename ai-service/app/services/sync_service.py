@@ -95,6 +95,11 @@ def sync_site_to_crud(site: str) -> dict:
         if not id_universel:
             continue
 
+        # Règle métier : annonce provenant du scraping
+        doc_copy["scraping"] = True
+        doc_copy["addedBy"] = None
+        doc_copy["status"] = None
+
         # Suivre la date_scraping la plus récente
         date_scraping = listing.get("date_scraping")
         if date_scraping and (not max_date_scraping or date_scraping > max_date_scraping):

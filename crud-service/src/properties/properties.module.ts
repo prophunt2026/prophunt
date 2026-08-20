@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PropertiesController } from './properties.controller';
+import { AdminPropertiesController } from './admin-properties.controller';
 import { PropertiesService } from './properties.service';
 import { Property, PropertySchema } from './schemas/property.schema';
 
@@ -10,7 +11,7 @@ import { Property, PropertySchema } from './schemas/property.schema';
       { name: Property.name, schema: PropertySchema },
     ]),
   ],
-  controllers: [PropertiesController],
+  controllers: [PropertiesController, AdminPropertiesController],
   providers: [PropertiesService],
   exports: [PropertiesService],
 })

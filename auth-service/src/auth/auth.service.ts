@@ -62,29 +62,62 @@ export class AuthService implements OnModuleInit {
     this.logger.log(`[Startup] ADMIN created: ${adminEmail}`);
   }
 
-  // ── SIGNUP ─────────────────────────────────────────────────────────────────
+  // ── SIGNUP (with Reactivation if previously deleted) ───────────────────────
 
   async signup(dto: SignupDto) {
     const email = dto.email.toLowerCase().trim();
 
     const existing = await this.userModel.findOne({ email });
+
+    // ── Si le compte existe déjà ──
     if (existing) {
-      throw new ConflictException(`Un compte existe déjà avec l'adresse : ${email}`);
+      if (existing.isActive) {
+        throw new ConflictException(`Un compte actif existe déjà avec l'adresse : ${email}`);
+      }
+
+      // ── Compte existant mais inactif (supprimé précédemment) : Réactivation ! ──
+      const password_hash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
+      existing.password_hash = password_hash;
+      existing.nom = dto.nom;
+      existing.telephone = dto.telephone;
+      existing.isActive = true;
+      existing.role = UserRole.USER; // Toujours USER
+      await existing.save();
+
+      this.logger.log(`[Reactivation] Compte réactivé pour : ${email}`);
+
+      return {
+        id:         existing._id.toString(),
+        email:      existing.email,
+        role:       existing.role,
+        nom:        existing.nom,
+        telephone:  existing.telephone,
+        reactivated: true,
+        message:    'Compte réactivé avec succès. (Vos anciennes annonces restent désactivées).',
+        created_at: (existing as any).createdAt?.toISOString() ?? new Date().toISOString(),
+      };
     }
 
+    // ── Nouveau compte ──
     const password_hash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
 
     try {
       const user = await this.userModel.create({
         email,
         password_hash,
-        role: UserRole.USER,   // always USER — never from client
+        role:      UserRole.USER,   // always USER — never from client
+        nom:       dto.nom,
+        telephone: dto.telephone,
+        avatar:    null,
+        isActive:  true,
       });
 
       return {
         id:         user._id.toString(),
         email:      user.email,
         role:       user.role,
+        nom:        user.nom,
+        telephone:  user.telephone,
         created_at: (user as any).createdAt?.toISOString() ?? new Date().toISOString(),
       };
     } catch (err: any) {
@@ -224,8 +257,82 @@ export class AuthService implements OnModuleInit {
     const refreshToken = jwt.sign(
       { sub: userId, type: 'refresh', jti: uuidv4() },
       this.jwtSecret(),
-      { expiresIn: `${days}d` },
     );
     return { refreshToken, expiresAt };
+  }
+
+  // ── PROFILE CRUD ───────────────────────────────────────────────────────────
+
+  async getProfile(userId: string) {
+    const user = await this.userModel.findById(userId).select('-password_hash');
+    if (!user || !user.isActive) {
+      throw new UnauthorizedException('Utilisateur introuvable ou compte inactif.');
+    }
+    return {
+      id:         user._id.toString(),
+      email:      user.email,
+      nom:        user.nom,
+      telephone:  user.telephone,
+      avatar:     user.avatar,
+      role:       user.role,
+      isActive:   user.isActive,
+      created_at: (user as any).createdAt?.toISOString() ?? null,
+      updated_at: (user as any).updatedAt?.toISOString() ?? null,
+    };
+  }
+
+  async updateProfile(userId: string, dto: { nom?: string; telephone?: string }) {
+    const user = await this.userModel.findById(userId);
+    if (!user || !user.isActive) {
+      throw new UnauthorizedException('Utilisateur introuvable ou compte inactif.');
+    }
+
+    if (dto.nom !== undefined) user.nom = dto.nom;
+    if (dto.telephone !== undefined) user.telephone = dto.telephone;
+
+    await user.save();
+
+    return {
+      message: 'Profil mis à jour avec succès.',
+      user: {
+        id:         user._id.toString(),
+        email:      user.email,
+        nom:        user.nom,
+        telephone:  user.telephone,
+        avatar:     user.avatar,
+        role:       user.role,
+      },
+    };
+  }
+
+  async deleteProfile(userId: string) {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new UnauthorizedException('Utilisateur introuvable.');
+    }
+
+    // Option : soft delete
+    user.isActive = false;
+    await user.save();
+
+    // Revoke all refresh tokens for this user
+    await this.refreshTokenModel.updateMany({ user_id: userId }, { is_revoked: true });
+
+    return { message: 'Compte désactivé avec succès.' };
+  }
+
+  async updateAvatar(userId: string, avatarUrl: string) {
+    const user = await this.userModel.findById(userId);
+    if (!user || !user.isActive) {
+      throw new UnauthorizedException('Utilisateur introuvable ou compte inactif.');
+    }
+
+    user.avatar = avatarUrl;
+    await user.save();
+
+    return {
+      message: 'Avatar mis à jour avec succès.',
+      avatar: user.avatar,
+    };
   }
 }

@@ -2,6 +2,7 @@ import {
   All,
   Controller,
   Get,
+  Post,
   Logger,
   Req,
   Res,
@@ -12,6 +13,7 @@ import type { Request, Response } from 'express';
 import { AppService }      from './app.service';
 import { ProxyService }    from './proxy/proxy.service';
 import { JwtAdminGuard }   from './guards/jwt-admin.guard';
+import { JwtAuthGuard }    from './guards/jwt-auth.guard';
 
 @Controller('v1')
 export class AppController {
@@ -28,32 +30,102 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  // ── Auth Service — PUBLIC ─────────────────────────────────────────────────
-  // No guard — signup, signin, refresh are public.
-  //
-  // URL mapping (buildTargetUrl strips /v1 only for auth):
-  //   /v1/auth/signup  → http://localhost:3003/auth/signup  ✓
-  //   /v1/auth/signin  → http://localhost:3003/auth/signin  ✓
-  //   /v1/auth/refresh → http://localhost:3003/auth/refresh ✓
+  // ── 1. AUTH SERVICE: PROFILE (AUTH REQUIRED) ──────────────────────────────
+  // Specific static profile routes must precede general /auth/*path
+  @All('auth/profile')
+  @UseGuards(JwtAuthGuard)
+  async proxyAuthProfile(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to Auth Profile: ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('AUTH_SERVICE_URL'));
+  }
+
+  @All('auth/profile/*path')
+  @UseGuards(JwtAuthGuard)
+  async proxyAuthProfileSub(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to Auth Profile Sub: ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('AUTH_SERVICE_URL'));
+  }
+
+  // ── 2. AUTH SERVICE: PUBLIC (SIGNUP, SIGNIN, REFRESH) ─────────────────────
   @All('auth/*path')
   async proxyToAuthService(
     @Req() req: Request,
     @Res() res: Response,
   ): Promise<void> {
-    this.logger.log(`Routing to Auth Service: ${req.method} ${req.path}`);
+    this.logger.log(`Routing to Auth Service (Public): ${req.method} ${req.path}`);
     await this.proxyService.proxyRequest(req, res, this.url('AUTH_SERVICE_URL'));
   }
 
-  // ── AI Service — ADMIN ONLY ───────────────────────────────────────────────
-  // JwtAdminGuard verifies:
-  //   1. Authorization: Bearer <token> header present
-  //   2. JWT signature valid + not expired
-  //   3. token type === 'access'  (refresh tokens rejected → 401)
-  //   4. role === 'ADMIN'         (USER → 403 Forbidden)
-  //
-  // URL mapping:
-  //   /v1/service-ia/scraping/tecnocasa → http://localhost:3001/scraping/tecnocasa ✓
-  //   /v1/service-ia/health             → http://localhost:3001/health             ✓
+  // ── 3. CRUD SERVICE: ADMIN ONLY (MODERATION & FULL CRUD) ──────────────────
+  @All('crud/admin/*path')
+  @UseGuards(JwtAdminGuard)
+  async proxyCrudAdmin(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Admin: ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  // ── 4. CRUD SERVICE: USER MY-PROPERTIES (AUTH REQUIRED) ───────────────────
+  @All('crud/properties/my-properties')
+  @UseGuards(JwtAuthGuard)
+  async proxyCrudMyProperties(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD My-Properties: ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  @All('crud/properties/my-properties/*path')
+  @UseGuards(JwtAuthGuard)
+  async proxyCrudMyPropertiesSub(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD My-Properties Sub: ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  // ── 5. CRUD SERVICE: CREATE PROPERTY & UPLOAD (AUTH REQUIRED) ─────────────
+  @Post('crud/properties/upload-images')
+  @UseGuards(JwtAuthGuard)
+  async proxyCrudUploadImages(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Upload Images: POST ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  @Post('crud/properties')
+  @UseGuards(JwtAuthGuard)
+  async proxyCrudCreateProperty(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Create Property: POST ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  // ── 6. CRUD SERVICE: PUBLIC (LISTINGS, SEARCH, STATS, DETAILS) ────────────
+  @All('crud/*path')
+  async proxyToCrudService(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Service (Public): ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  // ── 7. AI SERVICE: ADMIN ONLY (SCRAPING) ───────────────────────────────────
   @All('service-ia/*path')
   @UseGuards(JwtAdminGuard)
   async proxyToAiService(
@@ -62,20 +134,6 @@ export class AppController {
   ): Promise<void> {
     this.logger.log(`Routing to AI Service: ${req.method} ${req.path}`);
     await this.proxyService.proxyRequest(req, res, this.url('AI_SERVICE_URL'));
-  }
-
-  // ── CRUD Service — PUBLIC (for now) ──────────────────────────────────────
-  // Add JwtAdminGuard or a JwtAuthGuard here later when CRUD auth is needed.
-  //
-  // URL mapping:
-  //   /v1/crud/properties → http://localhost:3002/properties ✓
-  @All('crud/*path')
-  async proxyToCrudService(
-    @Req() req: Request,
-    @Res() res: Response,
-  ): Promise<void> {
-    this.logger.log(`Routing to CRUD Service: ${req.method} ${req.path}`);
-    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
   }
 
   // ── Private helpers ───────────────────────────────────────────────────────
@@ -88,3 +146,4 @@ export class AppController {
     return value;
   }
 }
+

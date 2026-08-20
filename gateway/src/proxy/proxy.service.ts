@@ -71,16 +71,20 @@ export class ProxyService {
     }
 
     // ── Axios config ───────────────────────────────────────────────────────
-    // Sérialiser le body en JSON string si c'est un objet pour éviter
-    // que Axios l'envoie comme "[object Object]"
     let requestData: unknown = undefined;
+    const contentType = (forwardedHeaders['content-type'] as string) || '';
+
     if (['post', 'put', 'patch'].includes(method)) {
-      const body = req.body;
-      if (body !== undefined && body !== null) {
-        requestData = typeof body === 'object' ? JSON.stringify(body) : body;
-        // S'assurer que Content-Type est bien application/json
-        if (!forwardedHeaders['content-type']) {
-          forwardedHeaders['content-type'] = 'application/json';
+      if (contentType.includes('multipart/form-data')) {
+        // Stream or pass raw buffer directly for multipart uploads
+        requestData = req;
+      } else {
+        const body = req.body;
+        if (body !== undefined && body !== null) {
+          requestData = typeof body === 'object' ? JSON.stringify(body) : body;
+          if (!forwardedHeaders['content-type']) {
+            forwardedHeaders['content-type'] = 'application/json';
+          }
         }
       }
     }

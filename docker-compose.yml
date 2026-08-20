@@ -31,6 +31,8 @@ services:
       - JWT_REFRESH_EXPIRES_DAYS=7
       - ADMIN_EMAIL=admin@prophunter.tn
       - ADMIN_PASSWORD=Admin@PropHunter2026!
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       mongodb:
         condition: service_healthy
@@ -48,6 +50,8 @@ services:
     environment:
       - PORT=3002
       - MONGODB_URI=mongodb://mongodb:27017/prophunter
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       mongodb:
         condition: service_healthy
@@ -85,6 +89,8 @@ services:
       - CRUD_SERVICE_URL=http://crud-service:3002
       - AI_SERVICE_URL=http://ai-service:3001
       - JWT_SECRET=3f8a2b1c9d4e7f0a5b6c3d2e1f8a9b0c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       - auth-service
       - crud-service
@@ -98,4 +104,6 @@ networks:
 
 volumes:
   mongodb_data:
+    driver: local
+  uploads_data:
     driver: local

@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Matches, MinLength, MaxLength } from 'class-validator';
+import { IsEmail, IsString, IsNotEmpty, Matches, MinLength, MaxLength } from 'class-validator';
 
 /**
  * POST /auth/signup
@@ -24,4 +24,14 @@ export class SignupDto {
     },
   )
   password: string;
+
+  /** Nom complet — obligatoire à l'inscription */
+  @IsNotEmpty({ message: 'Le nom est obligatoire.' })
+  @IsString()
+  nom: string;
+
+  /** Numéro de téléphone — obligatoire à l'inscription */
+  @IsNotEmpty({ message: 'Le numéro de téléphone est obligatoire.' })
+  @IsString()
+  telephone: string;
 }

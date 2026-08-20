@@ -78,6 +78,11 @@ export class JwtAdminGuard implements CanActivate {
       );
     }
 
+    // ── 5. Forward user info downstream ─────────────────────────────────────
+    req.headers['x-user-id'] = payload.sub || payload.userId || payload.id;
+    req.headers['x-user-email'] = payload.email;
+    req.headers['x-user-role'] = payload.role;
+
     return true;
   }
 }

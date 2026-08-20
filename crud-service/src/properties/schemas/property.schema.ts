@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, HydratedDocument, Schema as MongooseSchema } from 'mongoose';
+import { Document, HydratedDocument, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type PropertyDocument = HydratedDocument<Property>;
 
@@ -261,6 +261,21 @@ export class Property extends Document {
   @Prop({ type: MetadonnesScrapingSchema, default: () => ({}) }) metadonnees_scraping: MetadonnesScraping;
   @Prop({ type: ScoringIASchema, default: () => ({}) }) scoring_ia: ScoringIA;
   @Prop({ type: DonneesBrutesSchema, default: () => ({}) }) donnees_brutes: DonneesBrutes;
+
+  // ─── Champs Utilisateur & Modération ───────────────────────────────────────
+  @Prop({ type: Boolean, default: true, index: true })
+  scraping: boolean;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', default: null, index: true })
+  addedBy: Types.ObjectId | null;
+
+  @Prop({
+    type: String,
+    enum: ['pending', 'accepted', 'rejected', 'inactive'],
+    default: null,
+    index: true,
+  })
+  status: 'pending' | 'accepted' | 'rejected' | 'inactive' | null;
 }
 
 export const PropertySchema = SchemaFactory.createForClass(Property);

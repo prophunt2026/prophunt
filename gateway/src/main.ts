@@ -11,6 +11,15 @@ async function bootstrap() {
   expressApp.use(require('express').json({ limit: '10mb' }));
   expressApp.use(require('express').urlencoded({ extended: true, limit: '10mb' }));
 
+  // Servir les fichiers uploads statiques partagés (/app/uploads)
+  const path = require('path');
+  const fs = require('fs');
+  const uploadsDir = '/app/uploads';
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+  expressApp.use('/uploads', require('express').static(uploadsDir));
+
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
   console.log(`Gateway is running on http://localhost:${port}`);

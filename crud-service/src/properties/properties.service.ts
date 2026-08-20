@@ -4,11 +4,13 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, isValidObjectId, FilterQuery } from 'mongoose';
+import { Model, isValidObjectId, FilterQuery, Types } from 'mongoose';
 import { Property, PropertyDocument } from './schemas/property.schema';
 import { PaginationDto } from './dto/pagination.dto';
 import { SearchDto } from './dto/search.dto';
 import { LatestDto } from './dto/latest.dto';
+import { CreateUserPropertyDto } from './dto/create-user-property.dto';
+import { UpdateUserPropertyDto } from './dto/update-user-property.dto';
 
 // ─── Response shapes ─────────────────────────────────────────────────────────
 
@@ -47,7 +49,9 @@ export class PropertiesService {
     const siteFilter = dto.site ?? dto.source;
     const skip = (page - 1) * limit;
 
-    const filter: FilterQuery<PropertyDocument> = {};
+    const filter: FilterQuery<PropertyDocument> = {
+      $or: [{ scraping: true }, { status: 'accepted' }],
+    };
     if (siteFilter) {
       filter['metadonnees_scraping.source'] = siteFilter;
     }
@@ -65,7 +69,7 @@ export class PropertiesService {
     const [data, total] = await Promise.all([
       this.propertyModel
         .find(filter)
-        .sort({ 'listing.date_scraping': -1 })
+        .sort({ createdAt: -1, 'listing.date_scraping': -1 })
         .skip(skip)
         .limit(limit)
         .lean()
@@ -87,7 +91,9 @@ export class PropertiesService {
 
   async getSources(): Promise<string[]> {
     const sources = await this.propertyModel
-      .distinct('metadonnees_scraping.source')
+      .distinct('metadonnees_scraping.source', {
+        $or: [{ scraping: true }, { status: 'accepted' }],
+      })
       .exec();
     return (sources as string[]).filter(Boolean).sort();
   }
@@ -95,17 +101,18 @@ export class PropertiesService {
   // ── 3. GET /properties/stats ───────────────────────────────────────────────
 
   async getStats(): Promise<StatsResult> {
+    const baseMatch = { $or: [{ scraping: true }, { status: 'accepted' }] };
     const [total, sourceAgg, villeAgg, prixAgg] = await Promise.all([
-      this.propertyModel.countDocuments().exec(),
+      this.propertyModel.countDocuments(baseMatch).exec(),
 
       this.propertyModel.aggregate<{ _id: string; count: number }>([
-        { $match: { 'metadonnees_scraping.source': { $ne: null } } },
+        { $match: { ...baseMatch, 'metadonnees_scraping.source': { $ne: null } } },
         { $group: { _id: '$metadonnees_scraping.source', count: { $sum: 1 } } },
         { $sort: { count: -1 } },
       ]),
 
       this.propertyModel.aggregate<{ _id: string; count: number }>([
-        { $match: { 'localisation.ville': { $ne: null } } },
+        { $match: { ...baseMatch, 'localisation.ville': { $ne: null } } },
         { $group: { _id: '$localisation.ville', count: { $sum: 1 } } },
         { $sort: { count: -1 } },
         { $limit: 20 },
@@ -116,7 +123,7 @@ export class PropertiesService {
         min: number | null;
         max: number | null;
       }>([
-        { $match: { 'transaction.prix': { $ne: null, $gt: 0 } } },
+        { $match: { ...baseMatch, 'transaction.prix': { $ne: null, $gt: 0 } } },
         {
           $group: {
             _id: null,
@@ -151,8 +158,11 @@ export class PropertiesService {
   // ── 4. GET /properties/latest ──────────────────────────────────────────────
 
   async getLatest(dto: LatestDto): Promise<PropertyDocument[]> {
+    const filter: FilterQuery<PropertyDocument> = {
+      $or: [{ scraping: true }, { status: 'accepted' }],
+    };
     const docs = await this.propertyModel
-      .find()
+      .find(filter)
       .sort({ 'listing.date_scraping': -1 })
       .limit(dto.limit)
       .lean()
@@ -163,7 +173,9 @@ export class PropertiesService {
   // ── 5. GET /properties/search ──────────────────────────────────────────────
 
   async search(dto: SearchDto): Promise<PropertyDocument[]> {
-    const filter: FilterQuery<PropertyDocument> = {};
+    const filter: FilterQuery<PropertyDocument> = {
+      $or: [{ scraping: true }, { status: 'accepted' }],
+    };
 
     if (dto.source)
       filter['metadonnees_scraping.source'] = dto.source;
@@ -243,7 +255,13 @@ export class PropertiesService {
       throw new BadRequestException(`"${id}" n'est pas un ObjectId valide`);
     }
 
-    const doc = await this.propertyModel.findById(id).lean().exec();
+    const doc = await this.propertyModel
+      .findOne({
+        _id: id,
+        $or: [{ scraping: true }, { status: 'accepted' }],
+      })
+      .lean()
+      .exec();
 
     if (!doc) {
       throw new NotFoundException(`Annonce introuvable : ${id}`);
@@ -251,4 +269,312 @@ export class PropertiesService {
 
     return doc as unknown as PropertyDocument;
   }
+
+  // ── 8. USER CRUD: POST /properties ────────────────────────────────────────
+
+  async createUserProperty(
+    userId: string,
+    dto: CreateUserPropertyDto,
+  ): Promise<PropertyDocument> {
+    if (!isValidObjectId(userId)) {
+      throw new BadRequestException(`ID utilisateur invalide : ${userId}`);
+    }
+
+    const nowIso = new Date().toISOString();
+
+    const newProperty = new this.propertyModel({
+      scraping: false,
+      addedBy: new Types.ObjectId(userId),
+      status: 'pending',
+      listing: {
+        id_source: null,
+        id_universel: `user_${userId}_${Date.now()}`,
+        url_source: null,
+        url_canonique: null,
+        date_scraping: nowIso,
+        date_publication: nowIso,
+        date_maj: nowIso,
+        statut: 'disponible',
+        langue: 'fr',
+      },
+      transaction: {
+        type: dto.type_transaction,
+        prix: dto.prix,
+        devise: 'TND',
+        prix_negociable: dto.prix_negociable ?? false,
+      },
+      bien: {
+        type: dto.type_bien,
+        superficie_totale: dto.superficie_totale ?? null,
+        nombre_pieces: dto.nombre_pieces ?? null,
+        nombre_chambres: dto.nombre_chambres ?? null,
+        nombre_salles_bain: dto.nombre_salles_bain ?? null,
+        etage: dto.etage ?? null,
+        meuble: dto.meuble ?? null,
+      },
+      localisation: {
+        pays: 'Tunisie',
+        pays_code: 'TN',
+        ville: dto.ville,
+        delegation: dto.delegation ?? null,
+        adresse: dto.adresse ?? null,
+        code_postal: dto.code_postal ?? null,
+      },
+      description: {
+        titre: dto.titre,
+        texte: dto.texte ?? null,
+      },
+      medias: {
+        photos: dto.photos ?? [],
+        nombre_photos: dto.photos?.length ?? 0,
+      },
+      contact: {
+        type_vendeur: 'Particulier',
+        nom_vendeur: dto.nom_contact ?? null,
+        telephone: dto.telephone ?? [],
+        email: dto.email_contact ?? null,
+      },
+      metadonnees_scraping: {
+        source: 'user_submission',
+        methode: 'manual_entry',
+        statut_scraping: 'success',
+      },
+    });
+
+    const saved = await newProperty.save();
+    return saved as unknown as PropertyDocument;
+  }
+
+  // ── 9. USER CRUD: GET /properties/my-properties ───────────────────────────
+
+  async findMyProperties(
+    userId: string,
+    dto: PaginationDto = new PaginationDto(),
+  ): Promise<PaginatedResult<PropertyDocument>> {
+    if (!isValidObjectId(userId)) {
+      throw new BadRequestException(`ID utilisateur invalide : ${userId}`);
+    }
+
+    const { page, limit } = dto;
+    const skip = (page - 1) * limit;
+
+    const filter: FilterQuery<PropertyDocument> = {
+      addedBy: new Types.ObjectId(userId),
+      status: { $ne: 'inactive' },
+    };
+
+    const [total, data] = await Promise.all([
+      this.propertyModel.countDocuments(filter),
+      this.propertyModel
+        .find(filter)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean()
+        .exec(),
+    ]);
+
+    return {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+      data: data as unknown as PropertyDocument[],
+    };
+  }
+
+  // ── 10. USER CRUD: PATCH /properties/my-properties/:id ────────────────────
+
+  async updateMyProperty(
+    userId: string,
+    propertyId: string,
+    dto: UpdateUserPropertyDto,
+  ): Promise<PropertyDocument> {
+    if (!isValidObjectId(propertyId)) {
+      throw new BadRequestException(`ID propriété invalide : ${propertyId}`);
+    }
+
+    const prop = await this.propertyModel.findOne({
+      _id: propertyId,
+      addedBy: new Types.ObjectId(userId),
+    });
+
+    if (!prop) {
+      throw new NotFoundException(
+        `Annonce introuvable ou vous n'êtes pas autorisé à la modifier.`,
+      );
+    }
+
+    // Update mapped fields
+    if (dto.titre !== undefined) prop.description.titre = dto.titre;
+    if (dto.texte !== undefined) prop.description.texte = dto.texte;
+    if (dto.type_transaction !== undefined) prop.transaction.type = dto.type_transaction;
+    if (dto.prix !== undefined) prop.transaction.prix = dto.prix;
+    if (dto.prix_negociable !== undefined) prop.transaction.prix_negociable = dto.prix_negociable;
+    if (dto.type_bien !== undefined) prop.bien.type = dto.type_bien;
+    if (dto.superficie_totale !== undefined) prop.bien.superficie_totale = dto.superficie_totale;
+    if (dto.nombre_pieces !== undefined) prop.bien.nombre_pieces = dto.nombre_pieces;
+    if (dto.nombre_chambres !== undefined) prop.bien.nombre_chambres = dto.nombre_chambres;
+    if (dto.nombre_salles_bain !== undefined) prop.bien.nombre_salles_bain = dto.nombre_salles_bain;
+    if (dto.etage !== undefined) prop.bien.etage = dto.etage;
+    if (dto.meuble !== undefined) prop.bien.meuble = dto.meuble;
+    if (dto.ville !== undefined) prop.localisation.ville = dto.ville;
+    if (dto.delegation !== undefined) prop.localisation.delegation = dto.delegation;
+    if (dto.adresse !== undefined) prop.localisation.adresse = dto.adresse;
+    if (dto.code_postal !== undefined) prop.localisation.code_postal = dto.code_postal;
+    if (dto.nom_contact !== undefined) prop.contact.nom_vendeur = dto.nom_contact;
+    if (dto.telephone !== undefined) prop.contact.telephone = dto.telephone;
+    if (dto.email_contact !== undefined) prop.contact.email = dto.email_contact;
+    if (dto.photos !== undefined) {
+      prop.medias.photos = dto.photos as any;
+      prop.medias.nombre_photos = dto.photos.length;
+    }
+
+    // Modification puts status back to 'pending' for re-validation
+    prop.status = 'pending';
+    prop.listing.date_maj = new Date().toISOString();
+
+    const saved = await prop.save();
+    return saved as unknown as PropertyDocument;
+  }
+
+  // ── 11. USER CRUD: DELETE /properties/my-properties/:id ───────────────────
+
+  async deleteMyProperty(userId: string, propertyId: string): Promise<{ message: string }> {
+    if (!isValidObjectId(propertyId)) {
+      throw new BadRequestException(`ID propriété invalide : ${propertyId}`);
+    }
+
+    const res = await this.propertyModel.deleteOne({
+      _id: propertyId,
+      addedBy: new Types.ObjectId(userId),
+    });
+
+    if (res.deletedCount === 0) {
+      throw new NotFoundException(
+        `Annonce introuvable ou vous n'êtes pas autorisé à la supprimer.`,
+      );
+    }
+
+    return { message: 'Annonce supprimée avec succès.' };
+  }
+
+  // ── 11b. INTERNAL: DEACTIVATE ALL PROPERTIES OF A USER ───────────────────
+
+  async deactivateUserProperties(userId: string): Promise<{ modifiedCount: number }> {
+    if (!isValidObjectId(userId)) {
+      throw new BadRequestException(`ID utilisateur invalide : ${userId}`);
+    }
+
+    const res = await this.propertyModel.updateMany(
+      { addedBy: new Types.ObjectId(userId) },
+      { $set: { status: 'inactive', 'listing.date_maj': new Date().toISOString() } },
+    );
+
+    return { modifiedCount: res.modifiedCount };
+  }
+
+  // ── 12. ADMIN CRUD: ALL PROPERTIES WITH FILTERS ───────────────────────────
+
+  async adminFindAll(
+    query: {
+      page?: number;
+      limit?: number;
+      status?: string;
+      scraping?: string;
+      site?: string;
+    } = {},
+  ): Promise<PaginatedResult<PropertyDocument>> {
+    const page = Math.max(1, Number(query.page) || 1);
+    const limit = Math.min(100, Math.max(1, Number(query.limit) || 20));
+    const skip = (page - 1) * limit;
+
+    const filter: FilterQuery<PropertyDocument> = {};
+
+    if (query.status) {
+      filter.status = query.status;
+    }
+    if (query.scraping !== undefined) {
+      filter.scraping = query.scraping === 'true';
+    }
+    if (query.site) {
+      filter['metadonnees_scraping.source'] = query.site;
+    }
+
+    const [total, data] = await Promise.all([
+      this.propertyModel.countDocuments(filter),
+      this.propertyModel
+        .find(filter)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean()
+        .exec(),
+    ]);
+
+    return {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+      data: data as unknown as PropertyDocument[],
+    };
+  }
+
+  // ── 13. ADMIN CRUD: MODERATE STATUS (ACCEPT / REJECT) ─────────────────────
+
+  async adminUpdateStatus(
+    id: string,
+    status: 'accepted' | 'rejected' | 'pending' | 'inactive',
+  ): Promise<PropertyDocument> {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException(`ID invalide : ${id}`);
+    }
+
+    const prop = await this.propertyModel.findById(id);
+    if (!prop) {
+      throw new NotFoundException(`Annonce introuvable : ${id}`);
+    }
+
+    prop.status = status;
+    prop.listing.date_maj = new Date().toISOString();
+
+    const saved = await prop.save();
+    return saved as unknown as PropertyDocument;
+  }
+
+  // ── 14. ADMIN CRUD: FULL UPDATE ───────────────────────────────────────────
+
+  async adminUpdateProperty(id: string, updateData: any): Promise<PropertyDocument> {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException(`ID invalide : ${id}`);
+    }
+
+    const updated = await this.propertyModel
+      .findByIdAndUpdate(id, { $set: updateData, 'listing.date_maj': new Date().toISOString() }, { new: true })
+      .lean()
+      .exec();
+
+    if (!updated) {
+      throw new NotFoundException(`Annonce introuvable : ${id}`);
+    }
+
+    return updated as unknown as PropertyDocument;
+  }
+
+  // ── 15. ADMIN CRUD: DELETE ANY PROPERTY ───────────────────────────────────
+
+  async adminDeleteProperty(id: string): Promise<{ message: string }> {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException(`ID invalide : ${id}`);
+    }
+
+    const res = await this.propertyModel.findByIdAndDelete(id);
+    if (!res) {
+      throw new NotFoundException(`Annonce introuvable : ${id}`);
+    }
+
+    return { message: `Annonce ${id} supprimée avec succès par l'administrateur.` };
+  }
 }
+

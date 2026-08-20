@@ -271,7 +271,135 @@ Déclenchement API (POST) ──▶ Réponse 202 Accepted immédiate (Tâche en 
 
 ---
 
-## 🗄️ 4. Visualisation dans MongoDB Compass
+## 👤 4. Profil Utilisateur (`/v1/auth/profile`)
+
+Tous ces endpoints nécessitent un JWT valide dans le header `Authorization: Bearer <access_token>`.
+
+| Méthode | Endpoint | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/v1/auth/profile` | 🔑 User/Admin | Récupère les données du profil connecté (`email`, `nom`, `telephone`, `avatar`, `role`, etc.) |
+| `PATCH` | `/v1/auth/profile` | 🔑 User/Admin | Met à jour les informations du profil (`nom`, `telephone`) |
+| `DELETE` | `/v1/auth/profile` | 🔑 User/Admin | Désactive le compte utilisateur et révoque ses tokens |
+| `POST` | `/v1/auth/profile/avatar` | 🔑 User/Admin | Upload de l'avatar du profil (`multipart/form-data`, champ `avatar`, max 5MB) |
+
+#### Exemple : Upload de l'avatar (Postman)
+- **Méthode** : `POST`
+- **URL** : `http://localhost:3000/v1/auth/profile/avatar`
+- **Headers** : `Authorization: Bearer <TOKEN>`
+- **Body** : `form-data`
+  - Clé : `avatar` (type `File`)
+  - Valeur : *sélectionner une image (jpg, jpeg, png, webp)*
+
+---
+
+## 🏠 5. Annonces Utilisateurs (`/v1/crud/properties`)
+
+Gestion des annonces créées manuellement par les utilisateurs connectés.
+
+| Méthode | Endpoint | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/v1/crud/properties/upload-images` | 🔑 User/Admin | Upload de photos pour une annonce (`multipart/form-data`, champ `images`, jusqu'à 10 photos) |
+| `POST` | `/v1/crud/properties` | 🔑 User/Admin | Soumettre une nouvelle annonce (`scraping: false`, `status: "pending"`, `addedBy: <userId>`) |
+| `GET` | `/v1/crud/properties/my-properties` | 🔑 User/Admin | Liste paginée de toutes ses propres annonces soumises (tous statuts) |
+| `PATCH` | `/v1/crud/properties/my-properties/:id` | 🔑 User/Admin | Mettre à jour sa propre annonce (repasse le statut à `pending`) |
+| `DELETE` | `/v1/crud/properties/my-properties/:id` | 🔑 User/Admin | Supprimer sa propre annonce |
+
+#### Exemple 1 : Uploader des photos pour une annonce
+- **Méthode** : `POST`
+- **URL** : `http://localhost:3000/v1/crud/properties/upload-images`
+- **Headers** : `Authorization: Bearer <TOKEN>`
+- **Body** : `form-data`
+  - Clé : `images` (type `File` — sélectionner 1 ou plusieurs images)
+- **Réponse reçue** :
+  ```json
+  {
+    "message": "2 image(s) uploadée(s) avec succès.",
+    "photos": [
+      {
+        "url": "/uploads/properties/prop_66b0a_1724151234_123456.jpg",
+        "legende": "salon.jpg",
+        "ordre": 1
+      },
+      {
+        "url": "/uploads/properties/prop_66b0a_1724151234_789012.jpg",
+        "legende": "chambre.jpg",
+        "ordre": 2
+      }
+    ]
+  }
+  ```
+
+#### Exemple 2 : Créer une annonce avec les URLs de photos obtenues
+```http
+POST http://localhost:3000/v1/crud/properties
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "titre": "Appartement S+2 vue mer La Marsa",
+  "texte": "Très bel appartement entièrement rénové...",
+  "type_transaction": "Location",
+  "prix": 1500,
+  "type_bien": "Appartement",
+  "superficie_totale": 95,
+  "nombre_pieces": 3,
+  "nombre_chambres": 2,
+  "nombre_salles_bain": 1,
+  "ville": "Tunis",
+  "delegation": "La Marsa",
+  "nom_contact": "Mohamed",
+  "telephone": ["+216 55 123 456"],
+  "photos": [
+    {
+      "url": "/uploads/properties/prop_66b0a_1724151234_123456.jpg",
+      "legende": "Salon"
+    }
+  ]
+}
+```
+
+---
+
+## 🖼️ 6. Accès Direct aux Images Uploadées
+
+Toutes les images stockées dans le volume Docker sont immédiatement consultables via le navigateur ou une application frontend :
+- **Avatar** : `http://localhost:3000/uploads/avatars/<nom_fichier>`
+- **Photos de Propriété** : `http://localhost:3000/uploads/properties/<nom_fichier>`
+
+---
+
+## 🛡️ 7. Administration & Modération (`/v1/crud/admin/properties`)
+
+Endpoints réservés exclusivement aux administrateurs (`role === 'ADMIN'`).
+
+| Méthode | Endpoint | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/v1/crud/admin/properties` | 🛡️ Admin | Voir **toutes** les annonces sans restriction (filtres: `status`, `scraping`, `site`, `page`, `limit`) |
+| `PATCH` | `/v1/crud/admin/properties/:id/status` | 🛡️ Admin | Valider (`accepted`) ou Rejeter (`rejected`) une soumission utilisateur |
+| `PATCH` | `/v1/crud/admin/properties/:id` | 🛡️ Admin | Mettre à jour n'importe quelle annonce de la base |
+| `DELETE` | `/v1/crud/admin/properties/:id` | 🛡️ Admin | Supprimer définitivement n'importe quelle annonce |
+
+#### Exemples :
+- **Lister les annonces en attente de modération** :
+  ```http
+  GET http://localhost:3000/v1/crud/admin/properties?status=pending&page=1&limit=20
+  Authorization: Bearer <ADMIN_TOKEN>
+  ```
+
+- **Approuver une annonce** :
+  ```http
+  PATCH http://localhost:3000/v1/crud/admin/properties/66b0a1b2c3d4e5f6a7b8c9d0/status
+  Authorization: Bearer <ADMIN_TOKEN>
+  Content-Type: application/json
+
+  {
+    "status": "accepted"
+  }
+  ```
+
+---
+
+## 🗄️ 8. Visualisation dans MongoDB Compass
 
 Pour inspecter les données en temps réel dans votre interface graphique :
 
@@ -279,8 +407,9 @@ Pour inspecter les données en temps réel dans votre interface graphique :
 
 | Base de Données | Collection | Description |
 | :--- | :--- | :--- |
-| `prophunter` | `properties` | Base principale unifiée utilisée par le CRUD service. |
+| `prophunter` | `properties` | Base principale unifiée (`scraping`, `addedBy`, `status`). |
 | `prophunter` | `sync_metadata` | Suivi de l'état, de la date de sync (`last_sync_date`) et des compteurs par site. |
 | `prophunter_ia` | `<site>_properties` | Collections dédiées par site (`mubawab_properties`, `tayara_properties`, etc.). |
 | `prophunter_ia` | `scraping_jobs` | Historique et état en direct des exécutions des scrapers. |
-| `prophunter_auth`| `users` | Comptes utilisateurs et administrateurs. |
+| `prophunter_auth`| `users` | Comptes utilisateurs et administrateurs (`nom`, `telephone`, `avatar`, `role`, `isActive`). |
+
