@@ -1,7 +1,7 @@
-{
+﻿{
   "info": {
     "name": "PropHunter TN - Complete API Collection (All Services)",
-    "description": "Collection complète de tests pour l'intégralité du backend PropHunter TN via API Gateway (Port 3000).\n\nComprend :\n1. Authentification & Profil\n2. AI Service & Scraping Parallèle\n3. Propriétés Publiques & Recherche Avancée\n4. Annonces Utilisateurs (CRUD)\n5. Administration & Modération\n6. Uploads d'Images",
+    "description": "Collection complète de tests pour l'intégralité du backend PropHunter TN via API Gateway (Port 3000).\n\nComprend :\n1. Authentification & Profil\n2. AI Service & Scraping Parallèle (Admin)\n3. Propriétés Publiques & Recherche (Sans Auth)\n4. Annonces Utilisateurs (User CRUD)\n5. Administration & Modération (Admin Only)\n6. Métadonnées Scraping (Admin Only)\n7. Interne — Cycle de Vie Utilisateur",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -14,572 +14,76 @@
     {
       "name": "1. Authentification & Profil",
       "item": [
-        {
-          "name": "1.1 Inscription Utilisateur (Signup)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"user_demo@test.tn\",\n  \"password\": \"Pass@1234!\",\n  \"nom\": \"Mohamed Ben Ali\",\n  \"telephone\": \"+216 55 123 456\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/signup",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "signup"]
-            }
-          }
-        },
-        {
-          "name": "1.2 Connexion Utilisateur (Signin) -> Auto-Save Token",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const res = pm.response.json();",
-                  "if (res.access_token) {",
-                  "    pm.collectionVariables.set('user_token', res.access_token);",
-                  "    console.log('user_token saved!');",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"user_demo@test.tn\",\n  \"password\": \"Pass@1234!\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/signin",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "signin"]
-            }
-          }
-        },
-        {
-          "name": "1.3 Connexion Admin (Signin) -> Auto-Save Admin Token",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const res = pm.response.json();",
-                  "if (res.access_token) {",
-                  "    pm.collectionVariables.set('admin_token', res.access_token);",
-                  "    console.log('admin_token saved!');",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"admin@prophunter.tn\",\n  \"password\": \"Admin@PropHunter2026!\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/signin",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "signin"]
-            }
-          }
-        },
-        {
-          "name": "1.4 Consulter son Profil (GET /profile)",
-          "request": {
-            "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/auth/profile",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "profile"]
-            }
-          }
-        },
-        {
-          "name": "1.5 Mettre à jour son Profil (PATCH /profile)",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" },
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nom\": \"Mohamed Ben Ali Modifié\",\n  \"telephone\": \"+216 99 888 777\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/profile",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "profile"]
-            }
-          }
-        },
-        {
-          "name": "1.6 Uploader son Avatar (POST /profile/avatar)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                { "key": "avatar", "type": "file", "src": [] }
-              ]
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/profile/avatar",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "profile", "avatar"]
-            }
-          }
-        },
-        {
-          "name": "1.7 Supprimer / Désactiver son Profil (DELETE /profile)",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/auth/profile",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "profile"]
-            }
-          }
-        },
-        {
-          "name": "1.8 Rafraîchir le Token (Refresh)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"refresh_token\": \"<COLLEZ_VOTRE_REFRESH_TOKEN_ICI>\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/refresh",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "refresh"]
-            }
-          }
-        }
+        { "name": "1.1 Inscription Utilisateur (Signup)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"email\": \"user_demo@test.tn\",\n  \"password\": \"Pass@1234!\",\n  \"nom\": \"Mohamed Ben Ali\",\n  \"telephone\": \"+216 55 123 456\"\n}" }, "url": { "raw": "{{baseUrl}}/auth/signup", "host": ["{{baseUrl}}"], "path": ["auth", "signup"] } } },
+        { "name": "1.2 Connexion Utilisateur (Signin) -> Auto-Save Token", "event": [{ "listen": "test", "script": { "exec": ["const res = pm.response.json();", "if (res.access_token) {", "    pm.collectionVariables.set('user_token', res.access_token);", "    console.log('user_token saved!');", "}"] } }], "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"email\": \"user_demo@test.tn\",\n  \"password\": \"Pass@1234!\"\n}" }, "url": { "raw": "{{baseUrl}}/auth/signin", "host": ["{{baseUrl}}"], "path": ["auth", "signin"] } } },
+        { "name": "1.3 Connexion Admin (Signin) -> Auto-Save Admin Token", "event": [{ "listen": "test", "script": { "exec": ["const res = pm.response.json();", "if (res.access_token) {", "    pm.collectionVariables.set('admin_token', res.access_token);", "    console.log('admin_token saved!');", "}"] } }], "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@prophunter.tn\",\n  \"password\": \"Admin@PropHunter2026!\"\n}" }, "url": { "raw": "{{baseUrl}}/auth/signin", "host": ["{{baseUrl}}"], "path": ["auth", "signin"] } } },
+        { "name": "1.4 Consulter son Profil (GET /profile)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }], "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth", "profile"] } } },
+        { "name": "1.5 Mettre a jour son Profil (PATCH /profile)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nom\": \"Mohamed Ben Ali Modifie\",\n  \"telephone\": \"+216 99 888 777\"\n}" }, "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth", "profile"] } } },
+        { "name": "1.6 Uploader son Avatar (POST /profile/avatar)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }], "body": { "mode": "formdata", "formdata": [{ "key": "avatar", "type": "file", "src": [] }] }, "url": { "raw": "{{baseUrl}}/auth/profile/avatar", "host": ["{{baseUrl}}"], "path": ["auth", "profile", "avatar"] } } },
+        { "name": "1.7 Supprimer / Desactiver son Profil (DELETE /profile)", "description": "Soft-delete : isActive=false. Toutes les annonces passent en status=inactive.", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }], "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth", "profile"] } } },
+        { "name": "1.8 Reactiver un Compte Supprime (Signup avec meme email)", "description": "Si le compte existe mais isActive=false, le signup le reactive. Les anciennes annonces restent inactives.", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"email\": \"user_demo@test.tn\",\n  \"password\": \"NouveauPass@2026!\",\n  \"nom\": \"Mohamed Reactive\",\n  \"telephone\": \"+216 55 000 111\"\n}" }, "url": { "raw": "{{baseUrl}}/auth/signup", "host": ["{{baseUrl}}"], "path": ["auth", "signup"] } } },
+        { "name": "1.9 Rafraichir le Token (Refresh)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"<COLLEZ_VOTRE_REFRESH_TOKEN_ICI>\"\n}" }, "url": { "raw": "{{baseUrl}}/auth/refresh", "host": ["{{baseUrl}}"], "path": ["auth", "refresh"] } } }
       ]
     },
     {
       "name": "2. Scraping IA (Admin)",
       "item": [
-        {
-          "name": "2.1 Lancer Tous les Scrapers (POST /scraping/all)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/service-ia/scraping/all",
-              "host": ["{{baseUrl}}"],
-              "path": ["service-ia", "scraping", "all"]
-            }
-          }
-        },
-        {
-          "name": "2.2 Consulter le Statut Global (GET /scraping/all/status)",
-          "request": {
-            "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/service-ia/scraping/all/status",
-              "host": ["{{baseUrl}}"],
-              "path": ["service-ia", "scraping", "all", "status"]
-            }
-          }
-        },
-        {
-          "name": "2.3 Lancer un Scraper Spécifique (Ex: Mubawab)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/service-ia/scraping/mubawab",
-              "host": ["{{baseUrl}}"],
-              "path": ["service-ia", "scraping", "mubawab"]
-            }
-          }
-        },
-        {
-          "name": "2.4 Statut d'un Scraper Spécifique (Ex: Mubawab)",
-          "request": {
-            "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/service-ia/scraping/mubawab/status",
-              "host": ["{{baseUrl}}"],
-              "path": ["service-ia", "scraping", "mubawab", "status"]
-            }
-          }
-        }
+        { "name": "2.1 Lancer Tous les Scrapers (POST /scraping/all)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/service-ia/scraping/all", "host": ["{{baseUrl}}"], "path": ["service-ia", "scraping", "all"] } } },
+        { "name": "2.2 Statut Global (GET /scraping/all/status)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/service-ia/scraping/all/status", "host": ["{{baseUrl}}"], "path": ["service-ia", "scraping", "all", "status"] } } },
+        { "name": "2.3 Lancer un Scraper Specifique (Ex: Mubawab)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/service-ia/scraping/mubawab", "host": ["{{baseUrl}}"], "path": ["service-ia", "scraping", "mubawab"] } } },
+        { "name": "2.4 Statut d'un Scraper Specifique (Ex: Mubawab)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/service-ia/scraping/mubawab/status", "host": ["{{baseUrl}}"], "path": ["service-ia", "scraping", "mubawab", "status"] } } }
       ]
     },
     {
-      "name": "3. Propriétés Publiques (CRUD)",
+      "name": "3. Proprietes Publiques (CRUD - Sans Auth)",
       "item": [
-        {
-          "name": "3.1 Liste Paginée des Annonces (GET /properties)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties?page=1&limit=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties"],
-              "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "3.2 Filtrer par Site (Ex: tayara)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties?site=tayara&page=1&limit=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties"],
-              "query": [
-                { "key": "site", "value": "tayara" },
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "3.3 Filtrer par Date de Scraping",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties?startDate=2026-08-01&endDate=2026-08-20&page=1&limit=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties"],
-              "query": [
-                { "key": "startDate", "value": "2026-08-01" },
-                { "key": "endDate", "value": "2026-08-20" },
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "3.4 Recherche Multi-Critères (/search)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/search?ville=Tunis&type=Appartement&transaction=Vente&prixMin=100000&prixMax=600000",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "search"],
-              "query": [
-                { "key": "ville", "value": "Tunis" },
-                { "key": "type", "value": "Appartement" },
-                { "key": "transaction", "value": "Vente" },
-                { "key": "prixMin", "value": "100000" },
-                { "key": "prixMax", "value": "600000" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "3.5 Statistiques Globales (/stats)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/stats",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "stats"]
-            }
-          }
-        },
-        {
-          "name": "3.6 Liste des Sources (/sources)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/sources",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "sources"]
-            }
-          }
-        },
-        {
-          "name": "3.7 Dernières Annonces (/latest)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/latest?limit=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "latest"],
-              "query": [{ "key": "limit", "value": "10" }]
-            }
-          }
-        },
-        {
-          "name": "3.8 Détail d'une Annonce (GET /properties/:id)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/{{user_property_id}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "{{user_property_id}}"]
-            }
-          }
-        }
+        { "name": "3.1 Liste Paginee des Annonces (GET /properties)", "description": "Retourne les annonces scrapees (scraping=true) et acceptees (status=accepted).", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/crud/properties?page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["crud", "properties"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }] } } },
+        { "name": "3.2 Recherche Multi-Criteres (/search)", "description": "Recherche combinee par ville, type de bien, prix, surface, type de transaction.", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/crud/properties/search?ville=Tunis&type=Appartement&transaction=Vente&prixMin=100000&prixMax=600000", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "search"], "query": [{ "key": "ville", "value": "Tunis" }, { "key": "type", "value": "Appartement" }, { "key": "transaction", "value": "Vente" }, { "key": "prixMin", "value": "100000" }, { "key": "prixMax", "value": "600000" }] } } },
+        { "name": "3.3 Detail d'une Annonce (GET /properties/:id)", "description": "Recupere les details complets d'une annonce publique.", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/crud/properties/{{user_property_id}}", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "{{user_property_id}}"] } } }
       ]
     },
     {
       "name": "4. Annonces Utilisateurs (User CRUD)",
       "item": [
-        {
-          "name": "4.1 Upload Photos pour Annonce (POST /upload-images)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                { "key": "images", "type": "file", "src": [] }
-              ]
-            },
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/upload-images",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "upload-images"]
-            }
-          }
-        },
-        {
-          "name": "4.2 Soumettre une Annonce (POST /properties) -> Auto-Save ID",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const res = pm.response.json();",
-                  "if (res._id) {",
-                  "    pm.collectionVariables.set('user_property_id', res._id);",
-                  "    console.log('user_property_id saved:', res._id);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" },
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"titre\": \"Appartement S+2 haut standing La Marsa\",\n  \"texte\": \"Superbe appartement avec terrasse vue dégagée...\",\n  \"type_transaction\": \"Location\",\n  \"prix\": 1800,\n  \"type_bien\": \"Appartement\",\n  \"superficie_totale\": 115,\n  \"nombre_pieces\": 3,\n  \"nombre_chambres\": 2,\n  \"nombre_salles_bain\": 1,\n  \"ville\": \"Tunis\",\n  \"delegation\": \"La Marsa\",\n  \"nom_contact\": \"Mohamed\",\n  \"telephone\": [\"+216 55 123 456\"],\n  \"photos\": [\n    {\n      \"url\": \"/uploads/properties/demo.jpg\",\n      \"legende\": \"Salon spacieux\"\n    }\n  ]\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties"]
-            }
-          }
-        },
-        {
-          "name": "4.3 Mes Annonces (GET /my-properties)",
-          "request": {
-            "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/my-properties?page=1&limit=10",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "my-properties"],
-              "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "4.4 Modifier mon Annonce (PATCH /my-properties/:id)",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" },
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"titre\": \"Appartement S+2 haut standing La Marsa (Prix Négociable)\",\n  \"prix\": 1700,\n  \"prix_negociable\": true\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/my-properties/{{user_property_id}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "my-properties", "{{user_property_id}}"]
-            }
-          }
-        },
-        {
-          "name": "4.5 Supprimer mon Annonce (DELETE /my-properties/:id)",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{user_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/crud/properties/my-properties/{{user_property_id}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "properties", "my-properties", "{{user_property_id}}"]
-            }
-          }
-        }
+        { "name": "4.1 Upload Photos pour Annonce (POST /upload-images)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }], "body": { "mode": "formdata", "formdata": [{ "key": "images", "type": "file", "src": [] }] }, "url": { "raw": "{{baseUrl}}/crud/properties/upload-images", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "upload-images"] } } },
+        { "name": "4.2 Soumettre une Annonce (POST /properties) -> Auto-Save ID", "event": [{ "listen": "test", "script": { "exec": ["const res = pm.response.json();", "if (res._id) {", "    pm.collectionVariables.set('user_property_id', res._id);", "    console.log('user_property_id saved:', res._id);", "}"] } }], "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"titre\": \"Appartement S+2 La Marsa\",\n  \"texte\": \"Superbe appartement avec terrasse...\",\n  \"type_transaction\": \"Location\",\n  \"prix\": 1800,\n  \"type_bien\": \"Appartement\",\n  \"superficie_totale\": 115,\n  \"nombre_pieces\": 3,\n  \"nombre_chambres\": 2,\n  \"nombre_salles_bain\": 1,\n  \"ville\": \"Tunis\",\n  \"delegation\": \"La Marsa\",\n  \"nom_contact\": \"Mohamed\",\n  \"telephone\": [\"+216 55 123 456\"],\n  \"photos\": [{ \"url\": \"/uploads/properties/demo.jpg\", \"legende\": \"Salon\" }]\n}" }, "url": { "raw": "{{baseUrl}}/crud/properties", "host": ["{{baseUrl}}"], "path": ["crud", "properties"] } } },
+        { "name": "4.3 Mes Annonces (GET /my-properties)", "description": "Retourne les annonces de l'utilisateur (status != inactive).", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }], "url": { "raw": "{{baseUrl}}/crud/properties/my-properties?page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "my-properties"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }] } } },
+        { "name": "4.4 Modifier mon Annonce (PATCH /my-properties/:id)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"titre\": \"Appartement S+2 La Marsa (Prix Negociable)\",\n  \"prix\": 1700,\n  \"prix_negociable\": true\n}" }, "url": { "raw": "{{baseUrl}}/crud/properties/my-properties/{{user_property_id}}", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "my-properties", "{{user_property_id}}"] } } },
+        { "name": "4.5 Supprimer mon Annonce (DELETE /my-properties/:id)", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }], "url": { "raw": "{{baseUrl}}/crud/properties/my-properties/{{user_property_id}}", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "my-properties", "{{user_property_id}}"] } } }
       ]
     },
     {
-      "name": "5. Modération & Administration (Admin Only)",
+      "name": "5. Moderation & Administration (Admin Only)",
       "item": [
-        {
-          "name": "5.1 Voir Toutes les Annonces (GET /admin/properties)",
-          "request": {
-            "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/crud/admin/properties?page=1&limit=20",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "admin", "properties"],
-              "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "20" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "5.2 Voir les Annonces en Attente (status=pending)",
-          "request": {
-            "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/crud/admin/properties?status=pending&page=1&limit=20",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "admin", "properties"],
-              "query": [
-                { "key": "status", "value": "pending" },
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "20" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "5.3 Approuver une Annonce (status=accepted)",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"status\": \"accepted\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}/status",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "admin", "properties", "{{user_property_id}}", "status"]
-            }
-          }
-        },
-        {
-          "name": "5.4 Rejeter une Annonce (status=rejected)",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"status\": \"rejected\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}/status",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "admin", "properties", "{{user_property_id}}", "status"]
-            }
-          }
-        },
-        {
-          "name": "5.5 Modifier une Annonce par l'Admin (PATCH /admin/properties/:id)",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description.titre\": \"Titre modifié par Administrateur\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "admin", "properties", "{{user_property_id}}"]
-            }
-          }
-        },
-        {
-          "name": "5.6 Supprimer une Annonce par l'Admin (DELETE /admin/properties/:id)",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{admin_token}}" }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["crud", "admin", "properties", "{{user_property_id}}"]
-            }
-          }
-        }
+        { "name": "5.1 Toutes les Annonces (GET /admin/properties)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.2 Annonces en Attente (status=pending)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?status=pending&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "status", "value": "pending" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.3 Annonces Acceptees (status=accepted)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?status=accepted&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "status", "value": "accepted" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.4 Annonces Rejetees (status=rejected)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?status=rejected&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "status", "value": "rejected" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.5 Annonces Inactives - Comptes Supprimes (status=inactive)", "description": "Historique des annonces desactivees suite a la suppression d'un compte.", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?status=inactive&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "status", "value": "inactive" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.6 Filtrer par Site Scraping (Admin)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?scraping=true&site=tayara&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "scraping", "value": "true" }, { "key": "site", "value": "tayara" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.7 Filtrer par Periode de Scraping (Admin)", "description": "Permet a l'admin de filtrer les annonces par date de scraping avec prise en compte de la journee complete.", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties?startDate=2026-08-01&endDate=2026-08-20&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties"], "query": [{ "key": "startDate", "value": "2026-08-01" }, { "key": "endDate", "value": "2026-08-20" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "5.8 Approuver une Annonce (PATCH status=accepted)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"status\": \"accepted\"}" }, "url": { "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}/status", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties", "{{user_property_id}}", "status"] } } },
+        { "name": "5.9 Rejeter une Annonce (PATCH status=rejected)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"status\": \"rejected\"}" }, "url": { "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}/status", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties", "{{user_property_id}}", "status"] } } },
+        { "name": "5.10 Desactiver une Annonce Manuellement (PATCH status=inactive)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"status\": \"inactive\"}" }, "url": { "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}/status", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties", "{{user_property_id}}", "status"] } } },
+        { "name": "5.11 Remettre en Attente (PATCH status=pending)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"status\": \"pending\"}" }, "url": { "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}/status", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties", "{{user_property_id}}", "status"] } } },
+        { "name": "5.12 Modifier une Annonce par l'Admin (PATCH /admin/properties/:id)", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"description.titre\": \"Titre modifie par Administrateur\"\n}" }, "url": { "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties", "{{user_property_id}}"] } } },
+        { "name": "5.13 Supprimer une Annonce par l'Admin (DELETE /admin/properties/:id)", "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/admin/properties/{{user_property_id}}", "host": ["{{baseUrl}}"], "path": ["crud", "admin", "properties", "{{user_property_id}}"] } } }
+      ]
+    },
+    {
+      "name": "6. Metadonnees Scraping (Admin Only)",
+      "description": "Endpoints reserves a l'administrateur pour les donnees internes de scraping.",
+      "item": [
+        { "name": "6.1 Sources de Scraping Actives (GET /sources)", "description": "Retourne la liste des sites sources. Admin uniquement.", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/properties/sources", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "sources"] } } },
+        { "name": "6.2 Statistiques Globales (GET /stats)", "description": "Comptes par site, par ville, prix min/max/moyen. Admin uniquement.", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/properties/stats", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "stats"] } } },
+        { "name": "6.3 Dernieres Annonces Scrapees (GET /latest)", "description": "N dernieres annonces scrapees. Admin uniquement.", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }], "url": { "raw": "{{baseUrl}}/crud/properties/latest?limit=10", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "latest"], "query": [{ "key": "limit", "value": "10" }] } } }
+      ]
+    },
+    {
+      "name": "7. Interne - Cycle de Vie Utilisateur",
+      "description": "Endpoint interne appele lors de la suppression d'un compte. Desactive toutes les annonces.",
+      "item": [
+        { "name": "7.1 Desactiver les Annonces d'un Utilisateur (PATCH /internal/deactivate-user)", "description": "Passe toutes les annonces de l'utilisateur en status=inactive. Appele automatiquement lors du DELETE /auth/profile.", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }, { "key": "x-user-id", "value": "<USER_MONGO_ID>" }], "url": { "raw": "{{baseUrl}}/crud/properties/internal/deactivate-user", "host": ["{{baseUrl}}"], "path": ["crud", "properties", "internal", "deactivate-user"] } } }
       ]
     }
   ]

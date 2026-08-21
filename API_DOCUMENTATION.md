@@ -222,52 +222,26 @@ Déclenchement API (POST) ──▶ Réponse 202 Accepted immédiate (Tâche en 
 }
 ```
 
-#### 2. Filtrer par Source / Site Web
-- **Méthode** : `GET`
-- **Exemples** :
-  - `http://localhost:3000/v1/crud/properties?site=mubawab&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?site=tayara&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?site=tunisie_annonce&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?site=tecnocasa&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?site=fi_dari&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?site=home_in_tunisia&page=1&limit=10`
-
-#### 3. Filtrer par Date & Période de Scraping (Nouveau)
-- **Méthode** : `GET`
-- **Paramètres supportés** : `startDate` (ISO), `endDate` (ISO)
-- **Exemples** :
-  - `http://localhost:3000/v1/crud/properties?startDate=2026-08-01&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?endDate=2026-08-15&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?startDate=2026-08-09&endDate=2026-08-14&page=1&limit=10`
-  - `http://localhost:3000/v1/crud/properties?site=tayara&startDate=2026-08-01&page=1&limit=10`
-
-#### 4. Recherche Multi-Critères Avancée (`/search`)
+#### 2. Recherche Multi-Critères Avancée (`/search`)
 - **Méthode** : `GET`
 - **URL** : `http://localhost:3000/v1/crud/properties/search`
-- **Paramètres combinables** :
-  - `source` : nom du site (`mubawab`, `tayara`, etc.)
+- **Paramètres combinables (Publics)** :
   - `ville` : filtre par ville (insensible à la casse, ex: `Tunis`, `Sousse`)
   - `delegation` : filtre par délégation (ex: `La Marsa`, `Sahloul`)
-  - `type` : type de bien (`appartement`, `villa`, `terrain`, `local_commercial`, `duplex`, `studio`, `immeuble`)
-  - `transaction` : type de transaction (`vente`, `location`)
+  - `type` : type de bien (`Appartement`, `Villa`, `Terrain`, `Local Commercial`, `Duplex`, `Studio`, `Immeuble`)
+  - `transaction` : type de transaction (`Vente`, `Location`)
   - `prixMin` / `prixMax` : fourchette de prix en TND
   - `surfaceMin` / `surfaceMax` : surface totale en m²
   - `nombreChambres` : nombre de pièces/chambres
-  - `startDate` / `endDate` : filtre par date de scraping
 - **Exemples** :
-  - `http://localhost:3000/v1/crud/properties/search?ville=Tunis&type=appartement&transaction=vente`
+  - `http://localhost:3000/v1/crud/properties/search?ville=Tunis&type=Appartement&transaction=Vente`
   - `http://localhost:3000/v1/crud/properties/search?prixMin=200000&prixMax=500000&surfaceMin=100`
-  - `http://localhost:3000/v1/crud/properties/search?source=mubawab&ville=Sousse&type=appartement&prixMax=400000&startDate=2026-08-01`
+  - `http://localhost:3000/v1/crud/properties/search?ville=Sousse&type=Appartement&prixMax=400000`
 
-#### 5. Statistiques & Sources Actives
-- **Liste des sources actives** :
-  - `GET http://localhost:3000/v1/crud/properties/sources`
-- **Statistiques globales (comptes par site, par ville, prix min/max/moyen)** :
-  - `GET http://localhost:3000/v1/crud/properties/stats`
-- **Dernières annonces scrappées** :
-  - `GET http://localhost:3000/v1/crud/properties/latest?limit=10`
-- **Détail d'une annonce par son ID** :
-  - `GET http://localhost:3000/v1/crud/properties/:id`
+#### 3. Détail d'une Annonce Publique (`/:id`)
+- **Méthode** : `GET`
+- **URL** : `http://localhost:3000/v1/crud/properties/:id`
+- **Description** : Récupère la fiche détaillée complète d'une annonce (scrapée ou utilisateur approuvée).
 
 ---
 
@@ -374,12 +348,27 @@ Endpoints réservés exclusivement aux administrateurs (`role === 'ADMIN'`).
 
 | Méthode | Endpoint | Auth | Description |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/v1/crud/admin/properties` | 🛡️ Admin | Voir **toutes** les annonces sans restriction (filtres: `status`, `scraping`, `site`, `page`, `limit`) |
-| `PATCH` | `/v1/crud/admin/properties/:id/status` | 🛡️ Admin | Valider (`accepted`) ou Rejeter (`rejected`) une soumission utilisateur |
+| `GET` | `/v1/crud/admin/properties` | 🛡️ Admin | Voir **toutes** les annonces (filtres: `status`, `scraping`, `site`, `startDate`, `endDate`, `page`, `limit`) |
+| `PATCH` | `/v1/crud/admin/properties/:id/status` | 🛡️ Admin | Valider (`accepted`), Rejeter (`rejected`), Désactiver (`inactive`) ou Remettre en attente (`pending`) |
 | `PATCH` | `/v1/crud/admin/properties/:id` | 🛡️ Admin | Mettre à jour n'importe quelle annonce de la base |
 | `DELETE` | `/v1/crud/admin/properties/:id` | 🛡️ Admin | Supprimer définitivement n'importe quelle annonce |
+| `GET` | `/v1/crud/properties/sources` | 🛡️ Admin | Liste de toutes les sources de scraping actives |
+| `GET` | `/v1/crud/properties/stats` | 🛡️ Admin | Statistiques globales (par site, par ville, prix min/max/moyen) |
+| `GET` | `/v1/crud/properties/latest?limit=10` | 🛡️ Admin | Dernières annonces scrappées |
 
-#### Exemples :
+#### Exemples de Filtrage Admin :
+- **Filtrer par période de scraping (ex: du 1er au 20 août)** :
+  ```http
+  GET http://localhost:3000/v1/crud/admin/properties?startDate=2026-08-01&endDate=2026-08-20&page=1&limit=20
+  Authorization: Bearer <ADMIN_TOKEN>
+  ```
+
+- **Filtrer les annonces scrapées par site source (ex: tayara)** :
+  ```http
+  GET http://localhost:3000/v1/crud/admin/properties?scraping=true&site=tayara&page=1&limit=20
+  Authorization: Bearer <ADMIN_TOKEN>
+  ```
+
 - **Lister les annonces en attente de modération** :
   ```http
   GET http://localhost:3000/v1/crud/admin/properties?status=pending&page=1&limit=20

@@ -115,7 +115,41 @@ export class AppController {
     await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
   }
 
-  // ── 6. CRUD SERVICE: PUBLIC (LISTINGS, SEARCH, STATS, DETAILS) ────────────
+  // ── 6. CRUD SERVICE: ADMIN-ONLY METADATA ENDPOINTS ────────────────────────
+  // These MUST come before the public catch-all crud/*path
+  @All('crud/properties/sources')
+  @UseGuards(JwtAdminGuard)
+  async proxyCrudSources(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Sources (Admin): ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  @All('crud/properties/stats')
+  @UseGuards(JwtAdminGuard)
+  async proxyCrudStats(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Stats (Admin): ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  @All('crud/properties/latest')
+  @UseGuards(JwtAdminGuard)
+  async proxyCrudLatest(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    this.logger.log(`Routing to CRUD Latest (Admin): ${req.method} ${req.path}`);
+    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
+  }
+
+  // ── 7. CRUD SERVICE: PUBLIC (LISTINGS, SEARCH, DETAILS) ───────────────────
+  // Note: site= / startDate= / endDate= filters on /properties are admin-only
+  // and must be used via /v1/crud/admin/properties (adminFindAll).
   @All('crud/*path')
   async proxyToCrudService(
     @Req() req: Request,
@@ -125,7 +159,7 @@ export class AppController {
     await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
   }
 
-  // ── 7. AI SERVICE: ADMIN ONLY (SCRAPING) ───────────────────────────────────
+  // ── 8. AI SERVICE: ADMIN ONLY (SCRAPING) ───────────────────────────────────
   @All('service-ia/*path')
   @UseGuards(JwtAdminGuard)
   async proxyToAiService(

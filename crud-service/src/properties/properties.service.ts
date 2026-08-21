@@ -52,19 +52,6 @@ export class PropertiesService {
     const filter: FilterQuery<PropertyDocument> = {
       $or: [{ scraping: true }, { status: 'accepted' }],
     };
-    if (siteFilter) {
-      filter['metadonnees_scraping.source'] = siteFilter;
-    }
-
-    if (dto.startDate || dto.endDate) {
-      filter['listing.date_scraping'] = {};
-      if (dto.startDate) {
-        filter['listing.date_scraping'].$gte = dto.startDate;
-      }
-      if (dto.endDate) {
-        filter['listing.date_scraping'].$lte = dto.endDate;
-      }
-    }
 
     const [data, total] = await Promise.all([
       this.propertyModel
@@ -216,16 +203,6 @@ export class PropertiesService {
 
     if (dto.nombreChambres !== undefined)
       filter['bien.nombre_chambres'] = dto.nombreChambres;
-
-    if (dto.startDate || dto.endDate) {
-      filter['listing.date_scraping'] = {};
-      if (dto.startDate) {
-        filter['listing.date_scraping'].$gte = dto.startDate;
-      }
-      if (dto.endDate) {
-        filter['listing.date_scraping'].$lte = dto.endDate;
-      }
-    }
 
     const docs = await this.propertyModel
       .find(filter)
@@ -483,6 +460,8 @@ export class PropertiesService {
       status?: string;
       scraping?: string;
       site?: string;
+      startDate?: string;
+      endDate?: string;
     } = {},
   ): Promise<PaginatedResult<PropertyDocument>> {
     const page = Math.max(1, Number(query.page) || 1);
@@ -501,11 +480,25 @@ export class PropertiesService {
       filter['metadonnees_scraping.source'] = query.site;
     }
 
+    if (query.startDate || query.endDate) {
+      filter['listing.date_scraping'] = {};
+      if (query.startDate) {
+        filter['listing.date_scraping'].$gte = query.startDate.length === 10
+          ? `${query.startDate}T00:00:00.000Z`
+          : query.startDate;
+      }
+      if (query.endDate) {
+        filter['listing.date_scraping'].$lte = query.endDate.length === 10
+          ? `${query.endDate}T23:59:59.999Z`
+          : query.endDate;
+      }
+    }
+
     const [total, data] = await Promise.all([
       this.propertyModel.countDocuments(filter),
       this.propertyModel
         .find(filter)
-        .sort({ createdAt: -1 })
+        .sort({ 'listing.date_scraping': -1, createdAt: -1 })
         .skip(skip)
         .limit(limit)
         .lean()

@@ -28,6 +28,8 @@ export class AdminPropertiesController {
     @Query('status') status?: string,
     @Query('scraping') scraping?: string,
     @Query('site') site?: string,
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
   ): Promise<PaginatedResult<PropertyDocument>> {
     return this.propertiesService.adminFindAll({
       page,
@@ -35,6 +37,8 @@ export class AdminPropertiesController {
       status,
       scraping,
       site,
+      startDate,
+      endDate,
     });
   }
 
