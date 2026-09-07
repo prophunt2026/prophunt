@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   OnModuleInit,
@@ -11,6 +12,8 @@ import { ConfigService } from '@nestjs/config';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import * as fs from 'fs';
+import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
 import { User, UserDocument, UserRole } from './schemas/user.schema';
@@ -62,43 +65,16 @@ export class AuthService implements OnModuleInit {
     this.logger.log(`[Startup] ADMIN created: ${adminEmail}`);
   }
 
-  // ── SIGNUP (with Reactivation if previously deleted) ───────────────────────
+  // ── SIGNUP ─────────────────────────────────────────────────────────────────
 
   async signup(dto: SignupDto) {
     const email = dto.email.toLowerCase().trim();
 
     const existing = await this.userModel.findOne({ email });
-
-    // ── Si le compte existe déjà ──
     if (existing) {
-      if (existing.isActive) {
-        throw new ConflictException(`Un compte actif existe déjà avec l'adresse : ${email}`);
-      }
-
-      // ── Compte existant mais inactif (supprimé précédemment) : Réactivation ! ──
-      const password_hash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
-      existing.password_hash = password_hash;
-      existing.nom = dto.nom;
-      existing.telephone = dto.telephone;
-      existing.isActive = true;
-      existing.role = UserRole.USER; // Toujours USER
-      await existing.save();
-
-      this.logger.log(`[Reactivation] Compte réactivé pour : ${email}`);
-
-      return {
-        id:         existing._id.toString(),
-        email:      existing.email,
-        role:       existing.role,
-        nom:        existing.nom,
-        telephone:  existing.telephone,
-        reactivated: true,
-        message:    'Compte réactivé avec succès. (Vos anciennes annonces restent désactivées).',
-        created_at: (existing as any).createdAt?.toISOString() ?? new Date().toISOString(),
-      };
+      throw new ConflictException(`Un compte existe déjà avec l'adresse : ${email}`);
     }
 
-    // ── Nouveau compte ──
     const password_hash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
 
     try {
@@ -281,7 +257,10 @@ export class AuthService implements OnModuleInit {
     };
   }
 
-  async updateProfile(userId: string, dto: { nom?: string; telephone?: string }) {
+  async updateProfile(
+    userId: string,
+    dto: { nom?: string; telephone?: string; email?: string; currentPassword?: string; newPassword?: string },
+  ) {
     const user = await this.userModel.findById(userId);
     if (!user || !user.isActive) {
       throw new UnauthorizedException('Utilisateur introuvable ou compte inactif.');
@@ -311,14 +290,41 @@ export class AuthService implements OnModuleInit {
       throw new UnauthorizedException('Utilisateur introuvable.');
     }
 
-    // Option : soft delete
-    user.isActive = false;
-    await user.save();
+    // 1. Supprimer le fichier avatar du disque s'il existe
+    if (user.avatar) {
+      try {
+        const filename = user.avatar.split('/').pop();
+        if (filename) {
+          const avatarPath = path.join('/app/uploads/avatars', filename);
+          if (fs.existsSync(avatarPath)) {
+            fs.unlinkSync(avatarPath);
+          }
+        }
+      } catch (err) {
+        this.logger.warn(`Impossible de supprimer le fichier avatar : ${err}`);
+      }
+    }
 
-    // Revoke all refresh tokens for this user
-    await this.refreshTokenModel.updateMany({ user_id: userId }, { is_revoked: true });
+    // 2. Supprimer en cascade toutes les annonces de l'utilisateur dans crud-service
+    try {
+      const crudUrl = this.config.get<string>('CRUD_SERVICE_URL', 'http://crud-service:3002');
+      await fetch(`${crudUrl}/properties/internal/user-properties`, {
+        method: 'DELETE',
+        headers: { 'x-user-id': userId },
+      });
+    } catch (err) {
+      this.logger.warn(`Notification de suppression au crud-service échouée : ${err}`);
+    }
 
-    return { message: 'Compte désactivé avec succès.' };
+    // 3. Supprimer tous les refresh tokens de l'utilisateur
+    await this.refreshTokenModel.deleteMany({ user_id: userId });
+
+    // 4. Supprimer définitivement l'utilisateur de la base de données
+    await this.userModel.findByIdAndDelete(userId);
+
+    this.logger.log(`[HardDelete] Utilisateur ${userId} (${user.email}) supprimé définitivement.`);
+
+    return { message: 'Compte et données associées supprimés définitivement avec succès.' };
   }
 
   async updateAvatar(userId: string, avatarUrl: string) {

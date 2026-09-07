@@ -31,6 +31,8 @@ services:
       - JWT_REFRESH_EXPIRES_DAYS=7
       - ADMIN_EMAIL=admin@prophunter.tn
       - ADMIN_PASSWORD=Admin@PropHunter2026!
+      - PUBLIC_BASE_URL=http://localhost:3000
+      - CRUD_SERVICE_URL=http://crud-service:3002
     volumes:
       - uploads_data:/app/uploads
     depends_on:
@@ -50,6 +52,7 @@ services:
     environment:
       - PORT=3002
       - MONGODB_URI=mongodb://mongodb:27017/prophunter
+      - PUBLIC_BASE_URL=http://localhost:3000
     volumes:
       - uploads_data:/app/uploads
     depends_on:

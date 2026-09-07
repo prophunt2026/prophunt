@@ -2,9 +2,12 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, isValidObjectId, FilterQuery, Types } from 'mongoose';
+import * as fs from 'fs';
+import * as path from 'path';
 import { Property, PropertyDocument } from './schemas/property.schema';
 import { PaginationDto } from './dto/pagination.dto';
 import { SearchDto } from './dto/search.dto';
@@ -37,6 +40,8 @@ export interface StatsResult {
 
 @Injectable()
 export class PropertiesService {
+  private readonly logger = new Logger(PropertiesService.name);
+
   constructor(
     @InjectModel(Property.name)
     private readonly propertyModel: Model<PropertyDocument>,
@@ -436,7 +441,47 @@ export class PropertiesService {
     return { message: 'Annonce supprimée avec succès.' };
   }
 
-  // ── 11b. INTERNAL: DEACTIVATE ALL PROPERTIES OF A USER ───────────────────
+  // ── 11b. INTERNAL: HARD DELETE ALL PROPERTIES & PHOTOS OF A USER ─────────
+
+  async deleteUserProperties(userId: string): Promise<{ deletedCount: number }> {
+    if (!isValidObjectId(userId)) {
+      throw new BadRequestException(`ID utilisateur invalide : ${userId}`);
+    }
+
+    // 1. Trouver les propriétés pour supprimer leurs photos locales sur le disque
+    const userProperties = await this.propertyModel.find({
+      addedBy: new Types.ObjectId(userId),
+    });
+
+    for (const prop of userProperties) {
+      if (prop.medias?.photos && Array.isArray(prop.medias.photos)) {
+        for (const photoItem of prop.medias.photos) {
+          try {
+            const rawUrl = typeof photoItem === 'string' ? photoItem : (photoItem as any)?.url;
+            if (rawUrl && typeof rawUrl === 'string') {
+              const filename = rawUrl.split('/').pop();
+              if (filename) {
+                const photoPath = path.join('/app/uploads/properties', filename);
+                if (fs.existsSync(photoPath)) {
+                  fs.unlinkSync(photoPath);
+                }
+              }
+            }
+          } catch (e) {
+            this.logger.warn(`Impossible de supprimer le fichier photo : ${e}`);
+          }
+        }
+      }
+    }
+
+    // 2. Supprimer définitivement les annonces de la base de données
+    const res = await this.propertyModel.deleteMany({
+      addedBy: new Types.ObjectId(userId),
+    });
+
+    this.logger.log(`[CascadeDelete] ${res.deletedCount} annonces supprimées pour l'utilisateur ${userId}`);
+    return { deletedCount: res.deletedCount };
+  }
 
   async deactivateUserProperties(userId: string): Promise<{ modifiedCount: number }> {
     if (!isValidObjectId(userId)) {

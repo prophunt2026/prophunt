@@ -28,9 +28,37 @@ import { CreateUserPropertyDto } from './dto/create-user-property.dto';
 import { UpdateUserPropertyDto } from './dto/update-user-property.dto';
 import { PropertyDocument } from './schemas/property.schema';
 
+const propertyMulterOptions = {
+  storage: diskStorage({
+    destination: (req, file, cb) => {
+      const uploadPath = '/app/uploads/properties';
+      if (!fs.existsSync(uploadPath)) {
+        fs.mkdirSync(uploadPath, { recursive: true });
+      }
+      cb(null, uploadPath);
+    },
+    filename: (req, file, cb) => {
+      const userId = (req.headers['x-user-id'] as string) || 'unknown';
+      const ext = path.extname(file.originalname).toLowerCase() || '.jpg';
+      cb(null, `prop_${userId}_${Date.now()}_${Math.round(Math.random() * 1e6)}${ext}`);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB max per image
+  fileFilter: (req: any, file: any, cb: any) => {
+    if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
+      return cb(new BadRequestException('Format d\'image non supporté (jpg, jpeg, png, webp uniquement).'), false);
+    }
+    cb(null, true);
+  },
+};
+
 @Controller('properties')
 export class PropertiesController {
-  constructor(private readonly propertiesService: PropertiesService) {}
+  private readonly baseUrl: string;
+
+  constructor(private readonly propertiesService: PropertiesService) {
+    this.baseUrl = process.env.PUBLIC_BASE_URL ?? 'http://localhost:3000';
+  }
 
   // ── Health (Static) ────────────────────────────────────────────────────────
   @Get('health')
@@ -91,14 +119,25 @@ export class PropertiesController {
   /**
    * PATCH /properties/my-properties/:id
    * Updates an existing property owned by the authenticated user.
+   * Supports both JSON and multipart/form-data (with direct file upload in 'images').
    */
   @Patch('my-properties/:id')
+  @UseInterceptors(FilesInterceptor('images', 10, propertyMulterOptions))
   updateMyProperty(
     @Headers('x-user-id') userId: string,
     @Param('id') propertyId: string,
     @Body() dto: UpdateUserPropertyDto,
+    @UploadedFiles() files?: Express.Multer.File[],
   ): Promise<PropertyDocument> {
     if (!userId) throw new UnauthorizedException('Non authentifié.');
+    if (files && files.length > 0) {
+      const uploadedPhotos = files.map((file, index) => ({
+        url: `${this.baseUrl}/uploads/properties/${file.filename}`,
+        legende: file.originalname,
+        ordre: index + 1,
+      }));
+      dto.photos = [...(dto.photos || []), ...uploadedPhotos];
+    }
     return this.propertiesService.updateMyProperty(userId, propertyId, dto);
   }
 
@@ -116,6 +155,19 @@ export class PropertiesController {
   }
 
   /**
+   * DELETE /properties/internal/user-properties
+   * Internal endpoint called when user account is deleted permanently.
+   * Hard deletes all user submitted properties and their images.
+   */
+  @Delete('internal/user-properties')
+  deleteUserProperties(
+    @Headers('x-user-id') userId: string,
+  ): Promise<{ deletedCount: number }> {
+    if (!userId) throw new UnauthorizedException('Non authentifié.');
+    return this.propertiesService.deleteUserProperties(userId);
+  }
+
+  /**
    * PATCH /properties/internal/deactivate-user
    * Internal endpoint called when user account is deactivated.
    * Marks all user submitted properties as status='inactive'.
@@ -128,57 +180,7 @@ export class PropertiesController {
     return this.propertiesService.deactivateUserProperties(userId);
   }
 
-  /**
-   * POST /properties/upload-images
-   * Upload multiple property images (max 10 images, 5MB each).
-   * Returns list of image URLs.
-   */
-  @Post('upload-images')
-  @UseInterceptors(
-    FilesInterceptor('images', 10, {
-      storage: diskStorage({
-        destination: (req, file, cb) => {
-          const uploadPath = '/app/uploads/properties';
-          if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
-          }
-          cb(null, uploadPath);
-        },
-        filename: (req, file, cb) => {
-          const userId = (req.headers['x-user-id'] as string) || 'unknown';
-          const ext = path.extname(file.originalname).toLowerCase() || '.jpg';
-          cb(null, `prop_${userId}_${Date.now()}_${Math.round(Math.random() * 1e6)}${ext}`);
-        },
-      }),
-      limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB max per image
-      fileFilter: (req, file, cb) => {
-        if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
-          return cb(new BadRequestException('Format d\'image non supporté (jpg, jpeg, png, webp uniquement).'), false);
-        }
-        cb(null, true);
-      },
-    }),
-  )
-  uploadPropertyImages(
-    @Headers('x-user-id') userId: string,
-    @UploadedFiles() files: Express.Multer.File[],
-  ) {
-    if (!userId) throw new UnauthorizedException('Non authentifié.');
-    if (!files || files.length === 0) {
-      throw new BadRequestException('Aucun fichier image fourni.');
-    }
 
-    const images = files.map((file, index) => ({
-      url: `/uploads/properties/${file.filename}`,
-      legende: file.originalname,
-      ordre: index + 1,
-    }));
-
-    return {
-      message: `${files.length} image(s) uploadée(s) avec succès.`,
-      photos: images,
-    };
-  }
 
   // ── Source / Site Filter Routes ────────────────────────────────────────────
 
@@ -209,14 +211,25 @@ export class PropertiesController {
   /**
    * POST /properties
    * Allows authenticated user to submit a property (sets scraping=false, status=pending).
+   * Supports both JSON and multipart/form-data (with direct file upload in 'images').
    */
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(FilesInterceptor('images', 10, propertyMulterOptions))
   create(
     @Headers('x-user-id') userId: string,
     @Body() dto: CreateUserPropertyDto,
+    @UploadedFiles() files?: Express.Multer.File[],
   ): Promise<PropertyDocument> {
     if (!userId) throw new UnauthorizedException('Non authentifié.');
+    if (files && files.length > 0) {
+      const uploadedPhotos = files.map((file, index) => ({
+        url: `${this.baseUrl}/uploads/properties/${file.filename}`,
+        legende: file.originalname,
+        ordre: index + 1,
+      }));
+      dto.photos = [...(dto.photos || []), ...uploadedPhotos];
+    }
     return this.propertiesService.createUserProperty(userId, dto);
   }
 

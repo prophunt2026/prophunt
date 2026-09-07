@@ -13,6 +13,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Express } from 'express';
@@ -27,7 +28,14 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  private readonly baseUrl: string;
+
+  constructor(
+    private readonly authService: AuthService,
+    private readonly config: ConfigService,
+  ) {
+    this.baseUrl = this.config.get<string>('PUBLIC_BASE_URL', 'http://localhost:3000');
+  }
 
   // ─── Profile Routes (declared before or along public routes) ───────────────
 
@@ -89,8 +97,10 @@ export class AuthController {
     if (!userId) throw new UnauthorizedException('Non authentifié.');
     if (!file) throw new BadRequestException('Aucun fichier image fourni.');
 
+    // Return full URL so frontend can use it directly in <img src="...">.
     const avatarUrl = `/uploads/avatars/${file.filename}`;
-    return this.authService.updateAvatar(userId, avatarUrl);
+    const fullUrl   = `${this.baseUrl}${avatarUrl}`;
+    return this.authService.updateAvatar(userId, fullUrl);
   }
 
   // ─── Public Auth Routes ───────────────────────────────────────────────────

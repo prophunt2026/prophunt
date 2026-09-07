@@ -94,16 +94,7 @@ export class AppController {
     await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
   }
 
-  // ── 5. CRUD SERVICE: CREATE PROPERTY & UPLOAD (AUTH REQUIRED) ─────────────
-  @Post('crud/properties/upload-images')
-  @UseGuards(JwtAuthGuard)
-  async proxyCrudUploadImages(
-    @Req() req: Request,
-    @Res() res: Response,
-  ): Promise<void> {
-    this.logger.log(`Routing to CRUD Upload Images: POST ${req.path}`);
-    await this.proxyService.proxyRequest(req, res, this.url('CRUD_SERVICE_URL'));
-  }
+  // ── 5. CRUD SERVICE: CREATE PROPERTY (AUTH REQUIRED) ─────────────────────
 
   @Post('crud/properties')
   @UseGuards(JwtAuthGuard)
