@@ -1,21 +1,23 @@
 # 📖 PropHunter Backend — Documentation Complète de l'Architecture & des APIs
 
-Bienvenue dans la documentation officielle du backend **PropHunter**. Ce document résume l'architecture des 4 microservices, le fonctionnement du pipeline de scraping et de synchronisation automatique, ainsi que le guide complet de test des APIs.
+Bienvenue dans la documentation officielle du backend **PropHunter TN**. Ce document présente l'architecture des 4 microservices, le pipeline de scraping IA & synchronisation automatique, ainsi que le catalogue exhaustif de toutes les APIs du projet avec des exemples concrets pour le développement Frontend et les tests Postman.
 
 ---
 
-## 🏛️ 1. Architecture Globale des 4 Microservices
+## 🏛️ 1. Architecture Globale des Microservices
 
-PropHunter repose sur une architecture orientée microservices conteneurisée via Docker :
+PropHunter repose sur une architecture moderne de microservices conteneurisée avec **Docker & Docker Compose** :
 
 ```
                         [ Client / Postman / Frontend ]
                                        │
                                        ▼ (Port 3000)
                          ┌───────────────────────────┐
-                         │      API GATEWAY (NestJS) │
-                         │   - Routage & Reverse Proxy│
-                         │   - Sécurité JwtAdminGuard │
+                         │    API GATEWAY (NestJS)   │
+                         │  - Routage & Reverse Proxy│
+                         │  - Sécurité JwtAuthGuard  │
+                         │  - Sécurité JwtAdminGuard │
+                         │  - Service statique images│
                          └─────────────┬─────────────┘
                                        │
        ┌───────────────────────────────┼───────────────────────────────┐
@@ -25,17 +27,18 @@ PropHunter repose sur une architecture orientée microservices conteneurisée vi
 │ AUTH SERVICE  │              │  AI SERVICE   │              │ CRUD SERVICE  │
 │    (NestJS)   │              │   (FastAPI)   │              │   (NestJS)    │
 │               │              │               │              │               │
-│ - Inscription │              │ - 6 Scrapers  │              │ - Pagination  │
-│ - Connexion   │              │ - Upsert IA   │              │   (10 / page) │
-│ - Tokens JWT  │              │ - Auto-Sync   │              │ - Filtrage par│
-│               │              │ - Scoring IA  │              │   site/source │
+│ - Inscription │              │ - 6 Scrapers  │              │ - Annonces    │
+│ - Connexion   │              │ - Upsert IA   │              │   Publiques   │
+│ - Tokens JWT  │              │ - Auto-Sync   │              │ - CRUD User   │
+│ - Profil/Avatar│             │ - Scoring IA  │              │ - Modération  │
+│ - Hard Delete │              │ - Async Jobs  │              │ - Multer File │
 └───────┬───────┘              └───────┬───────┘              └───────┬───────┘
         │                              │                              │
         ▼                              ▼                              ▼
 ┌──────────────────┐           ┌──────────────────┐           ┌──────────────────┐
 │ prophunter_auth  │           │  prophunter_ia   │           │    prophunter    │
 │  - users         │           │  - 6 collections │           │  - properties    │
-│                  │           │  - scraping_jobs │           │  - sync_metadata │
+│  - refresh_tokens│           │  - scraping_jobs │           │  - sync_metadata │
 └──────────────────┘           └──────────────────┘           └──────────────────┘
                                  (MongoDB - Port 27018)
 ```
@@ -44,361 +47,252 @@ PropHunter repose sur une architecture orientée microservices conteneurisée vi
 
 ## 🔄 2. Pipeline de Scraping & Synchronisation Automatique
 
-Lorsqu'un scraping est déclenché (`POST /v1/service-ia/scraping/all` ou `/v1/service-ia/scraping/{site}`) :
+Lorsqu'un scraping est déclenché (`POST /v1/service-ia/scraping/all` ou `/v1/service-ia/scraping/{source}`) :
 
 ```
-Déclenchement API (POST) ──▶ Réponse 202 Accepted immédiate (Tâche en arrière-plan)
+Déclenchement API (POST) ──▶ Réponse 202 Accepted immédiate (Tâche de fond Playwright)
                                        │
                                        ▼
-                       Étape 1 : Scraping & Normalisation
-                         (Scrape des liens, détails, téléphones)
+                        Étape 1 : Scraping & Normalisation
+                         (Liens, détails, prix, photos, contacts)
                                        │
                                        ▼
-                       Étape 2 : Enregistrement dans l'IA
-                         (Upsert par listing.id_universel dans prophunter_ia.<site>_properties)
+                        Étape 2 : Enregistrement dans l'IA
+                         (Upsert par listing.id_universel dans prophunter_ia.<source>_properties)
                                        │
                                        ▼
-                       Étape 3 : Synchronisation Automatique vers CRUD
-                         (Filtre : date_scraping > last_sync_date ➔ Upsert dans prophunter.properties)
+                        Étape 3 : Synchronisation Automatique vers CRUD
+                         (Upsert dans prophunter.properties avec scraping=true, status="accepted")
                                        │
                                        ▼
-                       Étape 4 : Mise à jour des Métadonnées
-                         (Enregistrement de la nouvelle last_sync_date dans prophunter.sync_metadata)
+                        Étape 4 : Mise à jour des Métadonnées
+                         (Enregistrement de last_sync_date dans prophunter.sync_metadata)
                                        │
                                        ▼
-                               Statut = COMPLETED
+                                Statut = COMPLETED
 ```
 
 ### 🛡️ Garanties Techniques :
-- **Anti-Doublons** : Index unique MongoDB sparse sur `listing.id_universel` sur l'ensemble des collections.
-- **Anti-Concurrence** : Verrou par site (`threading.Lock` + vérification de statut) qui renvoie une erreur `HTTP 409 Conflict` si une tentative de relance a lieu alors qu'un scraper tourne déjà.
-- **Indépendance totale** : Chaque site s'exécute dans son propre thread sans bloquer ni attendre les autres sites.
+- **Anti-Doublons** : Index unique MongoDB sparse sur `listing.id_universel`.
+- **Anti-Concurrence** : Verrou par site (`threading.Lock`) renvoyant `HTTP 409 Conflict` si un scraping est déjà en cours pour la même source.
+- **Scraping Parallèle Indépendant** : Chaque site s'exécute dans son propre thread isolé.
 
 ---
 
-## 📡 3. Catalogue des APIs
+## 📡 3. Catalogue Exhaustif des APIs
 
-### 🔑 A. Authentification (Auth Service)
+### 🔑 A. Authentification & Profil (`/v1/auth`)
 
-#### 1. Connexion Admin (Obtention du Token)
-- **Méthode** : `POST`
-- **URL** : `http://localhost:3000/v1/auth/signin`
-- **Headers** : `Content-Type: application/json`
+#### 1. Inscription Utilisateur (`POST /v1/auth/signup`)
+- **Public** (Sans token)
 - **Body** :
-```json
-{
-  "email": "admin@prophunter.tn",
-  "password": "Admin@PropHunter2026!"
-}
-```
-- **Réponse (200 OK)** :
-```json
-{
-  "access_token": "eyJhbGciOi...",
-  "refresh_token": "eyJhbGciOi...",
-  "user": {
-    "id": "...",
-    "email": "admin@prophunter.tn",
-    "role": "ADMIN"
-  }
-}
-```
-
----
-
-### 🕷️ B. Scraping & Synchronisation (AI Service — Admin Only)
-> ⚠️ **Tous ces endpoints nécessitent le Header** :  
-> `Authorization: Bearer <VOTRE_ACCESS_TOKEN_ADMIN>`
-
-#### 1. Lancer le Scraping Global (6 sites en parallèle)
-- **Méthode** : `POST`
-- **URL** : `http://localhost:3000/v1/service-ia/scraping/all`
-- **Réponse (202 Accepted)** :
-```json
-{
-  "message": "Scraping global initié (6 lancés, 0 ignorés).",
-  "launched": [
-    { "source": "tecnocasa", "job_id": "...", "status": "pending" },
-    { "source": "mubawab", "job_id": "...", "status": "pending" },
-    { "source": "tayara", "job_id": "...", "status": "pending" },
-    { "source": "tunisie_annonce", "job_id": "...", "status": "pending" },
-    { "source": "fi_dari", "job_id": "...", "status": "pending" },
-    { "source": "home_in_tunisia", "job_id": "...", "status": "pending" }
-  ],
-  "skipped": []
-}
-```
-
-#### 2. Lancer le Scraping d'un Site Spécifique
-- **Méthode** : `POST`
-- **URLs disponibles** :
-  - `http://localhost:3000/v1/service-ia/scraping/tecnocasa`
-  - `http://localhost:3000/v1/service-ia/scraping/mubawab`
-  - `http://localhost:3000/v1/service-ia/scraping/tayara`
-  - `http://localhost:3000/v1/service-ia/scraping/tunisie_annonce`
-  - `http://localhost:3000/v1/service-ia/scraping/fi_dari`
-  - `http://localhost:3000/v1/service-ia/scraping/home_in_tunisia`
-
----
-
-### 📊 C. Suivi des Statuts de Scraping (AI Service)
-
-#### 1. Statut Global de TOUS les 6 Sites
-- **Méthode** : `GET`
-- **URL** : `http://localhost:3000/v1/service-ia/scraping/all/status`
-- **Headers** : `Authorization: Bearer <TOKEN>`
-- **Exemple de Réponse (200 OK)** :
-```json
-{
-  "tecnocasa": {
-    "job_id": "a1bb91a4-...",
-    "source": "tecnocasa",
-    "status": "completed",
-    "step": "done",
-    "result": {
-      "scraped": 15,
-      "inserted": 0,
-      "updated": 15,
-      "synced_crud": 15,
-      "last_sync_date": "2026-08-14T14:05:35.186447+00:00"
-    }
-  },
-  "tayara": {
-    "job_id": "b80f16c9-...",
-    "source": "tayara",
-    "status": "completed",
-    "step": "done",
-    "result": {
-      "scraped": 1000,
-      "inserted": 72,
-      "updated": 928,
-      "synced_crud": 1000
-    }
-  },
-  "tunisie_annonce": { "status": "completed", ... },
-  "mubawab": { "status": "completed", ... },
-  "fi_dari": { "status": "completed", ... },
-  "home_in_tunisia": { "status": "completed", ... }
-}
-```
-
-#### 2. Statut Individuel par Site
-- **Méthode** : `GET`
-- **URL** : `http://localhost:3000/v1/service-ia/scraping/{site}/status`
-  - Exemple : `http://localhost:3000/v1/service-ia/scraping/tunisie_annonce/status`
-
----
-
-### 🏡 D. Consultation & Pagination des Annonces (CRUD Service)
-
-#### 1. Récupérer les Annonces avec Pagination (10 par page par défaut)
-- **Méthode** : `GET`
-- **URL** : `http://localhost:3000/v1/crud/properties?page=1&limit=10`
-- **Réponse (200 OK)** :
-```json
-{
-  "data": [
-    {
-      "_id": "...",
-      "listing": {
-        "id_universel": "HIT_87151378",
-        "url_source": "...",
-        "date_scraping": "2026-08-14T12:32:12.246274+00:00"
-      },
-      "bien": { "type": "appartement", "superficie_habitable": 74 },
-      "transaction": { "type": "vente", "prix": 716880, "devise": "TND" },
-      "localisation": { "ville": "Les Berges du Lac", "gouvernorat": "Tunis" },
-      "metadonnees_scraping": { "source": "home_in_tunisia" }
-    }
-  ],
-  "meta": {
-    "total": 1105,
-    "page": 1,
-    "limit": 10,
-    "totalPages": 111,
-    "hasNextPage": true,
-    "hasPrevPage": false
-  }
-}
-```
-
-#### 2. Recherche Multi-Critères Avancée (`/search`)
-- **Méthode** : `GET`
-- **URL** : `http://localhost:3000/v1/crud/properties/search`
-- **Paramètres combinables (Publics)** :
-  - `ville` : filtre par ville (insensible à la casse, ex: `Tunis`, `Sousse`)
-  - `delegation` : filtre par délégation (ex: `La Marsa`, `Sahloul`)
-  - `type` : type de bien (`Appartement`, `Villa`, `Terrain`, `Local Commercial`, `Duplex`, `Studio`, `Immeuble`)
-  - `transaction` : type de transaction (`Vente`, `Location`)
-  - `prixMin` / `prixMax` : fourchette de prix en TND
-  - `surfaceMin` / `surfaceMax` : surface totale en m²
-  - `nombreChambres` : nombre de pièces/chambres
-- **Exemples** :
-  - `http://localhost:3000/v1/crud/properties/search?ville=Tunis&type=Appartement&transaction=Vente`
-  - `http://localhost:3000/v1/crud/properties/search?prixMin=200000&prixMax=500000&surfaceMin=100`
-  - `http://localhost:3000/v1/crud/properties/search?ville=Sousse&type=Appartement&prixMax=400000`
-
-#### 3. Détail d'une Annonce Publique (`/:id`)
-- **Méthode** : `GET`
-- **URL** : `http://localhost:3000/v1/crud/properties/:id`
-- **Description** : Récupère la fiche détaillée complète d'une annonce (scrapée ou utilisateur approuvée).
-
----
-
-## 👤 4. Profil Utilisateur (`/v1/auth/profile`)
-
-Tous ces endpoints nécessitent un JWT valide dans le header `Authorization: Bearer <access_token>`.
-
-| Méthode | Endpoint | Auth | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/v1/auth/profile` | 🔑 User/Admin | Récupère les données du profil connecté (`email`, `nom`, `telephone`, `avatar`, `role`, etc.) |
-| `PATCH` | `/v1/auth/profile` | 🔑 User/Admin | Met à jour les informations du profil (`nom`, `telephone`) |
-| `DELETE` | `/v1/auth/profile` | 🔑 User/Admin | Désactive le compte utilisateur et révoque ses tokens |
-| `POST` | `/v1/auth/profile/avatar` | 🔑 User/Admin | Upload de l'avatar du profil (`multipart/form-data`, champ `avatar`, max 5MB) |
-
-#### Exemple : Upload de l'avatar (Postman)
-- **Méthode** : `POST`
-- **URL** : `http://localhost:3000/v1/auth/profile/avatar`
-- **Headers** : `Authorization: Bearer <TOKEN>`
-- **Body** : `form-data`
-  - Clé : `avatar` (type `File`)
-  - Valeur : *sélectionner une image (jpg, jpeg, png, webp)*
-
----
-
-## 🏠 5. Annonces Utilisateurs (`/v1/crud/properties`)
-
-Gestion des annonces créées manuellement par les utilisateurs connectés.
-
-| Méthode | Endpoint | Auth | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/v1/crud/properties/upload-images` | 🔑 User/Admin | Upload de photos pour une annonce (`multipart/form-data`, champ `images`, jusqu'à 10 photos) |
-| `POST` | `/v1/crud/properties` | 🔑 User/Admin | Soumettre une nouvelle annonce (`scraping: false`, `status: "pending"`, `addedBy: <userId>`) |
-| `GET` | `/v1/crud/properties/my-properties` | 🔑 User/Admin | Liste paginée de toutes ses propres annonces soumises (tous statuts) |
-| `PATCH` | `/v1/crud/properties/my-properties/:id` | 🔑 User/Admin | Mettre à jour sa propre annonce (repasse le statut à `pending`) |
-| `DELETE` | `/v1/crud/properties/my-properties/:id` | 🔑 User/Admin | Supprimer sa propre annonce |
-
-#### Exemple 1 : Uploader des photos pour une annonce
-- **Méthode** : `POST`
-- **URL** : `http://localhost:3000/v1/crud/properties/upload-images`
-- **Headers** : `Authorization: Bearer <TOKEN>`
-- **Body** : `form-data`
-  - Clé : `images` (type `File` — sélectionner 1 ou plusieurs images)
-- **Réponse reçue** :
   ```json
   {
-    "message": "2 image(s) uploadée(s) avec succès.",
-    "photos": [
-      {
-        "url": "/uploads/properties/prop_66b0a_1724151234_123456.jpg",
-        "legende": "salon.jpg",
-        "ordre": 1
-      },
-      {
-        "url": "/uploads/properties/prop_66b0a_1724151234_789012.jpg",
-        "legende": "chambre.jpg",
-        "ordre": 2
-      }
-    ]
+    "email": "user_demo@test.tn",
+    "password": "Pass@1234!",
+    "nom": "Mohamed Ben Ali",
+    "telephone": "+216 55 123 456"
   }
   ```
+- **Réponse (201 Created)** : Renvoie l'ID utilisateur, nom, téléphone, email et rôle `USER`.
 
-#### Exemple 2 : Créer une annonce avec les URLs de photos obtenues
-```http
-POST http://localhost:3000/v1/crud/properties
-Authorization: Bearer <TOKEN>
-Content-Type: application/json
-
-{
-  "titre": "Appartement S+2 vue mer La Marsa",
-  "texte": "Très bel appartement entièrement rénové...",
-  "type_transaction": "Location",
-  "prix": 1500,
-  "type_bien": "Appartement",
-  "superficie_totale": 95,
-  "nombre_pieces": 3,
-  "nombre_chambres": 2,
-  "nombre_salles_bain": 1,
-  "ville": "Tunis",
-  "delegation": "La Marsa",
-  "nom_contact": "Mohamed",
-  "telephone": ["+216 55 123 456"],
-  "photos": [
-    {
-      "url": "/uploads/properties/prop_66b0a_1724151234_123456.jpg",
-      "legende": "Salon"
-    }
-  ]
-}
-```
-
----
-
-## 🖼️ 6. Accès Direct aux Images Uploadées
-
-Toutes les images stockées dans le volume Docker sont immédiatement consultables via le navigateur ou une application frontend :
-- **Avatar** : `http://localhost:3000/uploads/avatars/<nom_fichier>`
-- **Photos de Propriété** : `http://localhost:3000/uploads/properties/<nom_fichier>`
-
----
-
-## 🛡️ 7. Administration & Modération (`/v1/crud/admin/properties`)
-
-Endpoints réservés exclusivement aux administrateurs (`role === 'ADMIN'`).
-
-| Méthode | Endpoint | Auth | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/v1/crud/admin/properties` | 🛡️ Admin | Voir **toutes** les annonces (filtres: `status`, `scraping`, `site`, `startDate`, `endDate`, `page`, `limit`) |
-| `PATCH` | `/v1/crud/admin/properties/:id/status` | 🛡️ Admin | Valider (`accepted`), Rejeter (`rejected`), Désactiver (`inactive`) ou Remettre en attente (`pending`) |
-| `PATCH` | `/v1/crud/admin/properties/:id` | 🛡️ Admin | Mettre à jour n'importe quelle annonce de la base |
-| `DELETE` | `/v1/crud/admin/properties/:id` | 🛡️ Admin | Supprimer définitivement n'importe quelle annonce |
-| `GET` | `/v1/crud/properties/sources` | 🛡️ Admin | Liste de toutes les sources de scraping actives |
-| `GET` | `/v1/crud/properties/stats` | 🛡️ Admin | Statistiques globales (par site, par ville, prix min/max/moyen) |
-| `GET` | `/v1/crud/properties/latest?limit=10` | 🛡️ Admin | Dernières annonces scrappées |
-
-#### Exemples de Filtrage Admin :
-- **Filtrer par période de scraping (ex: du 1er au 20 août)** :
-  ```http
-  GET http://localhost:3000/v1/crud/admin/properties?startDate=2026-08-01&endDate=2026-08-20&page=1&limit=20
-  Authorization: Bearer <ADMIN_TOKEN>
-  ```
-
-- **Filtrer les annonces scrapées par site source (ex: tayara)** :
-  ```http
-  GET http://localhost:3000/v1/crud/admin/properties?scraping=true&site=tayara&page=1&limit=20
-  Authorization: Bearer <ADMIN_TOKEN>
-  ```
-
-- **Lister les annonces en attente de modération** :
-  ```http
-  GET http://localhost:3000/v1/crud/admin/properties?status=pending&page=1&limit=20
-  Authorization: Bearer <ADMIN_TOKEN>
-  ```
-
-- **Approuver une annonce** :
-  ```http
-  PATCH http://localhost:3000/v1/crud/admin/properties/66b0a1b2c3d4e5f6a7b8c9d0/status
-  Authorization: Bearer <ADMIN_TOKEN>
-  Content-Type: application/json
-
+#### 2. Connexion Utilisateur / Admin (`POST /v1/auth/signin`)
+- **Public** (Sans token)
+- **Body** :
+  ```json
   {
-    "status": "accepted"
+    "email": "user_demo@test.tn",
+    "password": "Pass@1234!"
+  }
+  ```
+  *(Admin par défaut : `admin@prophunter.tn` / `Admin@PropHunter2026!`)*
+- **Réponse (200 OK)** :
+  ```json
+  {
+    "access_token": "eyJhbGciOi...",
+    "refresh_token": "eyJhbGciOi...",
+    "token_type": "bearer",
+    "expires_in": 86400
   }
   ```
 
+#### 3. Rafraîchissement du Token (`POST /v1/auth/refresh`)
+- **Body** : `{ "refresh_token": "<VOTRE_REFRESH_TOKEN>" }`
+- **Réponse (200 OK)** : Nouvel `access_token` et nouveau `refresh_token` avec rotation.
+
+#### 4. Consulter son Profil (`GET /v1/auth/profile`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Réponse (200 OK)** :
+  ```json
+  {
+    "id": "66b5f9...",
+    "email": "user_demo@test.tn",
+    "nom": "Mohamed Ben Ali",
+    "telephone": "+216 55 123 456",
+    "avatar": "http://localhost:3000/uploads/avatars/avatar_66b5f9_1725638.jpg",
+    "role": "USER",
+    "isActive": true
+  }
+  ```
+
+#### 5. Mettre à jour son Profil (`PATCH /v1/auth/profile`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Body** :
+  ```json
+  {
+    "nom": "Mohamed Ben Ali Modifié",
+    "telephone": "+216 99 888 777"
+  }
+  ```
+
+#### 6. Uploader sa Photo de Profil (`POST /v1/auth/profile/avatar`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Format** : `multipart/form-data` (champ fichier `avatar`)
+- **Réponse (200 OK)** :
+  ```json
+  {
+    "message": "Avatar mis à jour avec succès.",
+    "avatar": "http://localhost:3000/uploads/avatars/avatar_66b5f9_1725638920.jpg"
+  }
+  ```
+
+#### 7. Supprimer Définitivement son Compte (`DELETE /v1/auth/profile`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Action** : **Hard Delete** (Suppression de l'utilisateur dans MongoDB, suppression du fichier avatar sur disque, révocation des tokens, et suppression en cascade de **toutes ses annonces et photos** dans `crud-service`).
+- **Réponse (200 OK)** : `{ "message": "Compte et données associées supprimés définitivement avec succès." }`
+
 ---
 
-## 🗄️ 8. Visualisation dans MongoDB Compass
+### 🕷️ B. Scraping IA (`/v1/service-ia/scraping` — Admin Only)
 
-Pour inspecter les données en temps réel dans votre interface graphique :
+> ⚠️ Tous ces endpoints nécessitent le Header : `Authorization: Bearer <ADMIN_TOKEN>`
 
-- **URI de Connexion Compass** : `mongodb://localhost:27018`
+| Méthode | Endpoint | Description |
+|---|---|---|
+| `POST` | `/v1/service-ia/scraping/all` | Déclenche le scraping parallèle des **6 sites** tunisiens |
+| `GET` | `/v1/service-ia/scraping/all/status` | Statut et métriques globales des 6 scrapers |
+| `POST` | `/v1/service-ia/scraping/mubawab` | Lancer le scraper Mubawab |
+| `GET` | `/v1/service-ia/scraping/mubawab/status` | Statut du scraper Mubawab |
+| `POST` | `/v1/service-ia/scraping/tayara` | Lancer le scraper Tayara |
+| `GET` | `/v1/service-ia/scraping/tayara/status` | Statut du scraper Tayara |
+| `POST` | `/v1/service-ia/scraping/tecno_casa` | Lancer le scraper Tecnocasa |
+| `GET` | `/v1/service-ia/scraping/tecno_casa/status` | Statut du scraper Tecnocasa |
+| `POST` | `/v1/service-ia/scraping/tunisie_vente` | Lancer le scraper Tunisie Vente |
+| `GET` | `/v1/service-ia/scraping/tunisie_vente/status` | Statut du scraper Tunisie Vente |
+| `POST` | `/v1/service-ia/scraping/dar_immo` | Lancer le scraper Dar Immo |
+| `GET` | `/v1/service-ia/scraping/dar_immo/status` | Statut du scraper Dar Immo |
+| `POST` | `/v1/service-ia/scraping/tunisie_annonce` | Lancer le scraper Tunisie Annonce |
+| `GET` | `/v1/service-ia/scraping/tunisie_annonce/status` | Statut du scraper Tunisie Annonce |
 
-| Base de Données | Collection | Description |
-| :--- | :--- | :--- |
-| `prophunter` | `properties` | Base principale unifiée (`scraping`, `addedBy`, `status`). |
-| `prophunter` | `sync_metadata` | Suivi de l'état, de la date de sync (`last_sync_date`) et des compteurs par site. |
-| `prophunter_ia` | `<site>_properties` | Collections dédiées par site (`mubawab_properties`, `tayara_properties`, etc.). |
-| `prophunter_ia` | `scraping_jobs` | Historique et état en direct des exécutions des scrapers. |
-| `prophunter_auth`| `users` | Comptes utilisateurs et administrateurs (`nom`, `telephone`, `avatar`, `role`, `isActive`). |
+---
 
+### 🏡 C. Propriétés Publiques & Recherche (`/v1/crud/properties` — Sans Auth)
+
+#### 1. Liste Paginée des Annonces Publiques (`GET /v1/crud/properties`)
+- **Query Params** : `page` (défaut: 1), `limit` (défaut: 10)
+- **Description** : Renvoie les annonces scrapées + les annonces utilisateurs acceptées par l'administrateur (`status: "accepted"`).
+
+#### 2. Recherche Multi-Critères (`GET /v1/crud/properties/search`)
+- **Paramètres combinables** :
+  - `ville` : Ex: `Tunis`, `Sousse`, `Ariana`
+  - `delegation` : Ex: `La Marsa`, `El Menzah`
+  - `type` : Ex: `Appartement`, `Villa`, `Terrain`, `Bureau`
+  - `transaction` : Ex: `Vente`, `Location`
+  - `prixMin` / `prixMax` : Fourchette de prix en TND
+  - `surfaceMin` / `surfaceMax` : Surface en m²
+  - `nombreChambres` : Nombre de chambres
+- **Exemple** :
+  `GET http://localhost:3000/v1/crud/properties/search?ville=Tunis&type=Appartement&transaction=Vente&prixMin=100000&prixMax=600000`
+
+#### 3. Détail d'une Annonce (`GET /v1/crud/properties/:id`)
+- Renvoie toutes les caractéristiques, équipements, contacts et galerie de photos d'une annonce.
+
+#### 4. Filtrer par Source (`GET /v1/crud/properties/source/:source`)
+- Exemples : `/v1/crud/properties/source/mubawab`, `/v1/crud/properties/source/tayara`
+
+---
+
+### 👤 D. Annonces Utilisateurs — User CRUD (`/v1/crud/properties` — Auth Required)
+
+Toutes ces actions sont accessibles depuis la page **Profil** de l'utilisateur connecté.
+
+#### 1. Publier une Annonce Tout-en-un (`POST /v1/crud/properties`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Format** : `multipart/form-data` (Envoi direct des champs texte + fichiers images dans la même requête)
+- **Champs du formulaire** :
+  - `titre` : `"Appartement S+2 Haut Standing"`
+  - `texte` : `"Superbe appartement vue mer..."`
+  - `type_transaction` : `"Location"`
+  - `prix` : `1800`
+  - `type_bien` : `"Appartement"`
+  - `superficie_totale` : `115`
+  - `nombre_pieces` : `3`
+  - `nombre_chambres` : `2`
+  - `nombre_salles_bain` : `1`
+  - `ville` : `"Tunis"`
+  - `delegation` : `"La Marsa"`
+  - `nom_contact` : `"Mohamed Ben Ali"`
+  - `images` : *1 à 10 fichiers photos (.jpg, .png, .webp)*
+- **Comportement** : Multer enregistre les fichiers physiques dans `/app/uploads/properties/`, construit les URLs complètes, crée l'annonce dans MongoDB avec `scraping: false` et lui attribue le statut automatique **`status: "pending"`**.
+
+#### 2. Mes Annonces (`GET /v1/crud/properties/my-properties`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Description** : Renvoie la liste paginée de toutes les annonces publiées par l'utilisateur connecté avec leurs photos et leurs statuts (`pending`, `accepted`, `rejected`).
+
+#### 3. Modifier mon Annonce (`PATCH /v1/crud/properties/my-properties/:id`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Format** : `multipart/form-data` ou `application/json`
+- **Comportement** : Permet de modifier le prix, le texte ou d'ajouter de nouvelles photos. **Toute modification repasse automatiquement le statut à `"pending"`** pour ré-approbation obligatoire par l'administrateur.
+
+#### 4. Supprimer mon Annonce (`DELETE /v1/crud/properties/my-properties/:id`)
+- **Headers** : `Authorization: Bearer <USER_TOKEN>`
+- **Description** : Supprime définitivement l'annonce et ses photos.
+
+---
+
+### 🛡️ E. Modération & Administration (`/v1/crud/admin/properties` — Admin Only)
+
+> ⚠️ Headers requis : `Authorization: Bearer <ADMIN_TOKEN>`
+
+| Méthode | Endpoint | Description |
+|---|---|---|
+| `GET` | `/v1/crud/admin/properties?page=1&limit=20` | Voir **toutes** les annonces de la plateforme |
+| `GET` | `/v1/crud/admin/properties?status=pending` | Filtrer les annonces **en attente de validation** |
+| `GET` | `/v1/crud/admin/properties?status=accepted` | Filtrer les annonces **acceptées** (en ligne) |
+| `GET` | `/v1/crud/admin/properties?status=rejected` | Filtrer les annonces **rejetées** |
+| `GET` | `/v1/crud/admin/properties?scraping=true&site=tayara` | Filtrer les annonces scrapées par site source |
+| `GET` | `/v1/crud/admin/properties?startDate=2026-08-01&endDate=2026-08-20` | Filtrer les annonces par période de scraping |
+| `PATCH` | `/v1/crud/admin/properties/:id/status` | Changer le statut : `{"status": "accepted"}` ou `{"status": "rejected"}` |
+| `PATCH` | `/v1/crud/admin/properties/:id` | Modifier n'importe quelle annonce de la base |
+| `DELETE` | `/v1/crud/admin/properties/:id` | Supprimer définitivement une annonce |
+
+---
+
+### 📊 F. Métadonnées Scraping & Statistiques (`/v1/crud/properties` — Admin Only)
+
+| Méthode | Endpoint | Description |
+|---|---|---|
+| `GET` | `/v1/crud/properties/sources` | Liste de toutes les sources de scraping actives |
+| `GET` | `/v1/crud/properties/stats` | Statistiques globales (par site, par ville, prix moyen/min/max) |
+| `GET` | `/v1/crud/properties/latest?limit=10` | Les N dernières annonces scrapées |
+
+---
+
+## 🖼️ 4. Accès Direct aux Images Uploadées (Static Serve)
+
+Toutes les images sauvegardées sont servies publiquement par l'API Gateway :
+* **Avatar Utilisateur** : `http://localhost:3000/uploads/avatars/<nom_fichier>`
+* **Photos d'Annonce** : `http://localhost:3000/uploads/properties/<nom_fichier>`
+
+---
+
+## 🗄️ 5. Schémas de Base de Données MongoDB (Compass : `localhost:27018`)
+
+| Base de Données | Collection | Contenu |
+|---|---|---|
+| **`prophunter_auth`** | `users` | Utilisateurs & Admins (`nom`, `telephone`, `avatar`, `role`, `isActive`) |
+| **`prophunter_auth`** | `refresh_tokens` | Tokens de rafraîchissement avec rotation et révocation |
+| **`prophunter`** | `properties` | Base unifiée des annonces (`scraping`, `addedBy`, `status`, `medias.photos`) |
+| **`prophunter`** | `sync_metadata` | Suivi des dates et compteurs de synchronisation par site |
+| **`prophunter_ia`** | `<site>_properties` | Collections brutes scrapées par site (`mubawab_properties`, etc.) |
+| **`prophunter_ia`** | `scraping_jobs` | Historique et état des tâches de scraping en arrière-plan |
