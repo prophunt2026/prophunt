@@ -1,9 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import * as express from 'express';
+import * as fs from 'fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
 
   // Global validation pipe — transforms query params and validates DTOs
   app.useGlobalPipes(
@@ -16,6 +24,14 @@ async function bootstrap() {
       forbidNonWhitelisted: false,
     }),
   );
+
+  // Servir les fichiers uploads statiques (/app/uploads)
+  const expressApp = app.getHttpAdapter().getInstance();
+  const uploadsDir = '/app/uploads';
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+  expressApp.use('/uploads', express.static(uploadsDir));
 
   const port = process.env.PORT ?? 3002;
   await app.listen(port);

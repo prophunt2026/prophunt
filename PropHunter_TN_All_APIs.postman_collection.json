@@ -452,6 +452,7 @@
                 { "key": "ville", "value": "Tunis", "type": "text" },
                 { "key": "delegation", "value": "La Marsa", "type": "text" },
                 { "key": "nom_contact", "value": "Mohamed Ben Ali", "type": "text" },
+                { "key": "telephone", "value": "+216 55 123 456", "type": "text" },
                 { "key": "images", "type": "file", "src": [] }
               ]
             },
@@ -493,6 +494,7 @@
                 { "key": "titre", "value": "Appartement S+2 Haut Standing La Marsa (Prix Négociable)", "type": "text" },
                 { "key": "prix", "value": "1700", "type": "text" },
                 { "key": "prix_negociable", "value": "true", "type": "text" },
+                { "key": "telephone", "value": "+216 99 888 777", "type": "text" },
                 { "key": "images", "type": "file", "src": [] }
               ]
             },

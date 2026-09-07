@@ -7,7 +7,7 @@ import {
   IsArray,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
 export class PhotoInputDto {
   @IsString()
@@ -104,6 +104,7 @@ export class CreateUserPropertyDto {
   nom_contact?: string;
 
   @IsOptional()
+  @Transform(({ value }) => (Array.isArray(value) ? value : typeof value === 'string' ? [value] : value))
   @IsArray()
   @IsString({ each: true })
   telephone?: string[];
