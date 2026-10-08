@@ -91,7 +91,7 @@
           }
         },
         {
-          "name": "1.4 Consulter son Profil (GET /profile)",
+          "name": "1.4 [USER] Consulter son Profil (GET /profile)",
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }],
@@ -103,7 +103,7 @@
           }
         },
         {
-          "name": "1.5 Mettre a jour son Profil (PATCH /profile)",
+          "name": "1.5 [USER] Mettre a jour son Profil (PATCH /profile)",
           "description": "Permet à l'utilisateur de modifier son nom et/ou son numéro de téléphone.",
           "request": {
             "method": "PATCH",
@@ -123,8 +123,8 @@
           }
         },
         {
-          "name": "1.6 Uploader son Avatar (POST /profile/avatar)",
-          "description": "Upload de la photo de profil en form-data. Retourne l'URL complète exploitable directement par le frontend.",
+          "name": "1.6 [USER] Uploader son Avatar (POST /profile/avatar)",
+          "description": "Upload de la photo de profil du USER en form-data. Enregistré sous /uploads/avatars/<userId>_...jpg.",
           "request": {
             "method": "POST",
             "header": [{ "key": "Authorization", "value": "Bearer {{user_token}}" }],
@@ -140,7 +140,57 @@
           }
         },
         {
-          "name": "1.7 Supprimer Definitivement son Compte (DELETE /profile)",
+          "name": "1.7 [ADMIN] Consulter son Profil Admin (GET /profile)",
+          "description": "Consulte le profil de l'administrateur connecté avec son propre avatar et informations.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          }
+        },
+        {
+          "name": "1.8 [ADMIN] Mettre a jour son Profil Admin (PATCH /profile)",
+          "description": "Permet à l'administrateur de mettre à jour son nom ou téléphone.",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Admin PropHunter TN\",\n  \"telephone\": \"+216 71 000 000\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          }
+        },
+        {
+          "name": "1.9 [ADMIN] Uploader son Avatar Admin (POST /profile/avatar)",
+          "description": "Upload de la photo de profil de l'ADMIN. Enregistré sous son propre ID dans /uploads/avatars/ sans impacter les utilisateurs.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [{ "key": "avatar", "type": "file", "src": [] }]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile/avatar",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile", "avatar"]
+            }
+          }
+        },
+        {
+          "name": "1.10 [USER] Supprimer Definitivement son Compte (DELETE /profile)",
           "description": "Hard Delete : supprime définitivement l'utilisateur de MongoDB, son avatar sur disque, et supprime en cascade toutes ses annonces et photos dans crud-service.",
           "request": {
             "method": "DELETE",
@@ -153,7 +203,7 @@
           }
         },
         {
-          "name": "1.8 Rafraichir le Token (Refresh)",
+          "name": "1.11 Rafraichir le Token (Refresh)",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],

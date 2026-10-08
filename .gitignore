@@ -9,11 +9,22 @@ __pycache__/
 .venv/
 venv/
 
-# ─── Environment variables ────────────────────────────────────────────────────
+# ─── Environment variables & Secrets ──────────────────────────────────────────
 # Never commit secrets or local config
-
+.env
 .env.local
 .env.*.local
+*.env
+
+# ─── Documentation & Test Collections with Secrets ────────────────────────────
+PROGRESS.md
+progress.md
+*.postman_collection.json
+PropHunter_TN_All_APIs.postman_collection.json
+
+# ─── Uploads & Medias ────────────────────────────────────────────────────────
+uploads/
+/app/uploads/
 
 # ─── Logs ────────────────────────────────────────────────────────────────────
 *.log
